@@ -1,0 +1,36 @@
+
+.pull-right {
+    float: right!important;
+}
+.pull-right {
+    float: right !important;
+}
+
+.TryAtHome{
+    padding-top: 10px;
+    height: 100%;
+    background: rgb(211, 209, 209);
+    font-size: 13px;
+    line-height: 19px;
+    color: #4d4d4d;
+}
+.TryAtHome .title{
+    padding-bottom: 20px;
+    font-family: "Kanit", sans-serif;;
+    
+}
+.TryAtHome form{      
+    border:solid 1px black;
+    padding:10px;
+    background-color: rgb(228, 228, 228);
+}
+.TryAtHome .form-control{
+    border-radius: 0px;
+    height: auto;
+}
+.TryAtHome .container {
+    margin-right: auto;
+    margin-left: auto;
+    padding-right: 5px; 
+    text-align: center;
+}

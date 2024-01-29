@@ -1,0 +1,164 @@
+.ProductDetails .container{
+    display:inline-block;
+    z-index: -1;
+    width: 100%;
+    overflow-x: auto;
+    height:auto;
+    background-color: rgb(233, 227, 227);
+  
+}
+.image{
+    align-items: center;
+    padding: 10px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width:50%;    
+    height:auto;  
+}
+.left-div{
+    width: 50%;
+    float: left;
+    
+}
+.right-div{
+    padding-left: 10px;
+    width:50%;
+    float: left;
+    
+}
+.right-div button{
+    width: 40%;
+    height: auto;
+    font-size: 25px;
+    font-family: "Kanit", sans-serif;;
+    padding:10px;
+    
+}
+.details-page .content{
+    display: flex;
+    padding-top:10px;  
+      
+}
+.details-page .content p{
+    border-right: solid 1px;
+    padding-right: 20px;
+    margin-left: 10px;
+}
+.details-page .product-name{
+    display: inline-block;
+    font-size: 2.4rem;
+    line-height: 2.6rem;
+    color: #4f3267;
+    margin: 3px 0 0;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    -webkit-flex-basis: 100%;
+    -ms-flex-preferred-size: 100%;
+    flex-basis: 100%;
+    max-width: 100%;
+}
+.details-page .product-details{
+    
+    background-color: #f5f5f5;
+    padding-left: 120px;
+    padding-right: 120px;
+    padding-top: 26px;
+}
+.details-page .product-details .product-name{
+    margin-bottom: 60px;
+}
+.details-page .product-descr{
+    display: inline-flex;
+    flex-direction: column;
+    max-width: 200px;
+    width: 100%;
+    height: fit-content;
+    background: rgb(249, 249, 250);
+    border: 1px solid rgb(222, 214, 251);
+    border-radius: 12px;
+    padding: 15px 12px;
+    margin-top: 40px;
+}
+.details-page .old-price{
+    color: #9d9fa4;
+    padding: 10px;
+    -webkit-text-decoration: line-through;
+    text-decoration: line-through;
+}
+.details-page .price{
+    font-size: 24px;
+    font-family: "Kanit", sans-serif;;
+    color: #231535;
+    font-weight: bold;
+    vertical-align: middle;
+}
+.details-page .ml-4{
+    margin-left: 40px;
+}
+.details-page .product-descr h6{
+    flex-basis: 50%;
+}
+.details-page .desc-text{
+    font: 12px;
+    line-height: 20px;
+    color: rgb(79, 50, 103);
+    white-space:break-spaces;
+
+}
+.offers{
+    margin-bottom: 20px;
+    margin-top: 20px;
+}
+.offers span{
+    display: inline-block;
+    position: relative;
+    padding: 0 16px 0 28px;
+    font: 14px 'InterSemiBold','Helvetica Neue',Helvetica,Arial,sans-serif;
+    color: #4f3267;
+    line-height: 18px;
+}
+@media screen and (max-width: 960px) {
+    .image{
+        align-items: center;
+        padding: 10px;
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+        width:100%;    
+        height:auto;  
+    }
+    .details-page .product-details{
+        padding: 15px;
+    }
+    .details-page .product-descr{
+        width: auto;
+        margin-right: 20px;
+    }
+    .offers span{
+        font-size: 10px;
+        padding: 4px;
+    }
+    .details-page .product-name{
+        white-space: break-spaces;
+    }
+    .details-page .ml-4{
+        margin-left: 0;
+        margin-right: 0;
+    }
+    .details-page .product-descr span{
+        font-size: 12px;
+        line-height: 14px;
+    }
+    
+}
+.addtocart-button{
+    background-color: rgb(28, 117, 173);
+    padding: 6px 12px;
+    border-radius: 16px;
+    color: white;
+    border: none;
+    margin-top: 30px;
+    box-shadow: 2px 2px 2px 0 rgb(147, 167, 181);
+}

@@ -1,0 +1,146 @@
+.FooterBody {
+    background-color: rgb(31, 29, 29);
+    color: rgb(192, 189, 189);
+    width: 100%;
+    right: 0;
+    position: stick;
+    bottom: 0;
+    left: 0;
+    max-width: auto;
+    max-height: auto;
+
+}
+
+.footer-copyright {
+    text-align: center;
+    color: white;
+    bottom: 0;
+}
+.FooterBody .social-icons a {
+    display: inline-block;
+    color: white;
+    padding-bottom: 8px;
+    margin-right: 20px;
+}
+
+.FooterB.FooterBody a:hover {
+    opacity: 0.5;
+}
+
+.FooterBody .Footer-NavLink {
+    width: fit-content;
+    text-decoration: none;
+    color: white;
+    font-size: 15px;
+}
+
+.FooterBody .links :hover {
+    text-decoration: none;
+    color: white;
+    opacity: 0.5;
+
+}
+
+.FooterBody .btn-floating {
+    text-decoration: none;
+}
+
+.FooterBody .btn-floating:hover {
+    text-decoration: none;
+
+}
+
+.FooterBody .mb-4 {
+    margin-bottom: -20px;
+}
+
+.FooterBody .mb-4-company {
+    margin-bottom: -20px;
+    padding-top: 20px;
+}
+
+.footer-main {
+    padding: 40px 0;
+}
+
+.footer-main h6 {
+    padding-bottom: 20px;
+    font-family: "FS Elliot Web Bold", "FS Elliot Web Regular", Arial, arial, sans-serif;
+    font-size: 16px;
+    color: #fff;
+    margin: 0;
+    text-align: left;
+    position: relative;
+    text-decoration: none !important;
+    white-space: pre;
+    font-weight: 700;
+    display: block;
+}
+
+.Footer-NavLink,
+.links,
+p {
+    font-family: "FS Elliot Web Bold", "FS Elliot Web Regular", Arial, arial, sans-serif;
+    font-size: 14px;
+    color: #fff;
+    margin: 0;
+    text-align: left;
+    position: relative;
+    text-decoration: none !important;
+    white-space: pre;
+    display: block;
+    margin-bottom: 10px;
+    width: fit-content;
+}
+
+.footer-copyright {
+    font-family: "FS Elliot Web Bold", "FS Elliot Web Regular", Arial, arial, sans-serif;
+    font-size: 16px;
+    color: #fff;
+    margin: 0;
+    text-align: center;
+    border-top: 1px solid white;
+}
+.footer-copyright .container-fluid{
+    
+    padding-top:20px;
+    padding-bottom: 10px;
+}
+
+.payment-parteners svg {
+    margin-right: 20px;
+    color: white;
+}
+.d-flex{
+    
+    display: flex;
+    flex-direction: row;
+}
+.footer-secondary{
+    border-top: 1px solid white;
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+.payment-parteners{
+    float: right;
+    margin-left: auto;
+}
+@media screen and (max-width: 960px) {
+    .footer-main {
+        padding: 40px 15px;
+    }
+
+    .footer-main .text-left {
+        margin-bottom: 40px;
+    }
+
+    .FooterBody .mb-4 {
+        margin-bottom: 0px;
+    }
+    .d-flex{
+        flex-direction: column;
+    }
+    .payment-parteners{
+        margin-left: 0;
+    }
+}

@@ -1,0 +1,10 @@
+.form-control {
+    width:400px;
+}
+.child1{
+    float: left;
+}
+.child2{
+    float: left;
+    margin-top:20px ;
+}

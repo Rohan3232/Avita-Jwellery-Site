@@ -1,0 +1,94 @@
+.responsive {
+    width: 100%;
+    height: auto;
+  }
+.card{
+    display: block;
+    padding-left: 20px;
+    padding-top:20px;
+    
+}
+.title{
+  font-size: 32px;
+  line-height: 40px;
+  margin-bottom: 40px;
+  color: rgb(79, 50, 103);
+  margin-top: 40px;
+}
+.Bangle .container{
+  background-color: rgb(233, 227, 227);
+  
+}
+.Bangle button{
+  padding:auto;
+  margin:10px;
+  align-items: center;
+}
+.cards-holder{
+  padding-bottom: 20px;
+}
+.product-cards{
+  padding: 24px 12px;
+  margin: auto;
+  width: fit-content;
+  box-shadow: rgba(0, 0, 0, 0.13) 0px 0px 20px 0px;
+  margin-bottom: 24px;
+  transition: transform .2s;
+  border-radius: 12px;
+  height: 100%;
+  background-color: #fff;
+}
+.product-cards:hover{
+  transform: scale(1.05);
+  cursor: pointer;
+}
+.product-cards img{
+  border-radius: 12px;
+    border: 1px solid rgb(233, 233, 233);
+    width: 100%;
+    min-height: 282px;
+    
+}
+.product-name{
+  margin: 0;
+  margin-top: 24px;
+  text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+    font-size: 18px;
+    font-family: "Kanit", sans-serif;;
+    max-width: calc(100% - 50px);
+    color: rgb(157, 159, 164);
+}
+.old-price{
+  color: #9d9fa4;
+  padding: 10px;
+  -webkit-text-decoration: line-through;
+  text-decoration: line-through;
+}
+.price{
+  font-size: 20px;
+  margin-top: 12px;
+  font-family: "Kanit", sans-serif;;
+  color: #231535;
+  font-weight: bold;
+  vertical-align: middle;
+}
+.discount{
+  font-size: 16px;
+  color:green;
+  text-decoration: none;
+}
+.product-price{
+  margin: 0;
+  font-size: 20px;
+    font-family: "Kanit", sans-serif;;
+    line-height: inherit;
+    color: rgb(79, 50, 103);
+    padding: 0px;
+    max-width: calc(100% - 50px);
+}
+.product-link{
+  text-decoration: none !important;
+  border: none !important;
+}
