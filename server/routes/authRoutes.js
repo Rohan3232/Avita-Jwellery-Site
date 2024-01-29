@@ -7,10 +7,11 @@ const User=require('../models/user')
 router.use(
     cors({
         credentials:true,
-        origin:'http://localhost:3000'
+        origin:'https://jwellerysite.onrender.com/'
     })
 )
 router.get('/',(req,res)=>{
+    res.setHeader("Access-Control-Allow-Credentials","true");
     res.json('test is working');
 })
 router.post('/register',async (req,res)=>{

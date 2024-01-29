@@ -14,6 +14,7 @@ const connectDB = async () =>{
    }
 }
 connectDB();
+app.use(cors());
 app.use(express.json());
 app.use('/',require('./routes/authRoutes'));
 const port=8000;
