@@ -11,7 +11,6 @@ router.use(
     })
 )
 router.get('/',(req,res)=>{
-    res.setHeader("Access-Control-Allow-Credentials","true");
     res.json('test is working');
 })
 router.post('/register',async (req,res)=>{
