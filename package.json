@@ -15,7 +15,6 @@
     "git": "^0.1.5",
     "history": "^5.3.0",
     "jquery": "^3.7.1",
-    "material-ui": "^0.20.0",
     "mdbreact": "^5.2.0",
     "mongodb": "^6.3.0",
     "nodejs": "0.0.0",
@@ -39,6 +38,7 @@
     "server": "nodemon server/server.js",
     "client": "react-scripts --max-http-header-size=1024 start",
     "dev": "concurrently \"npm run server\" \"npm run client\"",
+    "build":"react-scripts build",
     "data:import": "node server/SeederScript.js"
   },
   "proxy": "http://localhost:3001",
