@@ -8,15 +8,7 @@ router.use(
     cors()
 )
 router.get('/',(req,res)=>{
-    res.setHeader("Access-Control-Allow-Origin", "*");
-  res.setHeader(
-    "Access-Control-Allow-Headers",
-    "Origin, X-Requested-With, Content-Type, Accept"
-  );
-  res.setHeader(
-    "Access-Control-Allow-Methods",
-    "GET, POST, PATCH, DELETE, OPTIONS"
-  );
+    res.setHeader("Access-Control-Allow-Credentials","true");
     res.json('test is working');
 })
 router.post('/register',async (req,res)=>{
