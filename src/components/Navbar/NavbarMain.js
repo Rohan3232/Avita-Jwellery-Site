@@ -66,7 +66,13 @@ class NavbarMain extends Component {
         result=data
       }
       else{
-        const {data} = await axios.post('/login', {
+        const {data} = await axios.post('/login',{
+          withCredentials: true,
+          headers: {
+              'Access-Control-Allow-Origin': 'true', 
+              'Content-Type': 'application/json'
+          }
+        }, {
           userid,password,cart,total,totalQuantity,totalDiscount
         })
         result=data
