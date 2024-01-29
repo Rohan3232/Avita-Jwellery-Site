@@ -14,11 +14,8 @@ const connectDB = async () =>{
    }
 }
 connectDB();
-app.use(cors(
-   {
-      headers: {"Access-Control-Allow-Origin": "*"}
-   }
-));
+app.use(cors({credentials: true, origin: 'http://localhost:3000'})
+);
 app.use(express.json());
 app.use('/',require('./routes/authRoutes'));
 const port=8000;
