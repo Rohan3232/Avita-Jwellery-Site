@@ -2,10 +2,15 @@ const express = require('express');
 const router = express.Router();
 const cors = require('cors');
 const User = require('../models/user')
-
+const corsConf = {
+    origin: "*",
+    methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
+    preflightContinue: false,
+    optionsSuccessStatus: 204
+  }
 //middleware
 router.use(
-    cors()
+    cors(corsConf)
 )
 router.get('/', (req, res) => {
     response.setHeader("Access-Control-Allow-Origin", "*");
