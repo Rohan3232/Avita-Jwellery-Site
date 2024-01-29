@@ -15,7 +15,8 @@ const connectDB = async () =>{
 }
 connectDB();
 app.use(cors(
-   
+   {origin:'http://localhost:3000', 
+   credentials:false}
 ));
 app.use(express.json());
 app.use('/',require('./routes/authRoutes'));
