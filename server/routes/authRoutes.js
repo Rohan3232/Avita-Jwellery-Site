@@ -5,15 +5,22 @@ const User=require('../models/user')
 
 //middleware
 router.use(
-    cors({
-        credentials:false,
-        origin:'https://jwellerysite.onrender.com/'
-    })
+    cors()
 )
 router.get('/',(req,res)=>{
+    res.setHeader("Access-Control-Allow-Origin", "*");
+  res.setHeader(
+    "Access-Control-Allow-Headers",
+    "Origin, X-Requested-With, Content-Type, Accept"
+  );
+  res.setHeader(
+    "Access-Control-Allow-Methods",
+    "GET, POST, PATCH, DELETE, OPTIONS"
+  );
     res.json('test is working');
 })
 router.post('/register',async (req,res)=>{
+    res.setHeader("Access-Control-Allow-Credentials","true");
     try{
         const {userid,password,cart,total,totalQuantity,totalDiscount}=req.body;
         if(!password || password.length < 6){
@@ -38,6 +45,7 @@ router.post('/register',async (req,res)=>{
     }
 })
 router.post('/login',async (req,res)=>{
+    res.setHeader("Access-Control-Allow-Credentials","true");
     try{
         const {userid,password}=req.body;
         const user = await User.findOne({userid})
@@ -61,6 +69,7 @@ router.post('/login',async (req,res)=>{
     }
 })
 router.post('/updatecart',async (req,res)=>{
+    res.setHeader("Access-Control-Allow-Credentials","true");
     try{
         const {userid,cart,total,totalQuantity,totalDiscount}=req.body;
         const exist = await User.findOne({userid})

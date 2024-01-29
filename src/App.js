@@ -15,7 +15,7 @@ import TryAtHome from './components/Support/TryAtHome';
 import SearchPage from './components/SearchPage.js';
 import axios from 'axios';
 axios.defaults.baseURL='https://jwellerybackend.onrender.com/';
-axios.defaults.withCredentials=false;
+axios.defaults.withCredentials=true;
 function App() {
   return (
     <div className="App">
