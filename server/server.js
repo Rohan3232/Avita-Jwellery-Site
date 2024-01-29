@@ -14,7 +14,10 @@ const connectDB = async () =>{
    }
 }
 connectDB();
-app.use(cors());
+app.use(cors({
+   credentials:false,
+   origin:'https://jwellerybackend.onrender.com/login'
+}));
 app.use(express.json());
 app.use('/',require('./routes/authRoutes'));
 const port=8000;

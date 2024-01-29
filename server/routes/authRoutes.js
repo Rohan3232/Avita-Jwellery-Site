@@ -4,7 +4,12 @@ const cors=require('cors');
 const User=require('../models/user')
 
 //middleware
-router.use(cors())
+router.use(
+    cors({
+        credentials:false,
+        origin:'https://jwellerysite.onrender.com/'
+    })
+)
 router.get('/',(req,res)=>{
     res.setHeader("Access-Control-Allow-Credentials","true");
     res.json('test is working');

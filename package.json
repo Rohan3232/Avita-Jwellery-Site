@@ -42,7 +42,7 @@
     "build":"react-scripts build",
     "data:import": "node server/SeederScript.js"
   },
-  "proxy":"https://jwellerybackend.onrender.com/",
+  "proxy":"https://jwellerybackend.onrender.com/login",
   "eslintConfig": {
     "extends": [
       "react-app",
