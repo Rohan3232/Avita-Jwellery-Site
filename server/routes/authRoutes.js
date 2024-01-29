@@ -8,7 +8,10 @@ router.use(
     cors()
 )
 router.get('/',(req,res)=>{
-    res.setHeader("Access-Control-Allow-Credentials","true");
+    response.setHeader("Access-Control-Allow-Origin", "*");
+response.setHeader("Access-Control-Allow-Credentials", "true");
+response.setHeader("Access-Control-Allow-Methods", "GET,HEAD,OPTIONS,POST,PUT");
+response.setHeader("Access-Control-Allow-Headers", "Access-Control-Allow-Headers, Origin,Accept, X-Requested-With, Content-Type, Access-Control-Request-Method, Access-Control-Request-Headers");
     res.json('test is working');
 })
 router.post('/register',async (req,res)=>{
@@ -36,6 +39,10 @@ router.post('/register',async (req,res)=>{
     }
 })
 router.post('/login',async (req,res)=>{
+    response.setHeader("Access-Control-Allow-Origin", "*");
+response.setHeader("Access-Control-Allow-Credentials", "true");
+response.setHeader("Access-Control-Allow-Methods", "GET,HEAD,OPTIONS,POST,PUT");
+response.setHeader("Access-Control-Allow-Headers", "Access-Control-Allow-Headers, Origin,Accept, X-Requested-With, Content-Type, Access-Control-Request-Method, Access-Control-Request-Headers");
     try{
         const {userid,password}=req.body;
         const user = await User.findOne({userid})
