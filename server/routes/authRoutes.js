@@ -5,10 +5,7 @@ const User=require('../models/user')
 
 //middleware
 router.use(
-    cors({
-        credentials:true,
-        origin:'*'
-    })
+    cors()
 )
 router.get('/',(req,res)=>{
     res.json('test is working');
