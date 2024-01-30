@@ -60,13 +60,13 @@ class NavbarMain extends Component {
     var result;
     try {
       if (this.state.signup) {
-      const {data} = await axios.post('/register', {
+      const {data} = await axios.get('/register', {
           userid,password,cart,total,totalQuantity,totalDiscount
         })
         result=data
       }
       else{
-        const {data} = await axios.post('/login', {
+        const {data} = await axios.get('/login', {
           userid,password,cart,total,totalQuantity,totalDiscount
         },{
           withCredentials: false,
@@ -100,7 +100,7 @@ class NavbarMain extends Component {
     var password=this.state.password;
     var userid=this.props.userid;
     try {
-    const {data} = await axios.post('/resetpass', {
+    const {data} = await axios.get('/resetpass', {
       userid,password,oldPassword
     })
      }

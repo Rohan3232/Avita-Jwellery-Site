@@ -47,7 +47,7 @@ const BangleItems = (state = initState, action) => {
                 var cart = state.addedItems;
                 var total = state.total + addedItem.price - (addedItem.price * addedItem.discount / 100);
                 var totalDiscount = (addedItem.price * addedItem.discount / 100);
-                const { data } = axios.post('/updatecart', {
+                const { data } = axios.get('/updatecart', {
                     userid, cart, total, totalQuantity, totalDiscount
                 })
                 return {
@@ -63,7 +63,7 @@ const BangleItems = (state = initState, action) => {
                 var cart = [...state.addedItems, addedItem];
                 var total = state.total + addedItem.price - (addedItem.price * addedItem.discount / 100);
                 var totalDiscount = (addedItem.price * addedItem.discount / 100);
-                const { data } = axios.post('/updatecart', {
+                const { data } = axios.get('/updatecart', {
                     userid, cart, total, totalQuantity, totalDiscount
                 })
                 return {

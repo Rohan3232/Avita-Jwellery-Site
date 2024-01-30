@@ -11,7 +11,7 @@ var transporter = nodemailer.createTransport({
   }
 });
 
-router.post('/send', (req, res, next) => {
+router.get('/send', (req, res, next) => {
 
      var mailOptions = {
       from: 'justvarad@gmail.com',
