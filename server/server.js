@@ -15,7 +15,7 @@ const connectDB = async () =>{
    }
 }
 app.use(cors({
-        credentials:false,
+        credentials:true,
         origin:'https://jwellerybackend.onrender.com/'
     }
 ));
