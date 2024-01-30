@@ -2,11 +2,21 @@ const express = require('express');
 const router = express.Router();
 const cors = require('cors');
 const User = require('../models/user')
+const corsConf = {
+    origin: "*",
+    methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
+    preflightContinue: false,
+    optionsSuccessStatus: 204
+  }
 //middleware
 router.use(
-    cors()
+    cors(corsConf)
 )
 router.get('/', (req, res) => {
+    response.setHeader("Access-Control-Allow-Origin", "*");
+    response.setHeader("Access-Control-Allow-Credentials", "true");
+    response.setHeader("Access-Control-Allow-Methods", "GET,HEAD,OPTIONS,POST,PUT");
+    res.json('test is working');
 })
 router.post('/register', async (req, res) => {
     try {
@@ -32,6 +42,10 @@ router.post('/register', async (req, res) => {
     }
 })
 router.post('/login', async (req, res) => {
+    response.setHeader("Access-Control-Allow-Origin", "*");
+    response.setHeader("Access-Control-Allow-Credentials", "true");
+    response.setHeader("Access-Control-Allow-Methods", "GET,HEAD,OPTIONS,POST,PUT");
+    response.setHeader("Access-Control-Allow-Headers", "Access-Control-Allow-Headers, Origin,Accept, X-Requested-With, Content-Type, Access-Control-Request-Method, Access-Control-Request-Headers");
     try {
         const { userid, password } = req.body;
         const user = await User.findOne({ userid })
