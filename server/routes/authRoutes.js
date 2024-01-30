@@ -2,21 +2,14 @@ const express = require('express');
 const router = express.Router();
 const cors = require('cors');
 const User = require('../models/user')
-const corsConf = {
-    origin: "*",
-    methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
-    preflightContinue: false,
-    optionsSuccessStatus: 204
-  }
 //middleware
 router.use(
-    cors(corsConf)
+    cors()
 )
 router.get('/', (req, res) => {
     response.setHeader("Access-Control-Allow-Origin", "*");
     response.setHeader("Access-Control-Allow-Credentials", "true");
     response.setHeader("Access-Control-Allow-Methods", "GET,HEAD,OPTIONS,POST,PUT");
-    response.setHeader("Access-Control-Allow-Headers", "Access-Control-Allow-Headers, Origin,Accept, X-Requested-With, Content-Type, Access-Control-Request-Method, Access-Control-Request-Headers");
     res.json('test is working');
 })
 router.post('/register', async (req, res) => {

@@ -39,10 +39,10 @@
     "server": "nodemon server/server.js",
     "client": "react-scripts --max-http-header-size=1024 start",
     "dev": "concurrently \"npm run server\" \"npm run client\"",
-    "build":"react-scripts build",
+    "build": "react-scripts build",
     "data:import": "node server/SeederScript.js"
   },
-  "proxy":"https://jwellerybackend.onrender.com",
+  "proxy": "https://jwellerybackend.onrender.com",
   "eslintConfig": {
     "extends": [
       "react-app",
