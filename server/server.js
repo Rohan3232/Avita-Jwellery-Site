@@ -16,7 +16,7 @@ const connectDB = async () =>{
 }
 app.use(cors(
    cors({
-      credentials:false,
+      credentials:true,
       origin:'*'
   })
 ));
