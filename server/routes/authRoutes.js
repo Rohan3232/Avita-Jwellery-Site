@@ -7,7 +7,7 @@ const User=require('../models/user')
 router.use(
     cors({
         credentials:true,
-        origin:'https://jwellerysite.onrender.com/'
+        origin:'https://jwellerybackend.onrender.com/'
     })
 )
 router.get('/',(req,res)=>{
