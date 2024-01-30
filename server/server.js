@@ -14,6 +14,7 @@ const connectDB = async () =>{
       process.exit(1);
    }
 }
+app.use(cors());
 connectDB();
 app.use(express.json());
 app.use('/',require('./routes/authRoutes'));
