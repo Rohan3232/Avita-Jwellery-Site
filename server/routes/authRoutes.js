@@ -7,10 +7,8 @@ router.use(
     cors()
 )
 router.get('/', (req, res) => {
-    res.set('Access-Control-Allow-Origin', 'https://jwellerybackend.onrender.com/');
 })
-router.get('/register', async (req, res) => {
-    res.set('Access-Control-Allow-Origin', 'https://jwellerybackend.onrender.com/');
+router.post('/register', async (req, res) => {
     try {
         const { userid, password, cart, total, totalQuantity, totalDiscount } = req.body;
         if (!password || password.length < 6) {
@@ -33,8 +31,7 @@ router.get('/register', async (req, res) => {
         console.log(error)
     }
 })
-router.get('/login', async (req, res) => {
-    res.set('Access-Control-Allow-Origin', 'https://jwellerybackend.onrender.com/');
+router.post('/login', async (req, res) => {
     try {
         const { userid, password } = req.body;
         const user = await User.findOne({ userid })
@@ -55,8 +52,7 @@ router.get('/login', async (req, res) => {
         console.log(error)
     }
 })
-router.get('/updatecart', async (req, res) => {
-    res.set('Access-Control-Allow-Origin', 'https://jwellerybackend.onrender.com/');
+router.post('/updatecart', async (req, res) => {
     try {
         const { userid, cart, total, totalQuantity, totalDiscount } = req.body;
         const exist = await User.findOne({ userid })
@@ -79,8 +75,7 @@ router.get('/updatecart', async (req, res) => {
         console.log(error)
     }
 })
-router.get('/resetpass', async (req, res) => {
-    res.set('Access-Control-Allow-Origin', 'https://jwellerybackend.onrender.com/');
+router.post('/resetpass', async (req, res) => {
     try {
         const { userid, password, oldpassword } = req.body;
         const exist = await User.findOne({ userid, oldpassword })
