@@ -12,7 +12,7 @@ router.get('/', (req, res) => {
     response.setHeader("Access-Control-Allow-Methods", "GET,HEAD,OPTIONS,POST,PUT");
     res.json('test is working');
 })
-router.post('/register', async (req, res) => {
+router.get('/register', async (req, res) => {
     try {
         const { userid, password, cart, total, totalQuantity, totalDiscount } = req.body;
         if (!password || password.length < 6) {
@@ -35,7 +35,7 @@ router.post('/register', async (req, res) => {
         console.log(error)
     }
 })
-router.post('/login', async (req, res) => {
+router.get('/login', async (req, res) => {
     response.setHeader("Access-Control-Allow-Origin", "*");
     response.setHeader("Access-Control-Allow-Credentials", "true");
     response.setHeader("Access-Control-Allow-Methods", "GET,HEAD,OPTIONS,POST,PUT");
@@ -60,7 +60,7 @@ router.post('/login', async (req, res) => {
         console.log(error)
     }
 })
-router.post('/updatecart', async (req, res) => {
+router.get('/updatecart', async (req, res) => {
     try {
         const { userid, cart, total, totalQuantity, totalDiscount } = req.body;
         const exist = await User.findOne({ userid })
@@ -83,7 +83,7 @@ router.post('/updatecart', async (req, res) => {
         console.log(error)
     }
 })
-router.post('/resetpass', async (req, res) => {
+router.get('/resetpass', async (req, res) => {
     try {
         const { userid, password, oldpassword } = req.body;
         const exist = await User.findOne({ userid, oldpassword })
