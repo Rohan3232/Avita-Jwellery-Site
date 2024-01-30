@@ -15,7 +15,7 @@ const connectDB = async () =>{
 }
 connectDB();
 const corsConf = {
-   origin: "https://jwellerysite.onrender.com/",
+   origin: "https://jwellerybackend.onrender.com/",
    methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
    Headers:{
       'Access-Control-Allow-Origin':'*',
