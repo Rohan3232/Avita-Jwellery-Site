@@ -5,7 +5,10 @@ const User=require('../models/user')
 
 //middleware
 router.use(
-    cors()
+    cors({
+        credentials:true,
+        origin:'https://jwellerybackend.onrender.com/'
+    })
 )
 router.get('/',(req,res)=>{
     res.json('test is working');
