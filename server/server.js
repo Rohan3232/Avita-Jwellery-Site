@@ -2,6 +2,7 @@ const express=require('express');
 const cors=require('cors');
 const app=express();
 var mongo = require("mongoose");
+const path=require('path')
 const connectDB = async () =>{
    try{
       mongo.connect("mongodb+srv://user123:user123@atlascluster.5lvz3ep.mongodb.net/?retryWrites=true&w=majority", {useNewUrlParser:true,
@@ -14,17 +15,6 @@ const connectDB = async () =>{
    }
 }
 connectDB();
-const corsConf = {
-   origin: "*",
-   methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
-   preflightContinue: false,
- }
- app.use((req, res, next) => {
-   res.setHeader("Access-Control-Allow-Origin", "*");
-   res.setHeader("Access-Control-Allow-Methods", "POST, GET, PUT");
-   res.setHeader("Access-Control-Allow-Headers", "Content-Type");
- })
- app.use(cors(corsConf));
 app.use(express.json());
 app.use('/',require('./routes/authRoutes'));
 const port=8000;
