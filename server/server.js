@@ -14,7 +14,11 @@ const connectDB = async () =>{
       process.exit(1);
    }
 }
-app.use(cors());
+app.use(cors({
+        credentials:true,
+        origin:'*'
+    }
+));
 connectDB();
 app.use(express.json());
 app.use('/',require('./routes/authRoutes'));
