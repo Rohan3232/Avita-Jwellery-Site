@@ -15,11 +15,9 @@ const connectDB = async () =>{
 }
 connectDB();
 const corsConf = {
-   origin: "https://jwellerybackend.onrender.com/",
+   origin: "*",
    methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
-   Headers:{
-      'Access-Control-Allow-Origin':'*',
-   }
+   preflightContinue: false,
  }
  app.use(cors(corsConf));
 app.use(express.json());
