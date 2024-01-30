@@ -7,12 +7,10 @@ router.use(
     cors()
 )
 router.get('/', (req, res) => {
-    response.setHeader("Access-Control-Allow-Origin", "*");
-    response.setHeader("Access-Control-Allow-Credentials", "true");
-    response.setHeader("Access-Control-Allow-Methods", "GET,HEAD,OPTIONS,POST,PUT");
-    res.json('test is working');
+    res.set('Access-Control-Allow-Origin', '*');
 })
 router.get('/register', async (req, res) => {
+    res.set('Access-Control-Allow-Origin', '*');
     try {
         const { userid, password, cart, total, totalQuantity, totalDiscount } = req.body;
         if (!password || password.length < 6) {
@@ -36,10 +34,7 @@ router.get('/register', async (req, res) => {
     }
 })
 router.get('/login', async (req, res) => {
-    response.setHeader("Access-Control-Allow-Origin", "*");
-    response.setHeader("Access-Control-Allow-Credentials", "true");
-    response.setHeader("Access-Control-Allow-Methods", "GET,HEAD,OPTIONS,POST,PUT");
-    response.setHeader("Access-Control-Allow-Headers", "Access-Control-Allow-Headers, Origin,Accept, X-Requested-With, Content-Type, Access-Control-Request-Method, Access-Control-Request-Headers");
+    res.set('Access-Control-Allow-Origin', '*');
     try {
         const { userid, password } = req.body;
         const user = await User.findOne({ userid })
@@ -61,6 +56,7 @@ router.get('/login', async (req, res) => {
     }
 })
 router.get('/updatecart', async (req, res) => {
+    res.set('Access-Control-Allow-Origin', '*');
     try {
         const { userid, cart, total, totalQuantity, totalDiscount } = req.body;
         const exist = await User.findOne({ userid })
@@ -84,6 +80,7 @@ router.get('/updatecart', async (req, res) => {
     }
 })
 router.get('/resetpass', async (req, res) => {
+    res.set('Access-Control-Allow-Origin', '*');
     try {
         const { userid, password, oldpassword } = req.body;
         const exist = await User.findOne({ userid, oldpassword })
