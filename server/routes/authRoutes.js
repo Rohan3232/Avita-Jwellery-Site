@@ -7,7 +7,7 @@ const User=require('../models/user')
 router.use(
     cors({
         credentials:true,
-        origin:'https://rohan3232.github.io/'
+        origin:''
     })
 )
 router.get('/',(req,res)=>{
