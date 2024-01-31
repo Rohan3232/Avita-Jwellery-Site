@@ -32,7 +32,6 @@ router.post('/register', async (req, res) => {
         const user = await User.create({
             userid, password, cart, total, totalQuantity, totalDiscount
         })
-        alert('Acount Created!!')
         return res.json(user)
     }
     catch (error) {
@@ -54,7 +53,6 @@ router.post('/login', async (req, res) => {
                 error: 'Password Incorrect'
             })
         }
-        alert('Successfully Logged In!!')
         return res.json(password1)
     }
     catch (error) {
@@ -98,7 +96,6 @@ router.post('/resetpass', async (req, res) => {
         }, {
             $set: { password: password }
         })
-        alert('password reseted successfully!!')
         return res.json(user)
     }
     catch (error) {
