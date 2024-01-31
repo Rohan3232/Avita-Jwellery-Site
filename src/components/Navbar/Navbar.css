@@ -344,7 +344,6 @@
     border: none;
 }
 .link{
-    cursor: pointer;
     text-decoration: none;
 }
 .modal-content{
@@ -376,9 +375,10 @@
     color: #333;
     text-decoration: none;
 }
-.search-bar:focus+.searched-result{
+.show.searched-result{
     display: flex;
 }
+
 @media(max-width:992px) {
     .modal-content{
         padding: 0;

@@ -6,6 +6,7 @@ import { addToCart, addProduct } from '../actions/cartActions';
 import { MdOutlineVerified } from "react-icons/md";
 import { GiReturnArrow } from "react-icons/gi";
 import axios from "axios";
+import { NavLink } from 'react-router-dom';
 export class ProductDetails extends Component {
     constructor(props) {
         super(props);
@@ -15,6 +16,7 @@ export class ProductDetails extends Component {
     }
     AddtoCart(name) {
         this.props.addToCart(name);
+        alert('added to Cart!!')
 
     }
     sendDetails = (item) => {
@@ -110,8 +112,10 @@ export class ProductDetails extends Component {
                             {this.props.currentproduct.purity != null ? <span>Purity - {this.props.currentproduct.purity}</span> : null}
                         </div>
                         <div className='addtoCart-section'>
+                            {this.props.addedItems.indexOf(this.props.currentproduct)<0?
                             <button className='addtocart-button' onClick={(e) => { this.AddtoCart(this.props.currentproduct.name) }}>Add to Cart</button>
-                        </div>
+                            :  <NavLink className='addtocart-button' to={'/cart'}>Go to Cart</NavLink>}
+                            </div>
 
                     </div>
                 </div>

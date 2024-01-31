@@ -91,7 +91,7 @@ export const MenuItems = [
         "stones": ["Turquoise"],
         "availability": true,
         "description": "Handcrafted silver cuff with bohemian design and turquoise accents. Unique and eye-catching.",
-        "images": "bohemian_silver_cuff_1.jpg"
+        "images": "bohemian_silver_cuff.jpg"
       },
       {
         "id": 2,
@@ -168,6 +168,7 @@ export const MenuItems = [
         "sizes": ["5", "6", "7", "8", "9"],
         "stock": 50,
         "discount": 10,
+        "images": "classic_platinum_ring.jpg",
         "customer_reviews": [
           {
             "user": "happy_customer123",
@@ -191,6 +192,7 @@ export const MenuItems = [
         "description": "An elegant platinum engagement ring with a stunning diamond centerpiece.",
         "sizes": ["5.5", "6.5", "7.5", "8.5"],
         "stock": 30,
+        "images": "platinum_engagement_ring.jpg",
         "customer_reviews": [
           {
             "user": "shiny_ring_lover",
@@ -214,6 +216,7 @@ export const MenuItems = [
         "description": "A sleek and modern platinum band, perfect for everyday wear.",
         "sizes": ["6", "7", "8", "9", "10"],
         "stock": 20,
+        "images": "Modern_Platinum_Band.jpg",
         "customer_reviews": [
           {
             "user": "fashion_forward",
@@ -242,7 +245,7 @@ export const MenuItems = [
         "ring_size": ["6", "7", "8", "9"],
         "availability": true,
         "description": "An elegant modern diamond ring crafted in white gold. Perfect for engagements and special occasions.",
-        "images": "elegant_diamond_ring_1.jpg"
+        "images": "elegant_diamond_ring.jpg"
       }, {
         "id": 2,
         "name": "Sapphire Halo Engagement Ring",
@@ -255,7 +258,7 @@ export const MenuItems = [
         "ring_size": ["5", "6", "7", "8"],
         "availability": true,
         "description": "A vintage-inspired engagement ring featuring a beautiful sapphire surrounded by a halo of diamonds.",
-        "images": "sapphire_halo_ring_1.jpg"
+        "images": "sapphire_halo_ring.jpg"
       },
       
       {
@@ -270,7 +273,7 @@ export const MenuItems = [
         "ring_size": ["5", "6", "7"],
         "availability": true,
         "description": "A classic yellow gold ring featuring an elegant pearl. Ideal for a touch of sophistication.",
-        "images": "pearl_elegance_ring_1.jpg"
+        "images": "pearl_elegance_ring.jpg"
       }, {
         "id": 5,
         "name": "Emerald Cut Diamond Ring",
@@ -283,7 +286,7 @@ export const MenuItems = [
         "ring_size": ["6", "7", "8", "9"],
         "availability": true,
         "description": "A modern platinum ring featuring a stunning emerald-cut diamond. Sleek and sophisticated.",
-        "images": "emerald_cut_diamond_ring_1.jpg"
+        "images": "emerald_cut_diamond_ring.jpeg"
       }
     ]
     ,

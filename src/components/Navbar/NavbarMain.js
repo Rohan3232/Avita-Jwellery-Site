@@ -230,6 +230,12 @@ componentDidUpdate() {
       })
     }
     }
+    const clearSearch= (e) =>{
+      this.setState({
+        searchkey:''
+      })
+
+    }
     
     return (
       <div className="Top" >
@@ -247,8 +253,8 @@ componentDidUpdate() {
               </div>
               <div className="Search-bar">
                 <Form className="Search-form">
-                  <FormControl onChange={(e) => { this.searchValue(e) }} type="text" placeholder="search" className="search-bar" />
-                  {this.state.searchresult.length ? <div className="searched-result">{this.state.searchresult.map((product, key) => { return (<div key={key} className="mb-3"><NavLink className="searched-link" to={product.path}>{product.name}</NavLink></div>) })}</div> : null} <Button className="button"  ><NavLink to={{
+                  <FormControl onChange={(e) => { this.searchValue(e) }} value={this.state.searchkey} type="text" placeholder="search" className="search-bar" />
+                  {this.state.searchresult.length>0 && this.state.searchkey ? <div className={(this.state.searchresult.length?"show ":"")+"searched-result"}>{this.state.searchresult.map((product, key) => { return (<div onClick={(e)=>{clearSearch(e)}}  key={key} className="mb-3"><NavLink className="searched-link" to={product.path}>{product.name}</NavLink></div>) })}</div> : null} <Button className="button"  ><NavLink to={{
                     pathname: 'search',
                     search: '?searchfor=' + this.state.searchkey
                   }}>
