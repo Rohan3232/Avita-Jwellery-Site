@@ -58,14 +58,35 @@ class NavbarMain extends Component {
     var totalQuantity=this.props.totalQuantity?this.props.totalQuantity:0;
     var totalDiscount=this.props.totalDiscount?this.props.totalDiscount:0;
     var result;
-    try {
+    
       if (this.state.signup) {
+        try {        
       const {data} = await axios.post('/register', {
           userid,password,cart,total,totalQuantity,totalDiscount
         })
         result=data
+        if (result.error) {
+          document.querySelector('.validity-alert').style.display = "block";
+        }
+        else {
+          document.querySelector('.validity-alert').style.display = "none";
+          this.setState({
+            show:false,
+            resetPassword:false
+          })
+          alert('Success!!');
+        }
+           
+      this.setState({
+        validity: result.error
+      })
+        }
+        catch(error){
+          console.log(error);
+        }
       }
       else{
+        try{
         const {data} = await axios.post('/login', {
           userid,password,cart,total,totalQuantity,totalDiscount
         },{
@@ -76,25 +97,28 @@ class NavbarMain extends Component {
           }
       })
         result=data
-      }
-      if(this.state.signup==false && result.userid){
-      this.props.changeLoginStatus(result.userid,result.password)
-      this.props.updateCart(result.cart,result.total,result.totalQuantity,result.totalDiscount)
-    }
-      if (result.error) {
-        document.querySelector('.validity-alert').style.display = "block";
-      }
-      else {
-        document.querySelector('.validity-alert').style.display = "none";
-        alert('Success!!');
-      }
+        this.props.changeLoginStatus(result.userid,result.password)
+        this.props.updateCart(result.cart,result.total,result.totalQuantity,result.totalDiscount)
+        if (result.error) {
+          document.querySelector('.validity-alert').style.display = "block";
+        }
+        else {
+          document.querySelector('.validity-alert').style.display = "none";
+          this.setState({
+            show:false,
+            resetPassword:false
+          })
+          alert('Success!!');
+        }
+           
       this.setState({
         validity: result.error
       })
     }
-    catch (error) {
+    catch(error){
       console.log(error);
     }
+      }
   }
   else{
     var oldPassword=this.state.oldPassword;
@@ -104,15 +128,17 @@ class NavbarMain extends Component {
     const {data} = await axios.post('/resetpass', {
       userid,password,oldPassword
     })
+    this.setState({
+      show:false,
+      resetPassword:false
+    })
+    alert('password reseted successfully!!')
      }
     catch (error) {
       console.log(error);
     }
   }
-  this.setState({
-    show:false,
-    resetPassword:false
-  })
+  
   }
   formSubmit(e) {
     if (this.state.userid.length == 10) {
