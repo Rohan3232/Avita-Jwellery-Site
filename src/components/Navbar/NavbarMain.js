@@ -63,8 +63,6 @@ class NavbarMain extends Component {
       const {data} = await axios.post('/register', {
           userid,password,cart,total,totalQuantity,totalDiscount
         })
-        .then(
-          alert('password reseted successfully!!'))
         result=data
       }
       else{
@@ -88,6 +86,7 @@ class NavbarMain extends Component {
       }
       else {
         document.querySelector('.validity-alert').style.display = "none";
+        alert('Success!!');
       }
       this.setState({
         validity: result.error
