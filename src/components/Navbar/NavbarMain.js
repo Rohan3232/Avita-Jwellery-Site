@@ -97,8 +97,6 @@ class NavbarMain extends Component {
           }
       })
         result=data
-        this.props.changeLoginStatus(result.userid,result.password)
-        this.props.updateCart(result.cart,result.total,result.totalQuantity,result.totalDiscount)
         if (result.error) {
           document.querySelector('.validity-alert').style.display = "block";
         }
@@ -108,6 +106,8 @@ class NavbarMain extends Component {
             show:false,
             resetPassword:false
           })
+          this.props.changeLoginStatus(result.userid,result.password)
+          this.props.updateCart(result.cart,result.total,result.totalQuantity,result.totalDiscount)
           alert('Success!!');
         }
            
