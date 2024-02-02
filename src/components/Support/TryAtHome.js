@@ -117,7 +117,7 @@ export class TryAtHome extends Component {
         else{
             let addedItems =
                 (
-                    this.props.addedItems.map(item => {
+                    this.props.tryoutcart.map(item => {
                         return (<div key={item.id} className='container cart-page details-page'>
                             <div className='row'>
                                 <div className='col-md-3 col-12 product-page'>
