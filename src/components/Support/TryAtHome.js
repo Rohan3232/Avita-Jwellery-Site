@@ -53,6 +53,7 @@ export class TryAtHome extends Component {
     }
 
     render() {
+        console.log(this.props.tryoutcart)
         function importAll(r) {
             let carouselImages = {};
             r.keys().forEach((item, index) => { carouselImages[item.replace('./', '')] = r(item); });

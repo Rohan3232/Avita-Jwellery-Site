@@ -204,18 +204,18 @@ const BangleItems = (state = initState, action) => {
             let existed_item = state.tryoutcart.find(item => action.name === item.name)
             if (existed_item) {
                 var cart = state.tryoutcart;
-                const { data } = axios.post('/updatetryoutcart', {
-                   cart
-                })
+                // const { data } = axios.post('/updatetryoutcart', {
+                //    cart
+                // })
                 return {
                     ...state,
                 }
             }
             else {
                 var cart = [...state.tryoutcart, addedItem];
-                const { data } = axios.post('/updatetryoutcart', {
-                    cart
-                })
+                // const { data } = axios.post('/updatetryoutcart', {
+                //     cart
+                // })
                 return {
                     ...state,
                     tryoutcart: [...state.tryoutcart, addedItem]

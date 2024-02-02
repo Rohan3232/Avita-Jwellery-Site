@@ -24,7 +24,8 @@ componentDidUpdate() {
         this.setState({ currentUrl: window.location.pathname });
     }, 100);
 }
-addtotryoutcart=(name)=>{
+addtotryoutcart(e,name){
+  console.log(name)
   this.props.addtotryoutcart(name)
 }
   render() {
@@ -72,7 +73,7 @@ addtotryoutcart=(name)=>{
                                  
                                 </div>
                               </NavLink>
-                              {this.props.tryathome?<button className='addtocart-button tryout-button' onClick={this.addtotryoutcart(product.name)} >Try at Home</button>:null}
+                              {this.props.tryathome?<button className='addtocart-button tryout-button' onClick={(e)=>{this.addtotryoutcart(e,product.name)}} >Try at Home</button>:null}
                               
                             </div>
                           )
