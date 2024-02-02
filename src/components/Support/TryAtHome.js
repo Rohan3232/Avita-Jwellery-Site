@@ -167,7 +167,8 @@ export class TryAtHome extends Component {
 
 const mapStateToProps = (state) => {
     return {
-      tryathome:state.tryathome
+      tryathome:state.tryathome,
+      tryoutcart:state.tryoutcart
     }
   }
   
