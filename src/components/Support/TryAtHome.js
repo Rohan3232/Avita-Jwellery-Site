@@ -1,140 +1,181 @@
 import axios from "axios";
 import React, { Component } from 'react'
 import './TryAtHome.css'
+import { FaPlus, FaMinus } from "react-icons/fa";
+import { connect } from 'react-redux';
+import DatePicker from "react-datepicker";
+import {tryathomestate } from '../actions/cartActions';
+import "react-datepicker/dist/react-datepicker.css";
+import { FaCalendarAlt } from "react-icons/fa";
 export class TryAtHome extends Component {
- constructor(props)
- {
+    constructor(props) {
         super(props);
-        this.state={
-            contact:'',
-            email:'',
-            errorm1:'',
-            errorm2:'',
-            errorm3:'',
-            Buttontxt:'SCHEDULE',
-            message:""
+        this.state = {
+            contact: '',
+            email: '',
+            Buttontxt: 'SCHEDULE',
+            message: "",
+            validity:false,
+            appointdate:new Date(),
+            tryoutcart:[]
         };
-        this.handleChange=this.handleChange.bind(this);
-        this.handleClick=this.handleClick.bind(this);
- }
-   
-    handleChange=(e) =>{
-        //this.setState({[e.target.name]: e.target.value});
-        let nam = e.target.name;
-      let val = e.target.value;
-      let err1 = '';
-      let err3 = '';
-      
-      
-      if (nam === "contact") 
-      {
-          if (!val.match(/^\d{10}$/)) 
-          {
-          err1 = <strong style={{color:"red"}}>Mobile Number Must Be Of 10 Digits</strong>;
-          }
-          else if (val.match(/^[a-zA-Z]/)) 
-          {
-          err1 = <strong style={{color:"red"}}>Mobile Number Must contain numbers only</strong>;
-          }
-          else if(!val.match(/^[a-zA-Z]/) &&val.match(/^\d{10}$/))
-          {
-              this.setState({contact:val});
-          }
-      }
-      
-      if (nam === "email") 
-      { 
-          if (!val.match(/^[a-zA-Z0-9]+@[a-zA-Z0-9]+\.[A-Za-z]+$/)) 
-          {
-          err3 = <strong style={{color:"red"}}>Email must follow characters@characters.domain order</strong>;
-          }
-          else if(val.match(/^[a-zA-Z0-9]+@[a-zA-Z0-9]+\.[A-Za-z]+$/))
-          {
-              this.setState({email:val})
-          }
-      }
+        this.handleChange = this.handleChange.bind(this);
+        this.handleClick = this.handleClick.bind(this);
+        this.setStartDate=this.setStartDate.bind(this);
+    }
 
-    this.setState({errorm1:err1});  
-    this.setState({errorm3:err3});
-    this.setState({[nam]:val});
-        
+    handleChange = (e) => {
+        let val = e.target.value;
+        this.setState({ email: val })
+            if (!val.match(/^[a-zA-Z0-9]+@[a-zA-Z0-9]+\.[A-Za-z]+$/)) {
+                document.querySelector('.validity-alert-email').style.display = "block";
+                this.setState({
+                    validity:false
+                })
+            }
+            else{
+                document.querySelector('.validity-alert-email').style.display = "none";
+                this.setState({
+                    validity:true
+                })
+            }
     }
-   handleClick=(e)=>{
-    var data={
-        contact:this.state.contact,
-        email:this.state.email
+    setStartDate =(startDate)=>{
+        this.setState({
+            appointdate:startDate
+        })
     }
-if(this.state.errorm1!=''||this.state.errorm3!=""||data.contact===""||data.email==="")
-{
-    alert("please enter valid data");
-}
-else{
-    axios.post('http://localhost:3001/tryathome',data)
-    .then(function(response) {
-        alert('your response recorded Successfully!!!');
-    })
-    .catch(function (error) {
-        console.log(error)
-    });
-}
-   }
+    handleClick = (e) => {
+       if(this.state.validity)
+       {
+            this.props.tryathomestate(true)
+       }
+    }
 
     render() {
-        return (
-            <div className="TryAtHome">
-                  <div  className="container" >
-                <form  method="post" className="form1 pull-right validate">
-                <h3 className="title">SCHEDULE YOUR FREE TRIAL</h3> 
-               
-                <div className="form-content"> 
-                <div className="form-group row ">
-                 <div className="col-xs-12">              
-                <input type="text" className="form-control"  placeholder="Mobile Number"  name="contact"value={this.state.contact} onChange={ this.handleChange } />
-                <p>{this.state.errorm1}</p>
+        function importAll(r) {
+            let carouselImages = {};
+            r.keys().forEach((item, index) => { carouselImages[item.replace('./', '')] = r(item); });
+            return carouselImages
+        }
+        const ProductImages = importAll(require.context('../Products/images/products/', false, /\.(PNG|jpe?g|svg|webp)$/));
+        function addDays(currentdate,interval){
+            currentdate.setDate(currentdate.getDate()+interval)
+        return currentdate
+        }
+        if(this.state.tryoutcart.length==0) return (
+            <div className="tryathome-section">
+                <div className="container" >
+                    <div className="row">
+                        <div className="col-12">
+                            <h1 className="page-title">Your Favourite Designs at Your Doorstep!</h1>
+                        </div>
+                        <div className="col-lg-7 col-12">
+                            <h1 className="main-title">How it Works?</h1>
+                            <h3 className="title-new ">Add Designs</h3>
+                            <div className="desc">
+                                <p>Choose designs you want to try <span className="small">(Try as many as you like)</span>
+                                </p>
+                            </div>
+                            <h3 className="title-new">Schedule</h3>
+                            <div className="desc">
+                                <p>Select your convenient date, time & place <span className="small">(Monday to Sunday, Any time, Home/Office)</span>
+                                </p>
+                            </div>
+                            <h3 className="title-new ">Try</h3>
+                            <div className="desc">
+                                <p>Our Jewellery consultant will bring designs to you <span className="small">(Buy only if you like)</span>
+                                </p>
+                            </div>
+                        </div>
+                        <div className="col-lg-5 col-12">
+                            <form method="post" className="form1 pull-right validate">
+                                <h3 className="title">SCHEDULE YOUR FREE TRIAL</h3>
+                                <div className="form-content">
+                                    <div className="form-group email-group">
+                                        <div className="col-xs-12 email-address-holder">
+                                        <input type="text" placeholder="Email Address" className="form-control" name="email" value={this.state.email} onChange={this.handleChange} />
+                                        <span className="validity-alert-email">Please enter valid Email address</span>
+                                        </div>
+                                    </div>
+                                    <div className="form-group">
+                                        <div className="col-xs-12 datepicker-holder">
+                                        <DatePicker includeDateIntervals={[{start:new Date(), end:addDays(new Date(), 7)}]} id="appoint-date" value={this.state.appointdate} className="appoint-date" selected={addDays(new Date(), 1)} onChange={(date) => this.setStartDate(date)} />
+                                        <label className="calendar-icon" htmlFor="appoint-date">
+                                        <FaCalendarAlt/></label>
+                                        </div>
+                                    </div>
+                                    <input className="btn schedule-button btn-primary" type="button" value={this.state.Buttontxt} onClick={this.handleClick}></input>
+                                </div>
+                            </form>
+                        </div>
                     </div>
-                     </div>           
-
-                <div className="form-group row">
-                <div className="col-xs-12">
-                <input type="text" placeholder="Email Address" className="form-control" name="email" value={this.state.email} onChange={ this.handleChange } />
-                 <p>{this.state.errorm3}</p>
-                 </div> 
-                 </div>
-                
-              <input className="btn btn-primary" type="button" value={this.state.Buttontxt} onClick={this.handleClick}></input>
                 </div>
-                
-                <h4>For help, call us at 1234567891 </h4>
-                </form>
 
-                </div>
-                <div className="section ">
-                <div className="container"> 
-                <h2 className="title-new title-new-1 text-center">How it Works?</h2>
-                <div >
-                     <ul className="list-inline"> 
-                     <li className="col-xs-4 text-center"> 
-                     
-                    <h3 className="title-new ">Schedule</h3> 
-                    <div className="desc"> 
-                    <p>Select your convenient date, time &amp; place <span className="small">(Monday to Sunday, Any time, Home/Office)</span>
-                    </p> </div> </li> 
-                    <li className="col-xs-4 text-center"> 
-                    <h3 className="title-new ">Add Designs</h3>
-                     <div className="desc"> <p>Choose designs you want to try <span className="small">(Try as many as you like)</span>
-                     </p> </div> </li> 
-                     <li className="col-xs-4 text-center"> 
-                     <h3 className="title-new ">Try</h3>
-                      <div className="desc"> <p>Our Jewellery consultant will bring designs to you <span className="small">(Buy only if you like)</span>
-                      </p> </div> </li> </ul>
-                     
-                       </div>
-                       </div>
-                       </div>
             </div>
         )
+        else{
+            let addedItems =
+                (
+                    this.props.addedItems.map(item => {
+                        return (<div key={item.id} className='container cart-page details-page'>
+                            <div className='row'>
+                                <div className='col-md-3 col-12 product-page'>
+                                    <div className=' product-image'>
+                                        {ProductImages[item.images] ? <div className='image-holder'><img className='w-100' src={ProductImages[item.images]} alt={item.description} /></div> : null}
+                                        <p className='item-quantity'><FaMinus onClick={(e) => this.props.subtractQuantity(item.name)}></FaMinus><input type='number' value={item.quantity} className='quantity' onChange={(e) => this.changeQuantity(e, item.name)} /><FaPlus onClick={(e) => this.addSingleQuantity(item.name)}></FaPlus> </p>
+                                    </div>
+                                </div>
+                                <div className='col-md-9 col-12 product-details'>
+                                    <h6 className='product-name'>{item.name}</h6>
+                                    <p className='desc-text'>{item.description}</p>
+                                    <h4 className='price'>₹{item.discount ? <span>{this.Offerprice(item.discount, item.price)} <span className='old-price'>{item.price}</span><span className='discount'>-{item.discount}%off</span></span> : <span>{item.price}</span>}</h4>
+                                    <button className='remove-button' onClick={(e) => this.removeItem(e, item.name)}>Remove</button>
+                                </div>
+                            </div>
+                        </div >
+                        )
+                    })
+                )
+            if (addedItems.length > 0) {
+                return (
+                    <div className="container">
+                        <div className="cart row">
+                            <div className='col-12'>
+                                <h5>You have in your cart:</h5>
+                            </div>
+                            <div className='col-lg-8 col-12'>
+                                <div className="collection">
+                                    {addedItems}
+                                </div>
+                            </div>
+                            <div className='col-lg-4 col-12'>
+                                <div className='total-details'>
+                                    <h4>Price details</h4>
+                                    <div className='d-flex w-100 mt-4'><h6>Price ({this.props.totalQuantity} items)</h6><h6 className='ms-auto'>₹{this.props.total + this.props.totalDiscount}</h6></div>
+                                    <div className='d-flex mt-4'><h6>discount</h6><h6 className='ms-auto'>-₹{this.props.totalDiscount}</h6></div>
+                                    <div className='d-flex mt-4'><h4>Total Amount</h4><h4 className='ms-auto'>₹{this.props.total}</h4></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                )
+            } 
+        }
     }
 }
 
-export default TryAtHome
-                
+const mapStateToProps = (state) => {
+    return {
+      tryathome:state.tryathome
+    }
+  }
+  
+  const mapDispatchToProps = (dispatch) => {
+    return {
+      tryathomestate:(tryathome)=>{dispatch(tryathomestate(tryathome))}
+      
+    }
+  }
+
+export default connect(mapStateToProps, mapDispatchToProps)(TryAtHome)

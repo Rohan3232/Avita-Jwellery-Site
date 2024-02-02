@@ -1,4 +1,4 @@
-import { ADD_TO_CART,UPDATE_CART,CHANGE_LOGIN_STATUS,ADD_SINGLEQUANTITY,REMOVE_ITEM,SUB_QUANTITY,ADD_QUANTITY,ADD_SHIPPING,ADD_PRODUCT} from './action-types/cart-actions'
+import { ADD_TO_CART,UPDATE_CART,CHANGE_LOGIN_STATUS,ADD_SINGLEQUANTITY,REMOVE_ITEM,SUB_QUANTITY,ADD_QUANTITY,ADD_SHIPPING,ADD_PRODUCT, TRYATHOME_STATE, ADD_TO_TRYOUTCART} from './action-types/cart-actions'
 
 //add cart action
 export const addToCart= (name)=>{
@@ -63,5 +63,17 @@ export const changeLoginStatus=(userid,password)=>{
         type:CHANGE_LOGIN_STATUS,
         userid,
         password
+    }
+}
+export const tryathomestate=(tryathome)=>{
+    return{
+        type:TRYATHOME_STATE,
+        tryathome
+    }
+}
+export const addtotryoutcart=(name)=>{
+    return{
+        type:ADD_TO_TRYOUTCART,
+        name
     }
 }

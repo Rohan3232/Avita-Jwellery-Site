@@ -1,36 +1,115 @@
 
-.pull-right {
-    float: right!important;
-}
-.pull-right {
-    float: right !important;
-}
-
-.TryAtHome{
-    padding-top: 10px;
+.tryathome-section{
+    padding: 40px 0;
     height: 100%;
-    background: rgb(211, 209, 209);
     font-size: 13px;
     line-height: 19px;
     color: #4d4d4d;
+    font-family: "FS Elliot Web Bold", "FS Elliot Web Regular", Arial, arial, sans-serif;
 }
-.TryAtHome .title{
-    padding-bottom: 20px;
-    font-family: "Kanit", sans-serif;;
-    
+.tryathome-section .page-title{
+    font-family: "FS Elliot Web Bold", "FS Elliot Web Regular", Arial, arial, sans-serif;
+    font-size: 50px;
+    line-height: 58px;
+    color: darkmagenta;
+    margin-bottom: 40px;
 }
-.TryAtHome form{      
-    border:solid 1px black;
-    padding:10px;
-    background-color: rgb(228, 228, 228);
+.main-title{
+    font-size: 36px;
+    line-height: 40px;
+    text-align: left;
+    color: rgb(65, 25, 65);
+    margin-bottom: 30px;
 }
-.TryAtHome .form-control{
-    border-radius: 0px;
-    height: auto;
+.title-new,.tryathome-section form .title{
+    text-align: left;
+    font-size: 24px;
+    line-height: 28px;
+    margin: 20px 0;
+    font-weight: bold;
+    color: rgb(100 43 83)
 }
-.TryAtHome .container {
-    margin-right: auto;
-    margin-left: auto;
-    padding-right: 5px; 
+.desc p{
+    font-size: 16px;
+    line-height: 18px;
+    color: rgb(79, 50, 103);
+    white-space: break-spaces;
+}
+.tryathome-section form .title{
     text-align: center;
+    margin: 0;
+    margin-bottom: 40px;
+}
+
+.tryathome-section form{      
+    padding: 40px 24px;
+    border-radius: 32px;
+    background: linear-gradient(to right, #e9c1eb 0%, #ccbef6 100%);
+    border: 1px solid #e56eeb;
+}
+.form-content{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.form-group{
+    width: fit-content;
+    max-width: 80%;
+}
+.email-group{
+    width: 100%;
+    max-width: 280px;
+}
+.tryathome-section .form-control{
+    border-radius: 12px;
+    height: auto;
+    border: none;
+    outline: none;
+    box-shadow: none;
+    width: 100%;
+    color: #4F3267;
+}
+.email-address-holder{
+    margin-bottom: 30px;
+}
+.tryathome-section .container {
+    margin-right: auto;
+    margin-left: auto;  
+    text-align: center;
+}
+.schedule-button{
+    background-color: darkmagenta;
+    padding: 12px 24px;
+    border-radius: 16px;
+    color: white;
+    border: none;
+    box-shadow: 2px 2px 2px 0 rgb(147, 167, 181);
+    text-decoration: none;
+    display: inline-block;
+}
+.schedule-button:hover{
+    background-color: rgb(139, 98, 139)
+}
+.appoint-date{
+    height: 40px;
+    margin-bottom: 30px;
+    border-radius: 8px;
+    border: none;
+    font-size: 14px;
+    padding: 8px 12px;
+    font-family: "FS Elliot Web Bold", "FS Elliot Web Regular", Arial, arial, sans-serif;
+}
+.datepicker-holder{
+    width: 100%;
+    position: relative;
+}
+.calendar-icon{
+    position: absolute;
+    right: 8px;
+    top:8px;
+    z-index: 0;
+}
+.calendar-icon svg{
+    height: 25px;
+    width: 25px;
 }

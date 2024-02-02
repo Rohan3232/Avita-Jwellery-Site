@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
 import './Products.css';
 import { connect } from 'react-redux';
-import { addToCart, addProduct } from '../actions/cartActions';
+import { addToCart, addProduct,addtotryoutcart,tryathomestate } from '../actions/cartActions';
 import { NavLink } from 'react-router-dom';
 class Bangles extends Component {
   constructor(props) {
     super(props);
     this.Offerprice = this.Offerprice.bind(this);
+    this.addtotryoutcart=this.addtotryoutcart.bind(this);
   }
   Offerprice(discount, price) {
     let discountedprice = price - (price * discount / 100)
@@ -22,6 +23,9 @@ componentDidUpdate() {
     setTimeout(() => {
         this.setState({ currentUrl: window.location.pathname });
     }, 100);
+}
+addtotryoutcart=(name)=>{
+  this.props.addtotryoutcart(name)
 }
   render() {
     function importAll(r) {
@@ -65,8 +69,11 @@ componentDidUpdate() {
                                   {ProductImages[product.images] ? <div className='image-holder'><img className='h-auto' src={ProductImages[product.images]} alt={product.description} /></div> : null}
                                   <h6 className='product-name'>{product.name}</h6>
                                   <h6 className='price'>₹{product.discount ? <span>{this.Offerprice(product.discount, product.price)} <span className='old-price'>{product.price}</span><span className='discount'>-{product.discount}%off</span></span> : <span>{product.price}</span>}</h6>
+                                 
                                 </div>
                               </NavLink>
+                              {this.props.tryathome?<button className='addtocart-button tryout-button' onClick={this.addtotryoutcart(product.name)} >Try at Home</button>:null}
+                              
                             </div>
                           )
                         })}
@@ -99,14 +106,18 @@ componentDidUpdate() {
 const mapStateToProps = (state) => {
   return {
     items: state.items,
-    currentproduct: state.currentproduct
+    currentproduct: state.currentproduct,
+    tryoutcart:state.tryoutcart,
+    tryathome:state.tryathome
   }
 }
 
 const mapDispatchToProps = (dispatch) => {
   return {
     addToCart: (id) => { dispatch(addToCart(id)) },
-    addProduct: (product) => { dispatch(addProduct(product)) }
+    addProduct: (product) => { dispatch(addProduct(product)) },
+    addtotryoutcart:(name) =>{dispatch(addtotryoutcart(name))},
+    tryathomestate:(tryathome)=>{dispatch(tryathomestate(tryathome))}
   }
 }
 export default connect(mapStateToProps, mapDispatchToProps)(Bangles)

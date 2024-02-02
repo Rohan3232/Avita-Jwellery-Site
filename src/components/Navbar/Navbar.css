@@ -320,7 +320,7 @@
     margin-bottom: 60px;
     white-space: break-spaces;
 }
-.validity-alert{
+.validity-alert,.validity-alert-email{
     color: red;
     font-size: 14px;
     display: none

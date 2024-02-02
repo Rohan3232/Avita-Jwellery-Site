@@ -1,5 +1,5 @@
 import React from 'react';
-import { ADD_PRODUCT, UPDATE_CART, CHANGE_LOGIN_STATUS, ADD_SINGLEQUANTITY, ADD_QUANTITY, ADD_TO_CART, SUB_QUANTITY, REMOVE_ITEM } from '../actions/action-types/cart-actions';
+import { ADD_PRODUCT, UPDATE_CART, CHANGE_LOGIN_STATUS, ADD_SINGLEQUANTITY, ADD_QUANTITY, ADD_TO_CART, SUB_QUANTITY, REMOVE_ITEM, TRYATHOME_STATE, ADD_TO_TRYOUTCART } from '../actions/action-types/cart-actions';
 import { MenuItems } from '../Navbar/MenuItems';
 import axios from 'axios';
 let allproducts = [];
@@ -22,7 +22,9 @@ const initState = {
     currentproduct: {},
     totalDiscount: 0,
     userid: '',
-    password: ''
+    password: '',
+    tryathome:false,
+    tryoutcart:[]
 
 }
 const BangleItems = (state = initState, action) => {
@@ -179,6 +181,48 @@ const BangleItems = (state = initState, action) => {
             ...state,
             userid: action.userid,
             password: action.password
+        }
+    }
+    else if(action.type == TRYATHOME_STATE)
+    {
+        return{
+            ...state,
+            tryathome: action.tryathome
+        }
+    }
+    if (action.type ===ADD_TO_TRYOUTCART) {
+        let addedItem;
+        state.items.filter(subtype => subtype.types).map((maintype) => {
+            maintype.types.map((subtype) => {
+                maintype[subtype.name.replaceAll(' ', '')].map((product) => {
+                    if (action.name == product.name)
+                        addedItem = product;
+                })
+            })
+        })
+        if (addedItem != undefined) {
+            let existed_item = state.tryoutcart.find(item => action.name === item.name)
+            if (existed_item) {
+                var cart = state.tryoutcart;
+                const { data } = axios.post('/updatetryoutcart', {
+                   cart
+                })
+                return {
+                    ...state,
+                }
+            }
+            else {
+                var cart = [...state.tryoutcart, addedItem];
+                const { data } = axios.post('/updatetryoutcart', {
+                    cart
+                })
+                return {
+                    ...state,
+                    tryoutcart: [...state.tryoutcart, addedItem]
+                }
+
+            }
+
         }
     }
     else {

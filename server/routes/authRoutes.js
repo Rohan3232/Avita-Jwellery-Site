@@ -30,7 +30,7 @@ router.post('/register', async (req, res) => {
             })
         }
         const user = await User.create({
-            userid, password, cart, total, totalQuantity, totalDiscount
+            userid, password, cart, total, totalQuantity, totalDiscount,tryoutcart
         })
         return res.json(user)
     }
@@ -74,6 +74,29 @@ router.post('/updatecart', async (req, res) => {
             $set: {
                 cart: cart,
                 total: total, totalQuantity: totalQuantity, totalDiscount: totalDiscount
+            }
+        })
+        return res.json(user)
+    }
+    catch (error) {
+        console.log(error)
+    }
+})
+
+router.post('/updatetryoutcart', async (req, res) => {
+    try {
+        const { userid,tryoutcart } = req.body;
+        const exist = await User.findOne({ userid })
+        if (!exist) {
+            return res.json({
+                error: 'No User Found'
+            })
+        }
+        const user = await User.updateOne({
+            userid: userid
+        }, {
+            $set: {
+                tryoutcart: tryoutcart
             }
         })
         return res.json(user)
