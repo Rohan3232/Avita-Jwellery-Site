@@ -63,7 +63,7 @@ export class TryAtHome extends Component {
             currentdate.setDate(currentdate.getDate()+interval)
         return currentdate
         }
-        if(this.state.tryoutcart.length==0) return (
+        if(this.props.tryoutcart.length==0) return (
             <div className="tryathome-section">
                 <div className="container" >
                     <div className="row">
