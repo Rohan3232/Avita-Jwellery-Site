@@ -114,7 +114,7 @@ export class ProductDetails extends Component {
                         <div className='addtoCart-section'>
                             {this.props.addedItems.indexOf(this.props.currentproduct)<0?
                             <button className='addtocart-button' onClick={(e) => { this.AddtoCart(this.props.currentproduct.name) }}>Add to Cart</button>
-                            :  <NavLink className='addtocart-button' to={'/cart'}>Go to Cart</NavLink>}
+                            :  <NavLink className='addtocart-button' to={'/cart/shopping-cart'}>Go to Cart</NavLink>}
                             </div>
 
                     </div>

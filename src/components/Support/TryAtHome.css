@@ -60,6 +60,60 @@
     width: 100%;
     max-width: 280px;
 }
+.tabs-options .react-tabs__tab-list{
+    width: fit-content;
+    border: none;
+    font-size: 16px;
+    font-family: InterSemiBold, "Helvetica Neue", Helvetica, Arial, sans-serif;
+    color: rgb(35, 21, 53);
+    border: none;
+    background-color: rgb(232, 225, 255);
+    border-radius: 12px;
+    margin:auto;
+}
+.tabs-options{
+    width: 100%;
+    background-color: #ffffff;
+    box-shadow: 0 2px 0.5rem #bbbbbb;
+    height: 80px;
+    padding: 12px 0;
+    
+}
+.react-tabs__tab:focus:after{
+    content: none;
+}
+.react-tabs__tab.react-tabs__tab--selected{
+    border: none;
+    margin: 2px;
+    font-weight: 600;
+    color: rgb(79, 50, 103);
+}
+
+.react-tabs__tab{
+    border-radius: 12px;
+    border: none !important;
+    bottom: 0 !important;
+}
+
+.homecart-icon svg{
+    fill: darkmagenta;
+    width: 30px;
+    height: 30px;
+}
+.homecart-icon span{
+    position: absolute;
+    bottom: 0px;
+    right: 0;
+    font-weight: bold;
+}
+.homecart-icon{
+    color: darkmagenta;
+    width: 40px;
+    height: 40px;
+    position: fixed;
+    bottom: 40px;
+    right: 40px;
+}
 .tryathome-section .form-control{
     border-radius: 12px;
     height: auto;

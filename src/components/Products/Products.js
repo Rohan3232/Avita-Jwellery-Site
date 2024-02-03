@@ -7,7 +7,6 @@ class Bangles extends Component {
   constructor(props) {
     super(props);
     this.Offerprice = this.Offerprice.bind(this);
-    this.addtotryoutcart=this.addtotryoutcart.bind(this);
   }
   Offerprice(discount, price) {
     let discountedprice = price - (price * discount / 100)
@@ -23,10 +22,6 @@ componentDidUpdate() {
     setTimeout(() => {
         this.setState({ currentUrl: window.location.pathname });
     }, 100);
-}
-addtotryoutcart(e,name){
-  console.log(name)
-  this.props.addtotryoutcart(name)
 }
   render() {
     function importAll(r) {

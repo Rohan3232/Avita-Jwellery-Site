@@ -1,12 +1,19 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux'
 import { FaPlus, FaMinus } from "react-icons/fa";
-import { addQuantity, addToCart, addSingleQuantity, subtractQuantity, removeItem } from './actions/cartActions';
+import { useLocation } from "react-router-dom";
+import { addQuantity, addToCart, addSingleQuantity, subtractQuantity, removeItem, tryathomestate } from './actions/cartActions';
 import SearchPage from './SearchPage';
+import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
+import 'react-tabs/style/react-tabs.css';
 import axios from 'axios';
 class Cart extends Component {
     constructor(props) {
         super(props);
+        console.log(props)
+        this.state={
+            tabIndex:(this.props.cart=='try-at-home'||(this.props.tryoutcart.length>0 && this.props.addedItems.length==0))?1:0,
+        }
         this.Offerprice = this.Offerprice.bind(this);
         this.changeQuantity = this.changeQuantity.bind(this);
         this.addSingleQuantity = this.addSingleQuantity.bind(this);
@@ -17,9 +24,9 @@ class Cart extends Component {
         return discountedprice
     }
 
-    async removeItem(e, name) {
-        this.props.removeItem(name);
-        
+    async removeItem(e, name,cartname) {
+        this.props.removeItem(name,cartname);
+
     }
     async addSingleQuantity(name) {
         this.props.addSingleQuantity(name)
@@ -32,10 +39,11 @@ class Cart extends Component {
         else {
             this.props.addQuantity(name, 1)
         }
-       
-        
+
+
     }
     render() {
+        console.log(this.props)
         function importAll(r) {
             let carouselImages = {};
             r.keys().forEach((item, index) => { carouselImages[item.replace('./', '')] = r(item); });
@@ -57,43 +65,94 @@ class Cart extends Component {
                                 <h6 className='product-name'>{item.name}</h6>
                                 <p className='desc-text'>{item.description}</p>
                                 <h4 className='price'>₹{item.discount ? <span>{this.Offerprice(item.discount, item.price)} <span className='old-price'>{item.price}</span><span className='discount'>-{item.discount}%off</span></span> : <span>{item.price}</span>}</h4>
-                                <button className='remove-button' onClick={(e) => this.removeItem(e, item.name)}>Remove</button>
+                                <button className='remove-button' onClick={(e) => this.removeItem(e, item.name,'addtocart')}>Remove</button>
                             </div>
                         </div>
                     </div >
                     )
                 })
             )
-        if (addedItems.length > 0) {
-            return (
-                <div className="container">
-                    <div className="cart row">
-                        <div className='col-12'>
-                            <h5>You have in your cart:</h5>
-                        </div>
-                        <div className='col-lg-8 col-12'>
-                            <div className="collection">
-                                {addedItems}
+        let addedTryItems =
+            (
+                this.props.tryoutcart.map(item => {
+                    return (<div key={item.id} className='container cart-page details-page'>
+                        <div className='row'>
+                            <div className='col-md-3 col-12 product-page'>
+                                <div className=' product-image'>
+                                    {ProductImages[item.images] ? <div className='image-holder'><img className='w-100' src={ProductImages[item.images]} alt={item.description} /></div> : null}
+                                </div>
+                            </div>
+                            <div className='col-md-9 col-12 product-details'>
+                                <h6 className='product-name'>{item.name}</h6>
+                                <p className='desc-text'>{item.description}</p>
+                                <button className='remove-button' onClick={(e) => this.removeItem(e, item.name,'tryoutcart')}>Remove</button>
                             </div>
                         </div>
-                        <div className='col-lg-4 col-12'>
-                            <div className='total-details'>
-                                <h4>Price details</h4>
-                                <div className='d-flex w-100 mt-4'><h6>Price ({this.props.totalQuantity} items)</h6><h6 className='ms-auto'>₹{this.props.total + this.props.totalDiscount}</h6></div>
-                                <div className='d-flex mt-4'><h6>discount</h6><h6 className='ms-auto'>-₹{this.props.totalDiscount}</h6></div>
-                                <div className='d-flex mt-4'><h4>Total Amount</h4><h4 className='ms-auto'>₹{this.props.total}</h4></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                    </div >
+                    )
+                })
             )
-        } else {
-            return (<div className="container">
+        return (
+            <Tabs  selectedIndex={this.state.tabIndex} onSelect={tabIndex => this.setState({ tabIndex })}>
+                <div className='tabs-options'>
+                    <TabList>
+                        <Tab>Shopping Cart</Tab>
+                        <Tab>Trial Cart</Tab>
+                    </TabList>
+                </div>
+                <TabPanel>
+                    {addedItems.length > 0 ? <div className="container-fluid">
+                        <div className="cart row">
+                            <div className='col-12'>
+                                <h5>You have in your cart:</h5>
+                            </div>
+                            <div className='col-lg-8 col-12'>
+                                <div className="collection">
+                                    {addedItems}
+                                </div>
+                            </div>
+                            <div className='col-lg-4 col-12'>
+                                <div className='total-details'>
+                                    <h4>Price details</h4>
+                                    <div className='d-flex w-100 mt-4'><h6>Price ({this.props.totalQuantity} items)</h6><h6 className='ms-auto'>₹{this.props.total + this.props.totalDiscount}</h6></div>
+                                    <div className='d-flex mt-4'><h6>discount</h6><h6 className='ms-auto'>-₹{this.props.totalDiscount}</h6></div>
+                                    <div className='d-flex mt-4'><h4>Total Amount</h4><h4 className='ms-auto'>₹{this.props.total}</h4></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div> : <div className="container-fluid">
+                        <p className='title'>Your Cart is Empty</p>
+                        <SearchPage searchkey={'discount'}></SearchPage>
+                    </div>}
+                </TabPanel>
+                <TabPanel>
+                    {addedTryItems.length > 0 ? <div className="container-fluid">
+                        <div className="cart row">
+                            <div className='col-12'>
+                                <h5>You have in your cart:</h5>
+                            </div>
+                            <div className='col-lg-8 col-12'>
+                                <div className="collection">
+                                    {addedTryItems}
+                                </div>
+                            </div>
+                            <div className='col-lg-4 col-12'>
+                            <div className='total-details'>
+                                    <div className='d-flex w-100 mt-4'><h6>free trial</h6><h6 className='ms-auto'>₹0</h6></div>
+                                    <div className='d-flex mt-4'><h6>Service Charges</h6><h6 className='ms-auto'>Free</h6></div>
+                                    <div className='d-flex mt-4'><h6>Total Cost</h6><h6 className='ms-auto'>₹0</h6></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div> : <div className="container">
+                        <p className='title'>Nothing to Try at Home?
+                            Let's do some retail therapy.</p>
+                    </div>}
+                </TabPanel>
+            </Tabs>
+        )
 
-                <p className='title'>Your Cart is Empty</p>
-                <SearchPage searchkey={'discount'}></SearchPage>
-            </div>)
-        }
+
     }
 }
 
@@ -102,9 +161,11 @@ const mapStateToProps = (state) => {
         addedItems: state.addedItems,
         total: state.total,
         totalQuantity: state.totalQuantity,
-        totalDiscount: state.totalDiscount, 
-        userid:state.userid,
-        password:state.password
+        totalDiscount: state.totalDiscount,
+        userid: state.userid,
+        password: state.password,
+        tryoutcart: state.tryoutcart,
+        tryathome:state.tryathome
     }
 }
 const mapDispatchToProps = (dispatch) => {
@@ -113,7 +174,7 @@ const mapDispatchToProps = (dispatch) => {
         addQuantity: (name, quantity) => { dispatch(addQuantity(name, quantity)) },
         addSingleQuantity: (name) => { dispatch(addSingleQuantity(name)) },
         subtractQuantity: (name) => { dispatch(subtractQuantity(name)) },
-        removeItem: (name) => { dispatch(removeItem(name)) }
+        removeItem: (name,cartname) => { dispatch(removeItem(name,cartname)) }
     }
 }
 

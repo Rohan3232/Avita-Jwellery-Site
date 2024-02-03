@@ -17,10 +17,11 @@ export const updateCart=(addedItems,total,totalQuantity,totalDiscount)=>{
     }
 }
 //remove item action
-export const removeItem=(name)=>{
+export const removeItem=(name,cartname)=>{
     return{
         type: REMOVE_ITEM,
-        name
+        name,
+        cartname
     }
 }
 //subtract qt action

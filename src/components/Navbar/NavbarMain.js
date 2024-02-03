@@ -324,7 +324,7 @@ componentDidUpdate() {
                   <div className="modal-footer">
                     <div className={(this.state.signup ? "login-buttons " : "signup-button ") + "footer-button"}>
                       <button type="submit" className="login-button w-50" onClick={(e) => this.formSubmit(e)}>{this.state.signup ? "Signup" : "Login"}</button>
-                      {this.state.signup ? <p className="signup-link text-center">Already a user, <a className="link" onClick={(e) => this.changeMethod()}>Login</a></p> : <p className="signup-link text-center">New here, <a className="link" onClick={(e) => this.changeMethod()}>signup</a></p>}
+                      {this.state.signup ? <p className="signup-link text-center">Already a user, <a className="link" onClick={(e) => this.changeMethod()}>Login</a></p> : <p className="signup-link text-center">New here?<br/> <a className="link" onClick={(e) => this.changeMethod()}>signup</a></p>}
                     </div>
                   </div>
                 </form>
@@ -362,11 +362,11 @@ componentDidUpdate() {
                       </NavLink>
                     </li>
                     <li>
-                      <NavLink to="/Cart" className="navlink">
+                      <NavLink to="/Cart/shopping-cart" className="navlink">
                         <span>
                           <FaShoppingCart className="icon" size="25px" />
                         </span>
-                        <span className="cart-items">{this.props.totalQuantity > 0 ? this.props.totalQuantity : null}</span>
+                        <span className="cart-items">{this.props.totalQuantity > 0 || this.props.tryoutcart.length>0 ? this.props.totalQuantity+this.props.tryoutcart.length : null}</span>
                       </NavLink>
                     </li>
                   </ul>
@@ -394,7 +394,8 @@ const mapStateToProps = (state) => {
     totalDiscount:state.totalDiscount,
     allItems: state.allItems,
     userid:state.userid,
-    password:state.password
+    password:state.password,
+    tryoutcart:state.tryoutcart
   }
 }
 const mapDispatchToProps = (dispatch) => {

@@ -145,6 +145,7 @@ const BangleItems = (state = initState, action) => {
         return { ...state }
     }
     else if (action.type == REMOVE_ITEM) {
+        if(action.cartname=='addtocart'){
         state.totalDiscount = 0;
         state.totalQuantity = 0;
         state.total = 0;
@@ -163,8 +164,13 @@ const BangleItems = (state = initState, action) => {
         const {data} = axios.post('/updatecart', {
             userid,cart,total,totalQuantity,totalDiscount
         })
+        }
+        else{
+            let addedItems = state.tryoutcart.filter(product => { return product.name != action.name })
+            state.tryoutcart= addedItems;
+        }
+        
         return { ...state }
-
     }
     else if (action.type == UPDATE_CART) {
         return {

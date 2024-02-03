@@ -2,18 +2,21 @@ import axios from "axios";
 import React, { Component } from 'react'
 import './TryAtHome.css'
 import { FaPlus, FaMinus } from "react-icons/fa";
+import { MdAddHomeWork } from "react-icons/md";
 import { connect } from 'react-redux';
 import DatePicker from "react-datepicker";
-import {tryathomestate } from '../actions/cartActions';
+import {tryathomestate,addtotryoutcart } from '../actions/cartActions';
 import "react-datepicker/dist/react-datepicker.css";
 import { FaCalendarAlt } from "react-icons/fa";
+import Products from "../Products/Products";
+import { NavLink } from "react-router-dom";
 export class TryAtHome extends Component {
     constructor(props) {
         super(props);
         this.state = {
             contact: '',
             email: '',
-            Buttontxt: 'SCHEDULE',
+            Buttontxt: 'Select Jwellery',
             message: "",
             validity:false,
             appointdate:new Date(),
@@ -22,6 +25,7 @@ export class TryAtHome extends Component {
         this.handleChange = this.handleChange.bind(this);
         this.handleClick = this.handleClick.bind(this);
         this.setStartDate=this.setStartDate.bind(this);
+        this.addtotryoutcart=this.addtotryoutcart.bind(this);
     }
 
     handleChange = (e) => {
@@ -40,6 +44,17 @@ export class TryAtHome extends Component {
                 })
             }
     }
+    
+  componentDidMount() {
+    setTimeout(() => {
+        this.setState({ currentUrl: window.location.pathname });
+    }, 100);
+}
+componentDidUpdate() {
+    setTimeout(() => {
+        this.setState({ currentUrl: window.location.pathname });
+    }, 100);
+}
     setStartDate =(startDate)=>{
         this.setState({
             appointdate:startDate
@@ -52,8 +67,11 @@ export class TryAtHome extends Component {
        }
     }
 
+    addtotryoutcart(e,name){
+        this.props.addtotryoutcart(name)
+        alert("added to your try out cart")
+      }
     render() {
-        console.log(this.props.tryoutcart)
         function importAll(r) {
             let carouselImages = {};
             r.keys().forEach((item, index) => { carouselImages[item.replace('./', '')] = r(item); });
@@ -64,7 +82,7 @@ export class TryAtHome extends Component {
             currentdate.setDate(currentdate.getDate()+interval)
         return currentdate
         }
-        if(this.props.tryoutcart.length==0) return (
+        if(!this.props.tryathome) return (
             <div className="tryathome-section">
                 <div className="container" >
                     <div className="row">
@@ -116,44 +134,56 @@ export class TryAtHome extends Component {
             </div>
         )
         else{
-            let addedItems =
-                (
-                    this.props.tryoutcart.map(item => {
-                        return (<div key={item.id} className='container cart-page details-page'>
-                            <div className='row'>
-                                <div className='col-md-3 col-12 product-page'>
-                                    <div className=' product-image'>
-                                        {ProductImages[item.images] ? <div className='image-holder'><img className='w-100' src={ProductImages[item.images]} alt={item.description} /></div> : null}
-                                    </div>
-                                </div>
-                                <div className='col-md-9 col-12 product-details'>
-                                    <h6 className='product-name'>{item.name}</h6>
-                                    <p className='desc-text'>{item.description}</p>
-                                </div>
-                            </div>
-                        </div >
-                        )
-                    })
-                )
-            if (addedItems.length > 0) {
+            let currentproduct = this.props.items.map((item, key) => {
                 return (
-                    <div className="container">
-                        <div className="cart row">
-                            <div className='col-12'>
-                                <h5>You have in your cart:</h5>
+                  <div key={key}>
+                    <NavLink to={'/cart'} className={'homecart-icon'}><span>{this.props.tryoutcart.length}</span><MdAddHomeWork /></NavLink>
+                    {item.types ? <div className='col-xs-12'>
+                      {item.types.map((type, key) => {
+                        {
+                          return (
+                            <div className='row' key={key}><div className='col-12'>
+                            
                             </div>
-                            <div className='col-lg-8 col-12'>
-                                <div className="collection">
-                                    {addedItems}
-                                </div>
+                              <div className='col-xs-12'><div className='row'>
+                                {
+                                  item[type.name.replaceAll(' ', '')].filter((product)=>{
+                                   return this.props.tryoutcart.indexOf(product)<0
+                                  }).map((product, key) => {
+                                    return (
+                                      <div key={key} className='col-md-3 col-12 cards-holder'>
+                                          <div className=' product-cards'>
+                                            {ProductImages[product.images] ? <div className='image-holder'><img className='h-auto' src={ProductImages[product.images]} alt={product.description} /></div> : null}
+                                            {<NavLink to={'/cart/try-at-home'} className='addtocart-button tryout-button' onClick={(e)=>{this.addtotryoutcart(e,product.name)}} >Try at Home</NavLink>}
+                                          </div>
+                                    
+                                        
+                                      </div>
+                                    )
+                                  })}
+                              </div>
+                              </div>
                             </div>
-                            <div className='col-lg-4 col-12'>
-                               
-                            </div>
-                        </div>
-                    </div>
+                          )
+                        }
+                      })}
+                    </div> : null
+                    }
+                  </div>
+          
                 )
-            } 
+              });
+              if (currentproduct.length > 0) {
+                return (
+                  <div className='container products-holder'>
+                    {currentproduct}</div >
+                )
+              }
+              else {
+                return (<div>
+                  <h1 className='page-title'>Page Not Found</h1>
+                </div>)
+              }
         }
     }
 }
@@ -161,13 +191,15 @@ export class TryAtHome extends Component {
 const mapStateToProps = (state) => {
     return {
       tryathome:state.tryathome,
-      tryoutcart:state.tryoutcart
+      tryoutcart:state.tryoutcart,
+      items:state.items
     }
   }
   
   const mapDispatchToProps = (dispatch) => {
     return {
-      tryathomestate:(tryathome)=>{dispatch(tryathomestate(tryathome))}
+      tryathomestate:(tryathome)=>{dispatch(tryathomestate(tryathome))},
+      addtotryoutcart:(name) =>{dispatch(addtotryoutcart(name))}
       
     }
   }

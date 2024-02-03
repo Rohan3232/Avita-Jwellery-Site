@@ -28,11 +28,6 @@
   padding-bottom: 20px;
   position: relative;
 }
-.tryout-button{
-  position: absolute;
-    bottom: 30px;
-    left: 20px;
-}
 .product-cards{
   padding: 24px 12px;
   margin: auto;
