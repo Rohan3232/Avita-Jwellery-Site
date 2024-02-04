@@ -141,6 +141,7 @@ router.post('/send', async (req, res) => {
          status: 'fail'
        })
      } else {
+        console.log(data)
        res.json({
         status: 'success'
        })
