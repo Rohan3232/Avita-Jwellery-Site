@@ -6,7 +6,7 @@ const transporter=require('../models/mail');
 router.use(
     cors({
     credentials:true,
-    origin:'http://localhost:3000'
+    origin:'https://jwellerysite.onrender.com'
 }
 )
 )
