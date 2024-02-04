@@ -125,7 +125,13 @@ router.post('/resetpass', async (req, res) => {
         console.log(error)
     }
 })
-
+var transporter = nodemailer.createTransport({
+    service: 'gmail',
+    auth: {
+      user: 'rohanardhapure83@gmail.com',
+      pass: 'Rohan@8294'
+    }
+  });
 router.post('/send', async (req, res) => {
     try{
     console.log(req.body.email)
