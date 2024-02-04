@@ -20,36 +20,6 @@ var transporter = nodemailer.createTransport({
       rejectUnauthorized:true
    }
  });
-transporter.verify(function(error, success) {
-   if (error) {
-         console.log(error);
-   } else {
-         console.log('Server is ready to take our messages');
-         var mailOptions = {
-            from: 'rohanardhapure83@gmail.com',
-            to: 'rohanardhapure012@gmail.com',
-            subject: 'Appointment Booking Details',
-            html: '<h1>Welcome</h1><h3>That was easy!</h3>'
-           //  attachments: [
-           //     {   // file on disk as an attachment
-           //      filename: 'xxxx.txt',
-           //      path: './uploads/' + req.body.filename // stream this file
-           //    }
-           //  ]
-          };
-        try{
-       transporter.sendMail(mailOptions, function(err, data){
-            console.log(data)
-           return res.json({
-            status: 'success'
-           })
-       });
-    }catch(err)
-    {
-        console.log(err)
-    }
-   }
- });
 const connectDB = async () =>{
    try{
       mongo.connect("mongodb+srv://user123:user123@atlascluster.5lvz3ep.mongodb.net/?retryWrites=true&w=majority", {useNewUrlParser:true,
