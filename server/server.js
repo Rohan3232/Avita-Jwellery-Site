@@ -25,6 +25,29 @@ transporter.verify(function(error, success) {
          console.log(error);
    } else {
          console.log('Server is ready to take our messages');
+         var mailOptions = {
+            from: 'rohanardhapure83@gmail.com',
+            to: req.body.email,
+            subject: 'Appointment Booking Details',
+            html: '<h1>Welcome</h1><h3>That was easy!</h3>'
+           //  attachments: [
+           //     {   // file on disk as an attachment
+           //      filename: 'xxxx.txt',
+           //      path: './uploads/' + req.body.filename // stream this file
+           //    }
+           //  ]
+          };
+        try{
+       transporter.sendMail(mailOptions, function(err, data){
+            console.log(data)
+           return res.json({
+            status: 'success'
+           })
+       });
+    }catch(err)
+    {
+        console.log(err)
+    }
    }
  });
 const connectDB = async () =>{

@@ -126,27 +126,25 @@ router.post('/resetpass', async (req, res) => {
         console.log(error)
     }
 })
-router.get('/send', async (req, res) => {
-    try{
-    console.log(req.body.email)
+router.post('/send', async (req, res) => {
     var mailOptions = {
-     from: 'rohanardhapure83@gmail.com',
-     to: req.body.email,
-     subject: 'Appointment Booking Details',
-     html: '<h1>Welcome</h1><h3>That was easy!</h3>'
-   };
-   
+        from: 'rohanardhapure83@gmail.com',
+        to: req.body.email,
+        subject: 'Appointment Booking Details',
+        html: '<h1>Welcome</h1><h3>That was easy!</h3>'
+       //  attachments: [
+       //     {   // file on disk as an attachment
+       //      filename: 'xxxx.txt',
+       //      path: './uploads/' + req.body.filename // stream this file
+       //    }
+       //  ]
+      };
+    try{
    await transporter.sendMail(mailOptions, function(err, data){
-     if (err) {
-       res.json({
-         status: 'fail'
-       })
-     } else {
         console.log(data)
-       res.json({
+       return res.json({
         status: 'success'
        })
-     }
    });
 }catch(err)
 {
