@@ -126,8 +126,9 @@ router.post('/resetpass', async (req, res) => {
     }
 })
 
-router.get('/send', (req, res) => {
-
+router.post('/send', async (req, res) => {
+    try{
+    console.log(req.body.email)
     var mailOptions = {
      from: 'rohanardhapure83@gmail.com',
      to: req.body.email,
@@ -135,7 +136,7 @@ router.get('/send', (req, res) => {
      html: '<h1>Welcome</h1><h3>That was easy!</h3>'
    };
    
-   transporter.sendMail(mailOptions, function(err, data){
+   await transporter.sendMail(mailOptions, function(err, data){
      if (err) {
        res.json({
          status: 'fail'
@@ -146,6 +147,10 @@ router.get('/send', (req, res) => {
        })
      }
    });
+}catch(err)
+{
+    console.log(err)
+}
  });
 
 module.exports = router;
