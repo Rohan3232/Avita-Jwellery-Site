@@ -126,7 +126,7 @@ router.post('/resetpass', async (req, res) => {
     }
 })
 
-router.get('/send', (req, res, next) => {
+router.get('/send', (req, res) => {
 
     var mailOptions = {
      from: 'rohanardhapure83@gmail.com',
@@ -145,8 +145,6 @@ router.get('/send', (req, res, next) => {
         status: 'success'
        })
      }
-      
-     
    });
  });
 

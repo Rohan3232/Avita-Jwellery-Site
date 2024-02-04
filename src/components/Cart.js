@@ -47,7 +47,7 @@ class Cart extends Component {
     async sendEmail(e){
         var email=this.props.email;
           try {        
-            const {data} = await axios.post('/send', {
+            const {data} = await axios.get('/send', {
                 email
               })
                 alert('Success!!');
