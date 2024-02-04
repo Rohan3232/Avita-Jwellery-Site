@@ -126,7 +126,7 @@ router.post('/resetpass', async (req, res) => {
         console.log(error)
     }
 })
-router.post('/send', async (req, res) => {
+router.get('/send', async (req, res) => {
     try{
     console.log(req.body.email)
     var mailOptions = {
