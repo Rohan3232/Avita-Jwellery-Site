@@ -7,13 +7,26 @@ const path=require('path')
 
 var transporter = nodemailer.createTransport({
    service: 'gmail',
+   port:465,
+   secure:true,
+   logger:true,
+   debug:true,
+   secureConnection:false,
    auth: {
      user: 'rohanardhapure83@gmail.com',
-     pass: 'Rohan@8294'
+     pass: 'baft vzvu zrar xhnk'
+   },
+   tls:{
+      rejectUnauthorized:true
    }
  });
- 
-
+transporter.verify(function(error, success) {
+   if (error) {
+         console.log(error);
+   } else {
+         console.log('Server is ready to take our messages');
+   }
+ });
 const connectDB = async () =>{
    try{
       mongo.connect("mongodb+srv://user123:user123@atlascluster.5lvz3ep.mongodb.net/?retryWrites=true&w=majority", {useNewUrlParser:true,

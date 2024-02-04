@@ -3,6 +3,7 @@ const router = express.Router();
 const cors = require('cors');
 const User = require('../models/user')
 const transporter=require('../server')
+console.log(transporter)
 //middleware
 router.use(
     cors({
