@@ -2,13 +2,11 @@ const express = require('express');
 const router = express.Router();
 const cors = require('cors');
 const User = require('../models/user')
-const transporter=require('../server')
-console.log(transporter)
-//middleware
+const transporter=require('../models/mail');
 router.use(
     cors({
     credentials:true,
-    origin:'https://jwellerysite.onrender.com'
+    origin:'http://localhost:3000'
 }
 )
 )
@@ -126,12 +124,13 @@ router.post('/resetpass', async (req, res) => {
         console.log(error)
     }
 })
+
 router.post('/send', async (req, res) => {
     var mailOptions = {
         from: 'rohanardhapure83@gmail.com',
         to: req.body.email,
         subject: 'Appointment Booking Details',
-        html: '<h1>Welcome</h1><h3>That was easy!</h3>'
+        html: '<h1>Booked appointment!</h3>'
        //  attachments: [
        //     {   // file on disk as an attachment
        //      filename: 'xxxx.txt',
@@ -141,15 +140,14 @@ router.post('/send', async (req, res) => {
       };
     try{
    await transporter.sendMail(mailOptions, function(err, data){
-        console.log(data)
        return res.json({
         status: 'success'
        })
    });
-}catch(err)
-{
+ }catch(err)
+ {
     console.log(err)
-}
+ }
  });
-
+ 
 module.exports = router;

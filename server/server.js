@@ -1,25 +1,9 @@
 const express=require('express');
 const cors=require('cors');
 const app=express();
-var nodemailer = require('nodemailer');
 var mongo = require("mongoose");
 const path=require('path')
 
-var transporter = nodemailer.createTransport({
-   service: 'gmail',
-   port:465,
-   secure:true,
-   logger:true,
-   debug:true,
-   secureConnection:false,
-   auth: {
-     user: 'rohanardhapure83@gmail.com',
-     pass: 'baft vzvu zrar xhnk'
-   },
-   tls:{
-      rejectUnauthorized:true
-   }
- });
 const connectDB = async () =>{
    try{
       mongo.connect("mongodb+srv://user123:user123@atlascluster.5lvz3ep.mongodb.net/?retryWrites=true&w=majority", {useNewUrlParser:true,
@@ -33,7 +17,7 @@ const connectDB = async () =>{
 }
 app.use(cors({
         credentials:true,
-        origin:'https://jwellerysite.onrender.com'
+        origin:'http://localhost:3000'
     }
 ));
 connectDB();

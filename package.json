@@ -1,5 +1,4 @@
 {
-  "homepage": "https://jwellerysite.onrender.com/",
   "name": "online-webmart-for-jewellery",
   "version": "0.1.0",
   "private": true,
@@ -45,7 +44,7 @@
     "build": "react-scripts build",
     "data:import": "node server/SeederScript.js"
   },
-  "proxy": "https://jwellerybackend.onrender.com/",
+  "proxy": "http://localhost:8000/",
   "eslintConfig": {
     "extends": [
       "react-app",
