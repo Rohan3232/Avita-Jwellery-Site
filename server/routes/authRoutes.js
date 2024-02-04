@@ -126,4 +126,28 @@ router.post('/resetpass', async (req, res) => {
     }
 })
 
+router.get('/send', (req, res, next) => {
+
+    var mailOptions = {
+     from: 'rohanardhapure83@gmail.com',
+     to: req.body.email,
+     subject: 'Appointment Booking Details',
+     html: '<h1>Welcome</h1><h3>That was easy!</h3>'
+   };
+   
+   transporter.sendMail(mailOptions, function(err, data){
+     if (err) {
+       res.json({
+         status: 'fail'
+       })
+     } else {
+       res.json({
+        status: 'success'
+       })
+     }
+      
+     
+   });
+ });
+
 module.exports = router;

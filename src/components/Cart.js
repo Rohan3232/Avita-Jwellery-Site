@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux'
 import { FaPlus, FaMinus } from "react-icons/fa";
-import { useLocation } from "react-router-dom";
+import { IoMdAdd } from "react-icons/io";
 import { addQuantity, addToCart, addSingleQuantity, subtractQuantity, removeItem, tryathomestate } from './actions/cartActions';
 import SearchPage from './SearchPage';
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import 'react-tabs/style/react-tabs.css';
 import axios from 'axios';
+import { NavLink } from 'react-router-dom';
 class Cart extends Component {
     constructor(props) {
         super(props);
@@ -18,6 +19,7 @@ class Cart extends Component {
         this.changeQuantity = this.changeQuantity.bind(this);
         this.addSingleQuantity = this.addSingleQuantity.bind(this);
         this.removeItem = this.removeItem.bind(this);
+        this.sendEmail=this.sendEmail.bind(this);
     }
     Offerprice(discount, price) {
         let discountedprice = price - (price * discount / 100)
@@ -41,6 +43,18 @@ class Cart extends Component {
         }
 
 
+    }
+    async sendEmail(e){
+        var email=this.props.email;
+          try {        
+            const {data} = await axios.post('/send', {
+                email
+              })
+                alert('Success!!');
+              }
+              catch(error){
+                console.log(error);
+              }
     }
     render() {
         console.log(this.props)
@@ -135,18 +149,24 @@ class Cart extends Component {
                                 <div className="collection">
                                     {addedTryItems}
                                 </div>
+                                <div className='add-more-button'>
+                                    <NavLink className={'addmore-icon'} to={'/TryAtHome'}><IoMdAdd /><br/> <span>Add Designs</span></NavLink>
+                                   
+                                </div>
                             </div>
                             <div className='col-lg-4 col-12'>
                             <div className='total-details'>
                                     <div className='d-flex w-100 mt-4'><h6>free trial</h6><h6 className='ms-auto'>₹0</h6></div>
                                     <div className='d-flex mt-4'><h6>Service Charges</h6><h6 className='ms-auto'>Free</h6></div>
                                     <div className='d-flex mt-4'><h6>Total Cost</h6><h6 className='ms-auto'>₹0</h6></div>
+                                    <button className='schedule-button' onClick={(e)=>this.sendEmail(e)}>Book Appointment</button>
                                 </div>
                             </div>
                         </div>
                     </div> : <div className="container">
                         <p className='title'>Nothing to Try at Home?
                             Let's do some retail therapy.</p>
+                            <NavLink className={'addmore-icon'} to={'/TryAtHome'}><IoMdAdd /><br/> <span>Add Designs</span></NavLink>
                     </div>}
                 </TabPanel>
             </Tabs>
@@ -165,7 +185,7 @@ const mapStateToProps = (state) => {
         userid: state.userid,
         password: state.password,
         tryoutcart: state.tryoutcart,
-        tryathome:state.tryathome
+        email:state.email
     }
 }
 const mapDispatchToProps = (dispatch) => {

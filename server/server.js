@@ -1,8 +1,18 @@
 const express=require('express');
 const cors=require('cors');
 const app=express();
+var nodemailer = require('nodemailer');
 var mongo = require("mongoose");
 const path=require('path')
+var transporter = nodemailer.createTransport({
+   service: 'gmail',
+   auth: {
+     user: 'justvarad@gmail.com',
+     pass: 'varad1999'
+   }
+ });
+ 
+
 const connectDB = async () =>{
    try{
       mongo.connect("mongodb+srv://user123:user123@atlascluster.5lvz3ep.mongodb.net/?retryWrites=true&w=majority", {useNewUrlParser:true,
