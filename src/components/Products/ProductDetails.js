@@ -107,10 +107,22 @@ export class ProductDetails extends Component {
                                     )
                                 })}
                             </span> : null}
+                            {this.props.currentproduct.style != null ? <span>Style - {this.props.currentproduct.style}</span> : null}
+                            {this.props.currentproduct.sizes != null ? <span>Sizes -
+                                {this.props.currentproduct.sizes.map((item, index) => {
+                                    return (
+                                        <span key={index}>{index != 0 ? ', ' + item : item}</span>
+                                    )
+                                })}
+                            </span> : null}
                         </div>
                         <div className='product-descr ml-4'>
                             {this.props.currentproduct.purity != null ? <span>Purity - {this.props.currentproduct.purity}</span> : null}
+                            {this.props.currentproduct.metal != null ? <span>Metal - {this.props.currentproduct.metal}</span> : null}
+                            {this.props.currentproduct.gemstone != null ? <span>Gemstone - {this.props.currentproduct.gemstone}</span> : null}
+                       
                         </div>
+                        
                         <div className='addtoCart-section'>
                             {this.props.addedItems.indexOf(this.props.currentproduct)<0?
                             <button className='addtocart-button' onClick={(e) => { this.AddtoCart(this.props.currentproduct.name) }}>Add to Cart</button>

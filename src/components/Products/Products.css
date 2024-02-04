@@ -13,7 +13,6 @@
   line-height: 40px;
   margin-bottom: 40px;
   color: rgb(79, 50, 103);
-  margin-top: 40px;
 }
 .Bangle .container{
   background-color: rgb(233, 227, 227);
@@ -48,6 +47,7 @@
     border: 1px solid rgb(233, 233, 233);
     width: 100%;
     min-height: 282px;
+    max-height: 282px;
     
 }
 .product-name{

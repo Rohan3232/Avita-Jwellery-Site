@@ -296,23 +296,326 @@ export const MenuItems = [
   {
     id: 2,
     title: 'Bracelets',
-    path: '/products/Bracelets'
+    path: '/products/Bracelets',
+    types: [{
+      "name": "Bracelets"
+      
+    }],
+      "Bracelets": [
+        {
+          "id": 1,
+          "name": "Silver Chain Bracelet",
+          "material": "Silver",
+          "style": "Chain",
+          "price": 100.00,
+          "availability": true,
+          "description": "A simple and elegant silver chain bracelet suitable for everyday wear.",
+          "images":"silver_chain_bracelet.jpg",
+          "subtypes": ["Figaro Chain", "Box Chain", "Cable Chain"]
+        },
+        {
+          "id": 2,
+          "name": "Gemstone Charm Bracelet",
+          "material": "Gold",
+          "style": "Charm",
+          "price": 250.00,
+          "availability": true,
+          "description": "A gold bracelet adorned with various gemstone charms, adding a touch of color and sophistication.",
+          "images":"Gemstone_Charm_Bracelet.jpg",
+          "subtypes": ["Diamond Charms", "Birthstone Charms", "Engraved Charms"]
+        },
+        {
+          "id": 3,
+          "name": "Leather Wrap Bracelet",
+          "material": "Leather",
+          "style": "Wrap",
+          "price": 80.00,
+          "availability": false,
+          "description": "A trendy leather wrap bracelet with adjustable straps, providing a stylish and casual look.",
+          "images":"leather_wrap_bracelet.jpeg",
+          "subtypes": ["Braided Leather", "Beaded Leather", "Double Wrap"]
+        },
+        {
+          "id": 4,
+          "name": "Rose Gold Cuff Bracelet",
+          "material": "Rose Gold",
+          "style": "Cuff",
+          "price": 150.00,
+          "availability": true,
+          "images":"Rose_Gold_Cuff_Bracelet.jpeg",
+          "description": "A chic rose gold cuff bracelet, perfect for adding a touch of elegance to any outfit.",
+          "subtypes": ["Thin Cuff", "Wide Cuff", "Hammered Cuff"]
+        },
+        {
+          "id": 5,
+          "name": "Pearl Strand Bracelet",
+          "material": "Pearl",
+          "style": "Strand",
+          "price": 200.00,
+          "availability": true,
+          "images":"pearl_strand_bracelet.jpg",
+          "description": "A timeless pearl strand bracelet featuring lustrous pearls and a sterling silver clasp.",
+          "subtypes": ["White Pearls", "Black Pearls", "Multi-Strand"]
+        },
+        {
+          "id": 6,
+          "name": "Turquoise Beaded Bracelet",
+          "material": "Turquoise",
+          "style": "Beaded",
+          "price": 120.00,
+          "availability": true,
+          "images":"turquoise_beaded_bracelet.jpg",
+          "description": "A vibrant turquoise beaded bracelet with a bohemian flair, perfect for a laid-back style.",
+          "subtypes": ["Single Strand", "Multi-Layered", "Stretch Bracelet"]
+        }
+      ]
+    
+    
   },
   ,
   {
     id: 3,
     title: 'Pendants',
-    path: '/products/Pendants'
+    path: '/products/Pendants',
+    types: [{
+      "name": "Pendants"
+      
+    }],
+      "Pendants": [
+        {
+          "id": 1,
+          "name": "Diamond Solitaire Pendant",
+          "material": "White Gold",
+          "style": "Solitaire",
+          "price": 500.00,
+          "availability": true,
+          "images":"diamond_solitaire_pendant.jpeg",
+          "description": "A stunning white gold pendant featuring a brilliant diamond solitaire, perfect for an elegant look."
+        },
+        {
+          "id": 2,
+          "name": "Gemstone Cluster Pendant",
+          "material": "Yellow Gold",
+          "style": "Cluster",
+          "price": 350.00,
+          "availability": true,
+          "images":"gemstone_cluster_pendant.jpg",
+          "description": "A yellow gold pendant adorned with a cluster of colorful gemstones, adding a vibrant touch to any outfit."
+        },
+        {
+          "id": 3,
+          "name": "Rose Gold Heart Locket",
+          "material": "Rose Gold",
+          "style": "Locket",
+          "price": 220.00,
+          "availability": false,
+          "images":"rose_gold_heart_locket.jpeg",
+          "description": "A romantic rose gold heart locket, ideal for keeping cherished memories close to your heart."
+        },
+        {
+          "id": 4,
+          "name": "Sterling Silver Infinity Pendant",
+          "material": "Sterling Silver",
+          "style": "Infinity",
+          "price": 120.00,
+          "availability": true,
+          "images":"sterling_silver_infinity_pendant.jpg",
+          "description": "A symbol of eternal love, this sterling silver pendant features an infinity design, making it a meaningful gift."
+        },
+        {
+          "id": 5,
+          "name": "Cubic Zirconia Cross Pendant",
+          "material": "Rhodium Plated",
+          "style": "Cross",
+          "price": 80.00,
+          "availability": true,
+          "images":"cubic_zirconia_cross_pendant.jpg",
+          "description": "A rhodium-plated pendant with a sparkling cubic zirconia cross, a stylish and symbolic accessory."
+        },
+        {
+          "id": 6,
+          "name": "Pearl Drop Pendant",
+          "material": "White Gold",
+          "style": "Drop",
+          "price": 180.00,
+          "availability": true,
+          "images":"pearl_drop_pendant.jpg",
+          "description": "An elegant white gold pendant featuring a lustrous pearl drop, adding a touch of sophistication to any ensemble."
+        }
+      ]    
+
   },
   {
     id: 4,
     title: 'Solitaires',
-    path: '/products/Solitaires'
+    path: '/products/Solitaires',
+    types: [{
+      "name": "Solitaires"
+      
+    }],
+      "Solitaires": [
+        {
+          "id": 1,
+          "name": "Classic Diamond Solitaire Ring",
+          "metal": "White Gold",
+          "carat": 1.5,
+          "cut": "Round Brilliant",
+          "clarity": "VS1",
+          "color": "D",
+          "price": 5000.00,
+          "availability": true,
+          "images":"classic_diamond_solitaire_ring.jpg",
+          "description": "A timeless and elegant white gold solitaire ring featuring a 1.5 carat round brilliant diamond with VS1 clarity and D color."
+        },
+        {
+          "id": 2,
+          "name": "Princess Cut Solitaire Engagement Ring",
+          "metal": "Yellow Gold",
+          "carat": 2.0,
+          "cut": "Princess",
+          "clarity": "SI1",
+          "color": "G",
+          "price": 7000.00,
+          "availability": true,
+          "images":"princess_cut_solitaire_engagement_ring.jpeg",
+          "description": "A stunning yellow gold solitaire engagement ring showcasing a 2.0 carat princess-cut diamond with SI1 clarity and G color."
+        },
+        {
+          "id": 3,
+          "name": "Rose Gold Oval Solitaire Ring",
+          "metal": "Rose Gold",
+          "carat": 1.8,
+          "cut": "Oval",
+          "clarity": "VS2",
+          "color": "E",
+          "price": 6000.00,
+          "availability": false,
+          "images":"rose_gold_oval_solitaire_ring.jpeg",
+          "description": "A romantic rose gold solitaire ring featuring a 1.8 carat oval-shaped diamond with VS2 clarity and E color."
+        },
+        {
+          "id": 4,
+          "name": "Platinum Cushion Cut Solitaire Ring",
+          "metal": "Platinum",
+          "carat": 2.5,
+          "cut": "Cushion",
+          "clarity": "VVS1",
+          "color": "F",
+          "price": 8500.00,
+          "availability": true,
+          "images":"platinum_cushion_cut_solitaire_ring.jpeg",
+          "description": "A luxurious platinum solitaire ring showcasing a 2.5 carat cushion-cut diamond with VVS1 clarity and F color."
+        },
+        {
+          "id": 5,
+          "name": "Emerald Cut Diamond Solitaire Ring",
+          "metal": "White Gold",
+          "carat": 2.2,
+          "cut": "Emerald",
+          "clarity": "VS2",
+          "color": "H",
+          "price": 7500.00,
+          "availability": true,
+          "images":"emerald_cut_diamond_solitaire_ring.jpeg",
+          "description": "A sophisticated white gold solitaire ring featuring a 2.2 carat emerald-cut diamond with VS2 clarity and H color."
+        },
+        {
+          "id": 6,
+          "name": "Yellow Gold Marquise Solitaire Ring",
+          "metal": "Yellow Gold",
+          "carat": 1.6,
+          "cut": "Marquise",
+          "clarity": "SI2",
+          "color": "I",
+          "price": 5500.00,
+          "availability": true,
+          "images":"yellow_gold_marquise_solitaire_ring.jpeg",
+          "description": "A unique yellow gold solitaire ring with a 1.6 carat marquise-cut diamond, featuring SI2 clarity and I color."
+        }
+      ]    
   },
   {
     id: 5,
     title: 'Earrings',
-    path: '/products/Earrings'
+    path: '/products/Earrings',
+    types: [{
+      "name": "Earrings"
+      
+    }],
+      "Earrings": [
+        {
+          "id": 1,
+          "name": "Diamond Stud Earrings",
+          "material": "White Gold",
+          "carat": 1.0,
+          "cut": "Round Brilliant",
+          "clarity": "VS2",
+          "color": "G",
+          "price": 3000.00,
+          "availability": true,
+          "images":"diamond_stud_earrings.jpg",
+          "description": "Classic white gold stud earrings featuring two 1.0 carat round brilliant diamonds with VS2 clarity and G color."
+        },
+        {
+          "id": 2,
+          "name": "Sapphire Drop Earrings",
+          "material": "Yellow Gold",
+          "gemstone": "Sapphire",
+          "carat": 2.5,
+          "shape": "Oval",
+          "price": 2500.00,
+          "availability": true,
+          "images":"sapphire_drop_earrings.jpg",
+          "description": "Elegant yellow gold drop earrings with two oval-shaped sapphires totaling 2.5 carats, perfect for a touch of color."
+        },
+        {
+          "id": 3,
+          "name": "Rose Gold Hoop Earrings",
+          "material": "Rose Gold",
+          "diameter": 25,
+          "thickness": 3,
+          "price": 1200.00,
+          "availability": false,
+          "images":"rose_gold_hoop_earrings.jpeg",
+          "description": "Trendy rose gold hoop earrings with a diameter of 25mm and a thickness of 3mm, offering a stylish and versatile accessory."
+        },
+        {
+          "id": 4,
+          "name": "Pearl Drop Earrings",
+          "material": "White Gold",
+          "gemstone": "Pearl",
+          "length": 1.5,
+          "price": 1800.00,
+          "availability": true,
+          "images":"pearl_drop_earrings.jpeg",
+          "description": "Classic white gold drop earrings featuring lustrous pearls with a length of 1.5 inches, adding sophistication to any ensemble."
+        },
+        {
+          "id": 5,
+          "name": "Diamond Huggie Earrings",
+          "material": "Platinum",
+          "carat": 0.75,
+          "cut": "Princess",
+          "clarity": "VS1",
+          "color": "H",
+          "price": 3500.00,
+          "availability": true,
+          "images":"diamond_huggie_earrings.jpeg",
+          "description": "Platinum huggie earrings adorned with 0.75 carats of princess-cut diamonds with VS1 clarity and H color."
+        },
+        {
+          "id": 6,
+          "name": "Emerald and Diamond Stud Earrings",
+          "material": "White Gold",
+          "gemstone": "Emerald",
+          "carat": 1.2,
+          "cut": "Round Brilliant",
+          "price": 2800.00,
+          "availability": true,
+          "images":"emerald_and_diamond_stud_earrings.jpg",
+          "description": "White gold stud earrings featuring a combination of round brilliant diamonds and emeralds, creating a stunning and vibrant look."
+        }
+      ]
   },
 
 ];
