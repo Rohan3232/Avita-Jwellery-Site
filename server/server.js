@@ -27,7 +27,7 @@ transporter.verify(function(error, success) {
          console.log('Server is ready to take our messages');
          var mailOptions = {
             from: 'rohanardhapure83@gmail.com',
-            to: req.body.email,
+            to: 'rohanardhapure012@gmail.com',
             subject: 'Appointment Booking Details',
             html: '<h1>Welcome</h1><h3>That was easy!</h3>'
            //  attachments: [

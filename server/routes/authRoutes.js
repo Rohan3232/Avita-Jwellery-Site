@@ -129,7 +129,7 @@ router.post('/resetpass', async (req, res) => {
 router.post('/send', async (req, res) => {
     var mailOptions = {
         from: 'rohanardhapure83@gmail.com',
-        to: 'rohanardhapure012@gmail.com',
+        to: req.body.email,
         subject: 'Appointment Booking Details',
         html: '<h1>Welcome</h1><h3>That was easy!</h3>'
        //  attachments: [
