@@ -5,6 +5,13 @@ var nodemailer = require('nodemailer');
 var mongo = require("mongoose");
 const path=require('path')
 
+var transporter = nodemailer.createTransport({
+   service: 'gmail',
+   auth: {
+     user: 'rohanardhapure83@gmail.com',
+     pass: 'Rohan@8294'
+   }
+ });
  
 
 const connectDB = async () =>{
