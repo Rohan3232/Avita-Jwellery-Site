@@ -22,6 +22,8 @@
 }
 .title{
     white-space: break-spaces;
+    text-align: center;
+    margin-top: 20px;
 }
 svg{
     cursor: pointer;
@@ -80,4 +82,9 @@ input[type=number] {
 
 .cart-page.details-page .product-details .product-name {
     margin-bottom: 20px;
+}
+@media(max-width:720px){
+.collection,.total-details{
+    margin-top: 40px;
+}
 }

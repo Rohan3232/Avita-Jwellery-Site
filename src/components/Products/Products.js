@@ -14,6 +14,7 @@ class Bangles extends Component {
   }
   
   componentDidMount() {
+    window.scrollTo(0, 0);
     setTimeout(() => {
         this.setState({ currentUrl: window.location.pathname });
     }, 100);
@@ -59,7 +60,7 @@ componentDidUpdate() {
                             return product.discount
                         }).map((product, key) => {
                           return (
-                            <div key={key} className='col-md-3 col-12 cards-holder'>
+                            <div key={key} className='col-xl-3 col-lg-4 col-md-6 col-sm-6 col-12 cards-holder'>
                               <NavLink className="product-link" to={item.path + '/' + type.name + '/' + product.name}>
                                 <div className=' product-cards'>
                                   {ProductImages[product.images] ? <div className='image-holder'><img className='h-auto' src={ProductImages[product.images]} alt={product.description} /></div> : null}
@@ -86,7 +87,7 @@ componentDidUpdate() {
     });
     if (currentproduct.length > 0) {
       return (
-        <div className='container products-holder'>
+        <div className='container-fluid products-holder'>
           {currentproduct}</div >
       )
     }

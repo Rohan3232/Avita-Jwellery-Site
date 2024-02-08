@@ -237,8 +237,8 @@ class NavbarMain extends Component {
       searchresult: searchedproduct
     })
   }
-
   async componentDidMount() {
+    window.scrollTo(0, 0);
     const cookies=new Cookies();
     var getCred=cookies.get('login-cred');
     if(getCred!==undefined)
@@ -313,7 +313,7 @@ class NavbarMain extends Component {
     }
 
     return (
-      <div className="Top" >
+      <div className="Top" autoFocus >
         <div className="container-fluid">
           <div className="row">
             <div className="col-lg-12 Navbar">
@@ -372,7 +372,7 @@ class NavbarMain extends Component {
                               <div className="modal-footer">
                                 <div className={(this.state.signup ? "login-buttons " : "signup-button ") + "footer-button"}>
                                   <button type="submit" className="login-button w-50" onClick={(e) => this.formSubmit(e)}>{this.state.signup ? "Signup" : "Login"}</button>
-                                  {this.state.signup ? <p className="signup-link text-center">Already a user, <button className="link" onClick={(e) => this.changeMethod()}>Login</button></p> : <p className="signup-link text-center">New here?<br /> <button className="link" onClick={(e) => this.changeMethod()}>signup</button></p>}
+                                  {this.state.signup ? <p className="signup-link text-center">Already a user?,<br/> <button className="link" onClick={(e) => this.changeMethod()}>Login</button></p> : <p className="signup-link text-center">New here?<br /> <button className="link" onClick={(e) => this.changeMethod()}>signup</button></p>}
                                 </div>
                               </div>
                             </form>

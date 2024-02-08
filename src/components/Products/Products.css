@@ -96,3 +96,13 @@
   text-decoration: none !important;
   border: none !important;
 }
+@media(max-width:320px)
+{
+  .product-cards{
+    max-width: 240px;
+  }
+  .product-cards img{
+    max-width: 220px;
+    min-width: 219px;
+  }
+}

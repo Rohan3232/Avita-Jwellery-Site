@@ -20,7 +20,7 @@
     display: inline-block;
     color: white;
     padding-bottom: 8px;
-    margin-right: 20px;
+    margin-right: 20px !important;
 }
 
 .FooterB.FooterBody a:hover {
@@ -125,6 +125,12 @@ p {
     float: right;
     margin-left: auto;
 }
+.social-icons svg{
+    margin: 7px 0;
+}
+.payment-parteners{
+    margin-left: auto;
+}
 @media screen and (max-width: 960px) {
     .footer-main {
         padding: 40px 15px;
@@ -136,11 +142,5 @@ p {
 
     .FooterBody .mb-4 {
         margin-bottom: 0px;
-    }
-    .d-flex{
-        flex-direction: column;
-    }
-    .payment-parteners{
-        margin-left: 0;
     }
 }

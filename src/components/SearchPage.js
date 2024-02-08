@@ -53,7 +53,7 @@ class SearchPage extends Component {
             flg = 1;
         }
         if (flg == 1)
-          searchedproduct.push(<div key={searchedproduct.length} className='col-lg-3 col-12 cards-holder'>
+          searchedproduct.push(<div key={searchedproduct.length} className='col-lg-3 col-md-6 col-sm-6 col-12 cards-holder'>
             <NavLink className="product-link" to={product.path}>
               <div className=' product-cards'>
                 {ProductImages[product.images] ? <div className='image-holder'><img className='h-auto' src={ProductImages[product.images]} alt={product.description} /></div> : null}
@@ -67,7 +67,7 @@ class SearchPage extends Component {
 
     if (searchedproduct.length > 0) {
       return (
-        <div className='container products-holder'>
+        <div className='container-fluid products-holder'>
           <div className='row'>
             <h1 className='title'>{this.props.searchkey ? "Here are some suggestions:" : "Our Collection"}</h1>
             {searchedproduct}</div></div >

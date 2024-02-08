@@ -371,12 +371,19 @@
     left: 0px;
     background-color: rgb(245, 238, 238);
 }
+.link{
+    background: none;
+    border: none;
+    color: rgba(var(--bs-link-color-rgb),var(--bs-link-opacity, 1));
+}
 .searched-link{
     color: #333;
     text-decoration: none;
 }
 .show.searched-result{
     display: flex;
+    overflow-y: scroll;
+    height: 80vh;
 }
 
 @media(max-width:992px) {
@@ -558,5 +565,26 @@
     .Navbar .Search-form .search-bar {
         margin: auto;
         width: 85%;
+    }
+    
+.privacy-terms {
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+.modal-body{
+    padding: 5px;
+}
+}
+
+@media(max-width:319px)
+{
+    .Navbar{
+        height: 50px;
+    }
+    .d-flex{
+        flex-direction: column !important;
+    }
+    .payment-parteners{
+        margin-left: 0 !important;
     }
 }

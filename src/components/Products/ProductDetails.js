@@ -23,6 +23,7 @@ export class ProductDetails extends Component {
     }
 
     componentDidMount() {
+        window.scrollTo(0, 0);
         setTimeout(() => {
             this.setState({ currentUrl: window.location.pathname });
         }, 100);
@@ -116,13 +117,13 @@ export class ProductDetails extends Component {
                         {this.props.currentproduct.gemstone != null ? <span><b>Gemstone</b> - {this.props.currentproduct.gemstone}</span> : null}
                         {this.props.currentproduct.length != null ? <span><b>Length</b> - {this.props.currentproduct.length}</span> : null}
                         {this.props.currentproduct.size != null ? <span><b>Size</b> - {this.props.currentproduct.size}</span> : null}
-                        {this.props.currentproduct.design!= null ? <span>
+                        {this.props.currentproduct.design!= null ? (typeof(this.props.currentproduct.design)!= 'string'?<span>
                                 {Object.entries(this.props.currentproduct.design).map(([index, item]) => {
                                     return (
                                         <span key={index}><b>{index}</b>- {item} <br/></span>
                                     )
                                 })}
-                           </span> : null}
+                           </span>:<span><b>Design</b> - {this.props.currentproduct.design}</span>) : null}
                            {this.props.currentproduct.diamond!= null ? <span>
                                 {Object.entries(this.props.currentproduct.diamond).map(([index, item]) => {
                                     return (
