@@ -37,6 +37,7 @@
   border-radius: 12px;
   height: 100%;
   background-color: #fff;
+  max-width: 303px;
 }
 .product-cards:hover{
   transform: scale(1.05);
@@ -48,6 +49,8 @@
     width: 100%;
     min-height: 282px;
     max-height: 282px;
+    max-width: 280px;
+    min-width: 279px;
     
 }
 .product-name{
