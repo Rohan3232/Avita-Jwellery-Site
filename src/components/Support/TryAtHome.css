@@ -188,3 +188,17 @@
     height: 25px;
     width: 25px;
 }
+@media(max-width:720px){
+    .tryathome-section .page-title{
+        font-size: 32px;
+        line-height: 40px;
+    }
+    .main-title{
+        font-size: 28px;
+        line-height: 32px;
+    }
+    .title{
+        font-size: 28px;
+        line-height: 32px;
+    }
+}

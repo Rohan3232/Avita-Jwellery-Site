@@ -5,7 +5,6 @@ import { FaExchangeAlt } from "react-icons/fa";
 import { addToCart, addProduct } from '../actions/cartActions';
 import { MdOutlineVerified } from "react-icons/md";
 import { GiReturnArrow } from "react-icons/gi";
-import axios from "axios";
 import { NavLink } from 'react-router-dom';
 export class ProductDetails extends Component {
     constructor(props) {
@@ -98,29 +97,39 @@ export class ProductDetails extends Component {
                         <p className='desc-text'>{this.props.currentproduct.description}</p>
                         <h4 className='price'>₹{this.props.currentproduct.discount ? <span>{this.Offerprice(this.props.currentproduct.discount, this.props.currentproduct.price)} <span className='old-price'>{this.props.currentproduct.price}</span><span className='discount'>-{this.props.currentproduct.discount}%off</span></span> : <span>{this.props.currentproduct.price}</span>}</h4>
                         <div className='product-descr'>
-                            {this.props.currentproduct.weight != null ? <span>Weight - Gross {this.props.currentproduct.weight}g</span> : null}
-                            {this.props.currentproduct.design != null ? <span>design - {this.props.currentproduct.design}</span> : null}
-                            {this.props.currentproduct.stones != null ? <span>Stones -
-                                {this.props.currentproduct.stones.map((item, index) => {
+                            {this.props.currentproduct.material != null ? <span><b>Material</b> - {this.props.currentproduct.material}</span> : null}
+                            {this.props.currentproduct.manufacturer != null ? <span><b>Manufacturer</b> - {this.props.currentproduct.manufacturer}</span> : null}
+                            {this.props.currentproduct.metal != null ? <span><b>Metal</b> - {this.props.currentproduct.metal}</span> : null}
+                            {this.props.currentproduct.chainLength != null ? <span><b>Chain Length</b> - {this.props.currentproduct.chainLength}</span> : null}
+                       
+                            {this.props.currentproduct.dimensions != null ? <span>
+                                {Object.entries(this.props.currentproduct.dimensions).map(([index, item]) => {
                                     return (
-                                        <span key={index}>{index != 0 ? ', ' + item : item}</span>
-                                    )
-                                })}
-                            </span> : null}
-                            {this.props.currentproduct.style != null ? <span>Style - {this.props.currentproduct.style}</span> : null}
-                            {this.props.currentproduct.sizes != null ? <span>Sizes -
-                                {this.props.currentproduct.sizes.map((item, index) => {
-                                    return (
-                                        <span key={index}>{index != 0 ? ', ' + item : item}</span>
+                                        <span key={index}><b>{index}</b>- {item} <br/></span>
                                     )
                                 })}
                             </span> : null}
                         </div>
                         <div className='product-descr ml-4'>
-                            {this.props.currentproduct.purity != null ? <span>Purity - {this.props.currentproduct.purity}</span> : null}
-                            {this.props.currentproduct.metal != null ? <span>Metal - {this.props.currentproduct.metal}</span> : null}
-                            {this.props.currentproduct.gemstone != null ? <span>Gemstone - {this.props.currentproduct.gemstone}</span> : null}
-                       
+                        {this.props.currentproduct.color != null ? <span><b>Color</b> - {this.props.currentproduct.color}</span> : null}
+                        {this.props.currentproduct.weight != null ? <span><b>Weight</b> - {this.props.currentproduct.weight}</span> : null}
+                        {this.props.currentproduct.gemstone != null ? <span><b>Gemstone</b> - {this.props.currentproduct.gemstone}</span> : null}
+                        {this.props.currentproduct.length != null ? <span><b>Length</b> - {this.props.currentproduct.length}</span> : null}
+                        {this.props.currentproduct.size != null ? <span><b>Size</b> - {this.props.currentproduct.size}</span> : null}
+                        {this.props.currentproduct.design!= null ? <span>
+                                {Object.entries(this.props.currentproduct.design).map(([index, item]) => {
+                                    return (
+                                        <span key={index}><b>{index}</b>- {item} <br/></span>
+                                    )
+                                })}
+                           </span> : null}
+                           {this.props.currentproduct.diamond!= null ? <span>
+                                {Object.entries(this.props.currentproduct.diamond).map(([index, item]) => {
+                                    return (
+                                        <span key={index}><b>{index}</b>- {item} <br/></span>
+                                    )
+                                })}
+                           </span> : null}
                         </div>
                         
                         <div className='addtoCart-section'>

@@ -72,7 +72,7 @@
 .details-page .product-descr{
     display: inline-flex;
     flex-direction: column;
-    max-width: 200px;
+    max-width: 240px;
     width: 100%;
     height: fit-content;
     background: rgb(249, 249, 250);

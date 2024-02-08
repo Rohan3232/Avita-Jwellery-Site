@@ -130,13 +130,8 @@ router.post('/send', async (req, res) => {
         from: 'rohanardhapure83@gmail.com',
         to: req.body.email,
         subject: 'Appointment Booking Details',
-        html: '<h1>Booked appointment!</h3>'
-       //  attachments: [
-       //     {   // file on disk as an attachment
-       //      filename: 'xxxx.txt',
-       //      path: './uploads/' + req.body.filename // stream this file
-       //    }
-       //  ]
+        html: '<h1>Booked appointment!</h3>',
+        attachments: req.body.attachments
       };
     try{
    await transporter.sendMail(mailOptions, function(err, data){

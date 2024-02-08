@@ -46,9 +46,15 @@ class Cart extends Component {
     }
     async sendEmail(e){
         var email=this.props.email;
+        var tryoutcart=this.props.tryoutcart;
+        var attachments=[];
+        tryoutcart.map((item,index)=>{
+            attachments.push({filename:item.images,path:item.images})
+        })
+        
           try {        
             const {data} = await axios.post('/send', {
-                email
+                email,attachments
               })
                 alert('Success!!');
               }
