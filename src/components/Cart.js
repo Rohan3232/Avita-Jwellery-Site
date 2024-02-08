@@ -11,7 +11,6 @@ import { NavLink } from 'react-router-dom';
 class Cart extends Component {
     constructor(props) {
         super(props);
-        console.log(props)
         this.state={
             tabIndex:(this.props.cart=='try-at-home'||(this.props.tryoutcart.length>0 && this.props.addedItems.length==0))?1:0,
         }
@@ -47,14 +46,17 @@ class Cart extends Component {
     async sendEmail(e){
         var email=this.props.email;
         var tryoutcart=this.props.tryoutcart;
+        var address=this.props.address;
+        var dob=this.props.dob;
+        dob=dob.getDate()+'/'+(dob.getMonth()+1)+'/'+dob.getFullYear();
         var attachments=[];
         tryoutcart.map((item,index)=>{
-            attachments.push({filename:item.images,path:item.images})
+            attachments.push({name:item.name,filename:item.images,path:'./src/components/Products/images/products/'+item.images})
         })
         
           try {        
             const {data} = await axios.post('/send', {
-                email,attachments
+                email,attachments,dob,address
               })
                 alert('Success!!');
               }
@@ -191,7 +193,9 @@ const mapStateToProps = (state) => {
         userid: state.userid,
         password: state.password,
         tryoutcart: state.tryoutcart,
-        email:state.email
+        email:state.email,
+        dob:state.dob,
+        address:state.address
     }
 }
 const mapDispatchToProps = (dispatch) => {

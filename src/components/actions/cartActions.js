@@ -66,10 +66,12 @@ export const changeLoginStatus=(userid,password)=>{
         password
     }
 }
-export const tryathomestate=(email)=>{
+export const tryathomestate=(email,dob,address)=>{
     return{
         type:TRYATHOME_STATE,
-        email
+        email,
+        dob,
+        address
     }
 }
 export const addtotryoutcart=(name)=>{

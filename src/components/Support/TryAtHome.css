@@ -144,6 +144,9 @@
     width: 100%;
     color: #4F3267;
 }
+.tryathome-section .form-control[type="textarea"]{
+    margin-bottom: 40px;
+}
 .email-address-holder{
     margin-bottom: 30px;
 }

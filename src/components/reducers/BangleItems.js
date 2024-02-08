@@ -24,6 +24,8 @@ const initState = {
     userid: '',
     password: '',
     email:'',
+    dob:new Date(),
+    address:'',
     tryoutcart:[]
 
 }
@@ -193,7 +195,9 @@ const BangleItems = (state = initState, action) => {
     {
         return{
             ...state,
-            email: action.email
+            email: action.email,
+            dob:action.dob,
+            address:action.address
         }
     }
     if (action.type ===ADD_TO_TRYOUTCART) {

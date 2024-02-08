@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { Form, FormControl } from 'react-bootstrap';
+import {Cookies } from 'react-cookie';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import { NavLink } from 'react-router-dom';
@@ -26,9 +27,9 @@ class NavbarMain extends Component {
       searchkey: '',
       searchresult: [],
       validity: '*Please enter valid Mobile number',
-      password:'',
-      oldPassword:'',
-      resetPassword:false
+      password: '',
+      oldPassword: '',
+      resetPassword: false
     }
     this.handleChange = this.handleChange.bind(this);
     this.menuToggle = this.menuToggle.bind(this);
@@ -38,110 +39,116 @@ class NavbarMain extends Component {
     this.formSubmit = this.formSubmit.bind(this);
     this.searchValue = this.searchValue.bind(this);
     this.submitForm = this.submitForm.bind(this);
-    this.handlePassChange=this.handlePassChange.bind(this);
-    this.handleOldPassChange=this.handleOldPassChange.bind(this);
-    this.changeresetPass=this.changeresetPass.bind(this);
-    this.logoutAll=this.logoutAll.bind(this);
+    this.handlePassChange = this.handlePassChange.bind(this);
+    this.handleOldPassChange = this.handleOldPassChange.bind(this);
+    this.changeresetPass = this.changeresetPass.bind(this);
+    this.logoutAll = this.logoutAll.bind(this);
   }
-  logoutAll(){
-    this.props.changeLoginStatus('','')
-    this.props.updateCart([],0,0,0);
+  logoutAll() {
+    this.props.changeLoginStatus('', '')
+    this.props.updateCart([], 0, 0, 0);
+    alert('Successfully Logged Out')
+    const cookies=new Cookies();
+    this.setState({
+      show:false
+    })
+    cookies.set('login-cred','');
   }
   async submitForm(e) {
-    
+
     e.preventDefault();
-    if(this.props.userid==""){
-    var userid = this.state.userid;
-    var password = this.state.password;
-    var cart=this.props.addedItems?this.props.addedItems:[];
-    var total=this.props.total?this.props.total:0;
-    var totalQuantity=this.props.totalQuantity?this.props.totalQuantity:0;
-    var totalDiscount=this.props.totalDiscount?this.props.totalDiscount:0;
-    var result;
-    
+    if (this.props.userid === "") {
+      var userid = this.state.userid;
+      var password = this.state.password;
+      var cart = this.props.addedItems ? this.props.addedItems : [];
+      var total = this.props.total ? this.props.total : 0;
+      var totalQuantity = this.props.totalQuantity ? this.props.totalQuantity : 0;
+      var totalDiscount = this.props.totalDiscount ? this.props.totalDiscount : 0;
+      var result;
+
       if (this.state.signup) {
-        try {        
-      const {data} = await axios.post('/register', {
-          userid,password,cart,total,totalQuantity,totalDiscount
-        })
-        result=data
-        if (result.error) {
-          document.querySelector('.validity-alert').style.display = "block";
-        }
-        else {
-          document.querySelector('.validity-alert').style.display = "none";
-          this.setState({
-            show:false,
-            resetPassword:false
+        try {
+          const { data } = await axios.post('/register', {
+            userid, password, cart, total, totalQuantity, totalDiscount
           })
-          alert('Success!!');
+          result = data
+          if (result.error) {
+            document.querySelector('.validity-alert').style.display = "block";
+          }
+          else {
+            document.querySelector('.validity-alert').style.display = "none";
+            this.setState({
+              show: false,
+              resetPassword: false
+            })
+            alert('Success!!');
+          }
+
+          this.setState({
+            validity: result.error
+          })
         }
-           
-      this.setState({
-        validity: result.error
-      })
-        }
-        catch(error){
+        catch (error) {
           console.log(error);
         }
       }
-      else{
-        try{
-        const {data} = await axios.post('/login', {
-          userid,password,cart,total,totalQuantity,totalDiscount
-        },{
-          withCredentials: false,
-          headers: {
-              'Access-Control-Allow-Origin': true, 
+      else {
+        try {
+          const { data } = await axios.post('/login', {
+            userid, password
+          }, {
+            withCredentials: false,
+            headers: {
+              'Access-Control-Allow-Origin': true,
               'Content-Type': 'application/json'
-          }
-      })
-        result=data
-        if (result.error) {
-          document.querySelector('.validity-alert').style.display = "block";
-        }
-        else {
-          document.querySelector('.validity-alert').style.display = "none";
-          this.setState({
-            show:false,
-            resetPassword:false
+            }
           })
-          this.props.changeLoginStatus(result.userid,result.password)
-          this.props.updateCart(result.cart,result.total,result.totalQuantity,result.totalDiscount)
-          alert('Success!!');
+          result = data
+          if (result.error) {
+            document.querySelector('.validity-alert').style.display = "block";
+          }
+          else {
+            document.querySelector('.validity-alert').style.display = "none";
+            this.setState({
+              show: false,
+              resetPassword: false
+            })
+            this.props.changeLoginStatus(result.userid, result.password)
+            this.props.updateCart(result.cart, result.total, result.totalQuantity, result.totalDiscount)
+            const cookies = new Cookies();
+            cookies.set('login-cred',result.userid+'='+result.password,30)
+            alert('Success!!');
+          }
+
+          this.setState({
+            validity: result.error
+          })
         }
-           
-      this.setState({
-        validity: result.error
-      })
-    }
-    catch(error){
-      console.log(error);
-    }
+        catch (error) {
+          console.log(error);
+        }
       }
-  }
-  else{
-    var oldPassword=this.state.oldPassword;
-    var password=this.state.password;
-    var userid=this.props.userid;
-    try {
-    const {data} = await axios.post('/resetpass', {
-      userid,password,oldPassword
-    })
-    this.setState({
-      show:false,
-      resetPassword:false
-    })
-    alert('password reseted successfully!!')
-     }
-    catch (error) {
-      console.log(error);
     }
-  }
-  
+    else {
+      var oldPassword = this.state.oldPassword;
+      try {
+        await axios.post('/resetpass', {
+          userid, password, oldPassword
+        })
+        this.setState({
+          show: false,
+          resetPassword: false
+        })
+        alert('password reseted successfully!!')
+      }
+      catch (error) {
+        console.log(error);
+      }
+    }
+
   }
   formSubmit(e) {
-    if (this.state.userid.length == 10) {
+    if (this.state.userid.length === 10) {
       document.querySelector('.validity-alert').style.display = "none";
     }
     else {
@@ -155,28 +162,28 @@ class NavbarMain extends Component {
     this.setState(prevState => ({ signup: !prevState.signup }))
   }
   handleFocus(e, move) {
-    if (e.target.value == '')
+    if (e.target.value === '')
       this.setState({
         moveup: move
       })
   }
-  handlePassChange(e){
+  handlePassChange(e) {
     this.setState({
       password: e.target.value
     })
   }
-  handleOldPassChange(e){
+  handleOldPassChange(e) {
     this.setState({
       oldPassword: e.target.value
     })
   }
   handleChange(e) {
-    if (isNumeric(e.target.value) || e.target.value == '') {
+    if (isNumeric(e.target.value) || e.target.value === '') {
       this.setState({
         userid: e.target.value
       })
     }
-    if (e.target.value.length == 10) {
+    if (e.target.value.length === 10) {
       document.querySelector('.validity-alert').style.display = "none";
     }
     else {
@@ -186,9 +193,9 @@ class NavbarMain extends Component {
       document.querySelector('.validity-alert').style.display = "block";
     }
   }
-  changeresetPass(){
+  changeresetPass() {
     this.setState({
-      resetPassword:true
+      resetPassword: true
     })
   }
   menuToggle() {
@@ -209,7 +216,7 @@ class NavbarMain extends Component {
     let currentproduct = this.props.allItems;
     let searchedproduct = [];
     this.state.searchkey.split(/(?:,| |-)+/).map((searchvalue) => {
-      if (searchedproduct.length != 0) {
+      if (searchedproduct.length !== 0) {
         currentproduct = searchedproduct;
         searchedproduct = [];
       }
@@ -217,53 +224,94 @@ class NavbarMain extends Component {
         let flg = 0;
         for (let p in product) {
           let search = product[p];
-          if ((typeof search == 'string' && ((search.toLocaleLowerCase()).includes(searchvalue.toLocaleLowerCase()))))
+          if ((typeof search === 'string' && ((search.toLocaleLowerCase()).includes(searchvalue.toLocaleLowerCase()))))
             flg = 1;
         }
-        if (flg == 1)
+        if (flg === 1)
           searchedproduct.push(product);
-      })
+        return 0
+        })
+        return 0;
     })
     this.setState({
       searchresult: searchedproduct
     })
   }
-  
-  componentDidMount() {
+
+  async componentDidMount() {
+    const cookies=new Cookies();
+    var getCred=cookies.get('login-cred');
+    if(getCred!==undefined)
+    { var details=getCred.split('=');
+      var userid=details[0];
+      var result;
+      var password=details[1];
+        try {
+          const { data } = await axios.post('/login', {
+            userid, password
+          }, {
+            withCredentials: false,
+            headers: {
+              'Access-Control-Allow-Origin': true,
+              'Content-Type': 'application/json'
+            }
+          })
+          console.log(data)
+          result = data
+          if (result.error) {
+          }
+          else {
+            this.setState({
+              show: false,
+              resetPassword: false
+            })
+            this.props.changeLoginStatus(result.userid, result.password)
+            this.props.updateCart(result.cart, result.total, result.totalQuantity, result.totalDiscount)
+          }
+
+          this.setState({
+            validity: result.error
+          })
+        }
+        catch (error) {
+          console.log(error);
+        }
+    }
+    
     setTimeout(() => {
-        this.setState({ currentUrl: window.location.pathname });
+      this.setState({ currentUrl: window.location.pathname });
     }, 100);
-}
-componentDidUpdate() {
+  }
+  componentDidUpdate() {
     setTimeout(() => {
-        this.setState({ currentUrl: window.location.pathname });
+      this.setState({ currentUrl: window.location.pathname });
     }, 100);
-}
-  render() {
+  }
+  render() {  
     const handleClose = () => {
       this.setState({
         show: false,
-        resetPassword:false
+        resetPassword: false
       })
     }
     const handleShow = () => {
-      if(this.state.show==false){
-      this.setState({
-        show: true
-      })
-    }else{
-      this.setState({
-        show: false
-      })
+      if (this.state.show === false) {
+        this.setState({
+          show: true
+        })
+      } else {
+        this.setState({
+          show: false
+        })
+      }
     }
-    }
-    const clearSearch= (e) =>{
+    const clearSearch = (e) => {
       this.setState({
-        searchkey:''
+        searchkey: ''
       })
 
     }
-    
+
     return (
       <div className="Top" >
         <div className="container-fluid">
@@ -281,7 +329,7 @@ componentDidUpdate() {
               <div className="Search-bar">
                 <Form className="Search-form">
                   <FormControl onChange={(e) => { this.searchValue(e) }} value={this.state.searchkey} type="text" placeholder="search" className="search-bar" />
-                  {this.state.searchresult.length>0 && this.state.searchkey ? <div className={(this.state.searchresult.length?"show ":"")+"searched-result"}>{this.state.searchresult.map((product, key) => { return (<div onClick={(e)=>{clearSearch(e)}}  key={key} className="mb-3"><NavLink className="searched-link" to={product.path}>{product.name}</NavLink></div>) })}</div> : null} <Button className="button"  ><NavLink to={{
+                  {this.state.searchresult.length > 0 && this.state.searchkey ? <div className={(this.state.searchresult.length ? "show " : "") + "searched-result"}>{this.state.searchresult.map((product, key) => { return (<div onClick={(e) => { clearSearch(e) }} key={key} className="mb-3"><NavLink className="searched-link" to={product.path}>{product.name}</NavLink></div>) })}</div> : null} <Button className="button"  ><NavLink to={{
                     pathname: 'search',
                     search: '?searchfor=' + this.state.searchkey
                   }}>
@@ -300,61 +348,61 @@ componentDidUpdate() {
                       <Button variant="primary" onClick={handleShow}>
                         <FaUser className="icon" size="25px" />
                       </Button>
-                      
-            { this.props.userid==""?
-            <Modal size="lg" show={this.state.show} aria-labelledby="example-modal-sizes-title-lg" onHide={handleClose}>
-              <Modal.Header closeButton>
-                <Modal.Title id="example-modal-sizes-title-lg"><div className="Login-title"><h2>{this.state.signup ? "Signup" : "Login"}</h2></div></Modal.Title>
-              </Modal.Header>
-              <Modal.Body><div className="modal-body">
-               
-                <form onSubmit={(e) => this.submitForm(e)} action="/">
-                  <div className={(this.state.userid != '' ? "no-number " : "") + "input-number"}>
-                    <label className={(this.state.moveup ? "move " : "") + "number-label"}>Enter Mobile Number:</label>
-                    <span className="country-code">+91</span>
-                    <input type="tel" onFocus={(e) => this.handleFocus(e, true)} onBlur={(e) => this.handleFocus(e, false)} value={this.state.userid} pattern="[0-9]{10}" onChange={(e) => this.handleChange(e)}></input>
-                    <span className="validity-alert">{this.state.validity ? this.state.validity : ''}</span>
-                  </div>
-                  <div className="input-password">
-                     <input className="password-input" type="password" value={this.state.password} onChange={(e) => this.handlePassChange(e)}></input>
-                     <label className={(this.state.moveup ? "move " : "") + "password-label"}>Enter Password:</label>
-                
-                  </div>
-                  <p className="privacy-terms text-center">By continuing, you agree for our <NavLink onClick={()=>{this.setState({show:false})}} to="TermsCond">Terms of Use</NavLink> and <NavLink onClick={()=>{this.setState({show:false})}} to="Privacy">Privacy policy.</NavLink></p>
-                  <div className="modal-footer">
-                    <div className={(this.state.signup ? "login-buttons " : "signup-button ") + "footer-button"}>
-                      <button type="submit" className="login-button w-50" onClick={(e) => this.formSubmit(e)}>{this.state.signup ? "Signup" : "Login"}</button>
-                      {this.state.signup ? <p className="signup-link text-center">Already a user, <a className="link" onClick={(e) => this.changeMethod()}>Login</a></p> : <p className="signup-link text-center">New here?<br/> <a className="link" onClick={(e) => this.changeMethod()}>signup</a></p>}
-                    </div>
-                  </div>
-                </form>
-              </div>
-              </Modal.Body>
-            </Modal>:<div><div className={(this.state.show?"show ":"close ")+"dropdown-login"}><p>{this.props.userid}</p><p onClick={this.changeresetPass}>Reset Password</p><p onClick={this.logoutAll}>Logout</p></div>
-            <Modal size="lg" show={this.state.resetPassword} aria-labelledby="example-modal-sizes-title-lg" onHide={handleClose}>
-              <Modal.Header closeButton>
-                <Modal.Title id="example-modal-sizes-title-lg"><div className="Login-title"><h2>Reset Password</h2></div></Modal.Title>
-              </Modal.Header>
-              <Modal.Body><div className="modal-body">
-                <form onSubmit={(e) => this.submitForm(e)} action="/">
-                <div className="input-password">
-                     <input className="password-input" type="password" value={this.state.oldPassword} onChange={(e) => this.handleOldPassChange(e)}></input>
-                     <label className={(this.state.moveup ? "move " : "") + "password-label"}>Old Password:</label>
-                  </div>
-                  <div className="input-password">
-                     <input className="password-input" type="password" value={this.state.password} onChange={(e) => this.handlePassChange(e)}></input>
-                     <label className={(this.state.moveup ? "move " : "") + "password-label"}>Enter Password:</label>
-                  </div>
-                  <div className="modal-footer">
-                    <div className="login-buttons footer-button">
-                      <button type="submit" className="login-button w-50">Reset Password</button>
-                    </div>
-                  </div>
-                </form>
-              </div>
-              </Modal.Body>
-            </Modal></div>
-            }
+
+                      {this.props.userid === "" ?
+                        <Modal size="lg" show={this.state.show} aria-labelledby="example-modal-sizes-title-lg" onHide={handleClose}>
+                          <Modal.Header closeButton>
+                            <Modal.Title id="example-modal-sizes-title-lg"><div className="Login-title"><h2>{this.state.signup ? "Signup" : "Login"}</h2></div></Modal.Title>
+                          </Modal.Header>
+                          <Modal.Body><div className="modal-body">
+
+                            <form onSubmit={(e) => this.submitForm(e)} action="/">
+                              <div className={(this.state.userid !== '' ? "no-number " : "") + "input-number"}>
+                                <label className={(this.state.moveup ? "move " : "") + "number-label"}>Enter Mobile Number:</label>
+                                <span className="country-code">+91</span>
+                                <input type="tel" onFocus={(e) => this.handleFocus(e, true)} onBlur={(e) => this.handleFocus(e, false)} value={this.state.userid} pattern="[0-9]{10}" onChange={(e) => this.handleChange(e)}></input>
+                                <span className="validity-alert">{this.state.validity ? this.state.validity : ''}</span>
+                              </div>
+                              <div className="input-password">
+                                <input className="password-input" type="password" value={this.state.password} onChange={(e) => this.handlePassChange(e)}></input>
+                                <label className={(this.state.moveup ? "move " : "") + "password-label"}>Enter Password:</label>
+
+                              </div>
+                              <p className="privacy-terms text-center">By continuing, you agree for our <NavLink onClick={() => { this.setState({ show: false }) }} to="TermsCond">Terms of Use</NavLink> and <NavLink onClick={() => { this.setState({ show: false }) }} to="Privacy">Privacy policy.</NavLink></p>
+                              <div className="modal-footer">
+                                <div className={(this.state.signup ? "login-buttons " : "signup-button ") + "footer-button"}>
+                                  <button type="submit" className="login-button w-50" onClick={(e) => this.formSubmit(e)}>{this.state.signup ? "Signup" : "Login"}</button>
+                                  {this.state.signup ? <p className="signup-link text-center">Already a user, <button className="link" onClick={(e) => this.changeMethod()}>Login</button></p> : <p className="signup-link text-center">New here?<br /> <button className="link" onClick={(e) => this.changeMethod()}>signup</button></p>}
+                                </div>
+                              </div>
+                            </form>
+                          </div>
+                          </Modal.Body>
+                        </Modal> : <div><div className={(this.state.show ? "show " : "close ") + "dropdown-login"}><p>{this.props.userid}</p><p onClick={this.changeresetPass}>Reset Password</p><p onClick={this.logoutAll}>Logout</p></div>
+                          <Modal size="lg" show={this.state.resetPassword} aria-labelledby="example-modal-sizes-title-lg" onHide={handleClose}>
+                            <Modal.Header closeButton>
+                              <Modal.Title id="example-modal-sizes-title-lg"><div className="Login-title"><h2>Reset Password</h2></div></Modal.Title>
+                            </Modal.Header>
+                            <Modal.Body><div className="modal-body">
+                              <form onSubmit={(e) => this.submitForm(e)} action="/">
+                                <div className="input-password">
+                                  <input className="password-input" type="password" value={this.state.oldPassword} onChange={(e) => this.handleOldPassChange(e)}></input>
+                                  <label className={(this.state.moveup ? "move " : "") + "password-label"}>Old Password:</label>
+                                </div>
+                                <div className="input-password">
+                                  <input className="password-input" type="password" value={this.state.password} onChange={(e) => this.handlePassChange(e)}></input>
+                                  <label className={(this.state.moveup ? "move " : "") + "password-label"}>Enter Password:</label>
+                                </div>
+                                <div className="modal-footer">
+                                  <div className="login-buttons footer-button">
+                                    <button type="submit" className="login-button w-50">Reset Password</button>
+                                  </div>
+                                </div>
+                              </form>
+                            </div>
+                            </Modal.Body>
+                          </Modal></div>
+                      }
                     </li>
                     <li>
                       <NavLink to="/TryAtHome" className="navlink">
@@ -366,7 +414,7 @@ componentDidUpdate() {
                         <span>
                           <FaShoppingCart className="icon" size="25px" />
                         </span>
-                        <span className="cart-items">{this.props.totalQuantity > 0 || this.props.tryoutcart.length>0 ? this.props.totalQuantity+this.props.tryoutcart.length : null}</span>
+                        <span className="cart-items">{this.props.totalQuantity > 0 || this.props.tryoutcart.length > 0 ? this.props.totalQuantity + this.props.tryoutcart.length : null}</span>
                       </NavLink>
                     </li>
                   </ul>
@@ -391,17 +439,17 @@ const mapStateToProps = (state) => {
     addedItems: state.addedItems,
     total: state.total,
     totalQuantity: state.totalQuantity,
-    totalDiscount:state.totalDiscount,
+    totalDiscount: state.totalDiscount,
     allItems: state.allItems,
-    userid:state.userid,
-    password:state.password,
-    tryoutcart:state.tryoutcart
+    userid: state.userid,
+    password: state.password,
+    tryoutcart: state.tryoutcart
   }
 }
 const mapDispatchToProps = (dispatch) => {
   return {
-    changeLoginStatus: (userid,password) => { dispatch(changeLoginStatus(userid,password)) },
-    updateCart:(addedItems,total,totalQuantity,totalDiscount)=>{dispatch(updateCart(addedItems,total,totalQuantity,totalDiscount))}
+    changeLoginStatus: (userid, password) => { dispatch(changeLoginStatus(userid, password)) },
+    updateCart: (addedItems, total, totalQuantity, totalDiscount) => { dispatch(updateCart(addedItems, total, totalQuantity, totalDiscount)) }
   }
 }
 export default connect(mapStateToProps, mapDispatchToProps)(NavbarMain)

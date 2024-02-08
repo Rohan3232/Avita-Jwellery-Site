@@ -68,7 +68,6 @@ componentDidUpdate() {
                                  
                                 </div>
                               </NavLink>
-                              {this.props.tryathome?<button className='addtocart-button tryout-button' onClick={(e)=>{this.addtotryoutcart(e,product.name)}} >Try at Home</button>:null}
                               
                             </div>
                           )

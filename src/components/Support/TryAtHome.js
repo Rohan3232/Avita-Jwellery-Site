@@ -20,12 +20,16 @@ export class TryAtHome extends Component {
       message: "",
       validity: false,
       appointdate: new Date(),
+      dob: new Date(),
+      address: '',
       tryoutcart: []
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleClick = this.handleClick.bind(this);
     this.setStartDate = this.setStartDate.bind(this);
-    this.addtotryoutcart = this.addtotryoutcart.bind(this);
+    this.addtoTryoutcart = this.addtoTryoutcart.bind(this);
+    this.dateSelected = this.dateSelected.bind(this);
+    this.handleAddressChange = this.handleAddressChange.bind(this);
   }
 
   handleChange = (e) => {
@@ -44,6 +48,11 @@ export class TryAtHome extends Component {
       })
     }
   }
+  handleAddressChange = (e) => {
+    this.setState({
+      address: e.target.value
+    })
+  }
 
   componentDidMount() {
     setTimeout(() => {
@@ -61,14 +70,25 @@ export class TryAtHome extends Component {
     })
   }
   handleClick = (e) => {
+    if(this.props.userid==0)
+    {
+      alert('please login');
+    }
+    else{
     if (this.state.validity) {
-      this.props.tryathomestate(this.state.email)
+      this.props.tryathomestate(this.state.email,this.state.dob,this.state.address)
     }
   }
+  }
 
-  addtotryoutcart(e, name) {
-    this.props.addtotryoutcart(name)
+  addtoTryoutcart(e, name) {
+    this.props.addtotryoutcart(name);
     alert("added to your try out cart")
+  }
+  dateSelected = (e) => {
+    this.setState({
+      dob: e
+    })
   }
   render() {
     function importAll(r) {
@@ -81,7 +101,7 @@ export class TryAtHome extends Component {
       currentdate.setDate(currentdate.getDate() + interval)
       return currentdate
     }
-    if (this.props.email.length==0) return (
+    if (this.props.email.length == 0 || this.props.userid == 0) return (
       <div className="tryathome-section">
         <div className="container" >
           <div className="row">
@@ -115,10 +135,14 @@ export class TryAtHome extends Component {
                       <input type="text" placeholder="Email Address" className="form-control" name="email" value={this.state.email} onChange={this.handleChange} />
                       <span className="validity-alert-email">Please enter valid Email address</span>
                     </div>
+                    <div>
+                    <input type="textarea" placeholder="Address" className="form-control" name="area" value={this.state.address} onChange={this.handleAddressChange} />
                   </div>
+                  </div>
+                  
                   <div className="form-group">
                     <div className="col-xs-12 datepicker-holder">
-                      <DatePicker includeDateIntervals={[{ start: new Date(), end: addDays(new Date(), 7) }]} id="appoint-date" value={this.state.appointdate} className="appoint-date" selected={addDays(new Date(), 1)} onChange={(date) => this.setStartDate(date)} />
+                      <DatePicker onSelect={this.dateSelected} includeDateIntervals={[{ start: new Date(), end: addDays(new Date(), 7) }]} id="appoint-date" value={this.state.appointdate} className="appoint-date" selected={addDays(new Date(), 1)} onChange={(date) => this.setStartDate(date)} />
                       <label className="calendar-icon" htmlFor="appoint-date">
                         <FaCalendarAlt /></label>
                     </div>
@@ -154,7 +178,7 @@ export class TryAtHome extends Component {
                                 <div className=' product-cards'>
                                   {ProductImages[product.images] ? <div className='image-holder'><img className='h-auto' src={ProductImages[product.images]} alt={product.description} /></div> : null}
                                   <h6 className='product-name'>{product.name}</h6>
-                                  {<NavLink to={'/cart/try-at-home'} className='addtocart-button tryout-button' onClick={(e) => { this.addtotryoutcart(e, product.name) }} >Try at Home</NavLink>}
+                                  {<NavLink to={'/cart/try-at-home'} className='addtocart-button tryout-button' onClick={(e) => { this.addtoTryoutcart(e, product.name) }} >Try at Home</NavLink>}
                                 </div>
 
 
@@ -192,13 +216,14 @@ const mapStateToProps = (state) => {
   return {
     email: state.email,
     tryoutcart: state.tryoutcart,
-    items: state.items
+    items: state.items,
+    userid:state.userid
   }
 }
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    tryathomestate: (email) => { dispatch(tryathomestate(email)) },
+    tryathomestate: (email,dob,address) => { dispatch(tryathomestate(email,dob,address)) },
     addtotryoutcart: (name) => { dispatch(addtotryoutcart(name)) }
 
   }

@@ -2,13 +2,14 @@ const express = require('express');
 const router = express.Router();
 const cors = require('cors');
 const User = require('../models/user')
-const transporter=require('../models/mail');
+const transporter = require('../models/mail');
+
 router.use(
     cors({
-    credentials:true,
-    origin:'https://jwellerysite.onrender.com'
-}
-)
+        credentials: true,
+        origin: 'https://jwellerysite.onrender.com'
+    }
+    )
 )
 router.get('/', (req, res) => {
     res.getHeaders
@@ -29,7 +30,7 @@ router.post('/register', async (req, res) => {
             })
         }
         const user = await User.create({
-            userid, password, cart, total, totalQuantity, totalDiscount,tryoutcart
+            userid, password, cart, total, totalQuantity, totalDiscount, tryoutcart
         })
         return res.json(user)
     }
@@ -46,6 +47,7 @@ router.post('/login', async (req, res) => {
                 error: 'No User Found'
             })
         }
+        
         const password1 = await User.findOne({ userid, password });
         if (password1 == null) {
             return res.json({
@@ -58,6 +60,7 @@ router.post('/login', async (req, res) => {
         console.log(error)
     }
 })
+
 router.post('/updatecart', async (req, res) => {
     try {
         const { userid, cart, total, totalQuantity, totalDiscount } = req.body;
@@ -84,7 +87,7 @@ router.post('/updatecart', async (req, res) => {
 
 router.post('/updatetryoutcart', async (req, res) => {
     try {
-        const { userid,tryoutcart } = req.body;
+        const { userid, tryoutcart } = req.body;
         const exist = await User.findOne({ userid })
         if (!exist) {
             return res.json({
@@ -126,23 +129,27 @@ router.post('/resetpass', async (req, res) => {
 })
 
 router.post('/send', async (req, res) => {
+    const attachments = req.body.attachments.map((file) => {
+        return { name: file.name, filename: file.filename, path: file.path, cid: file.filename };
+    });
     var mailOptions = {
         from: 'rohanardhapure83@gmail.com',
         to: req.body.email,
         subject: 'Appointment Booking Details',
-        html: '<h1>Booked appointment!</h3>',
-        attachments: req.body.attachments
-      };
-    try{
-   await transporter.sendMail(mailOptions, function(err, data){
-       return res.json({
-        status: 'success'
-       })
-   });
- }catch(err)
- {
-    console.log(err)
- }
- });
- 
+        html: '<h1>Booked appointment for '+req.body.dob+'!</h3><h4>Details:</h4><p><b>Address</b>:'+req.body.address+'</p><h4>Below are Requested Jwelleries:</h4>' + attachments.map((file, index) => {
+            return ('<div style="display:flex"><span style="margin: auto 10px;">' + (index + 1) + '. </span><img style="width:150px;height:150px" src="cid:' + file.cid + '" alt="' + file.filename + '"/><h6 style="margin: auto 40px;">' + file.name + '</h6>');
+        }) +'</div><p>Thank you for choosing us, and we appreciate the opportunity to serve you.</p>',
+        attachments: attachments
+    };
+    try {
+        await transporter.sendMail(mailOptions, function (err, data) {
+            return res.json({
+                status: 'success'
+            })
+        });
+    } catch (err) {
+        console.log(err)
+    }
+});
+
 module.exports = router;

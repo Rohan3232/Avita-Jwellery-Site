@@ -131,7 +131,6 @@ export class ProductDetails extends Component {
                                 })}
                            </span> : null}
                         </div>
-                        
                         <div className='addtoCart-section'>
                             {this.props.addedItems.indexOf(this.props.currentproduct)<0?
                             <button className='addtocart-button' onClick={(e) => { this.AddtoCart(this.props.currentproduct.name) }}>Add to Cart</button>
