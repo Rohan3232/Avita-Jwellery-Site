@@ -66,8 +66,13 @@
     padding-right: 120px;
     padding-top: 26px;
 }
-.details-page .product-details .product-name{
-    margin-bottom: 60px;
+.addtoCart-section{
+    margin-bottom: 40px;
+}
+.product-details .title{
+    font-size: 24px;
+    line-height: 28px;
+    text-align: left;
 }
 .details-page .product-descr{
     display: inline-flex;
