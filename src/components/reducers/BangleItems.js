@@ -1,12 +1,12 @@
 import { ADD_PRODUCT, UPDATE_CART, CHANGE_LOGIN_STATUS, ADD_SINGLEQUANTITY, ADD_QUANTITY, ADD_TO_CART, SUB_QUANTITY, REMOVE_ITEM, TRYATHOME_STATE, ADD_TO_TRYOUTCART } from '../actions/action-types/cart-actions';
 import { MenuItems } from '../Navbar/MenuItems';
 import axios from 'axios';
-let allproducts = {};
+let allproducts = [];
 MenuItems.map((item, key) => {
     if (item.types)
         item.types.map((type, key) => {
             item[type.name.replaceAll(' ', '')].map((product, key) => {
-                let currentproduct = new Object({ ...product, path: item.path + '/' + type.name + '/' + product.name });
+                let currentproduct = {...product, path: item.path + '/' + type.name + '/' + product.name };
                 allproducts.push(currentproduct)
            return currentproduct;
             })
