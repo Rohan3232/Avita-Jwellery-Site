@@ -1,17 +1,18 @@
-import React from 'react';
 import { ADD_PRODUCT, UPDATE_CART, CHANGE_LOGIN_STATUS, ADD_SINGLEQUANTITY, ADD_QUANTITY, ADD_TO_CART, SUB_QUANTITY, REMOVE_ITEM, TRYATHOME_STATE, ADD_TO_TRYOUTCART } from '../actions/action-types/cart-actions';
 import { MenuItems } from '../Navbar/MenuItems';
 import axios from 'axios';
-let allproducts = [];
+let allproducts = {};
 MenuItems.map((item, key) => {
     if (item.types)
         item.types.map((type, key) => {
             item[type.name.replaceAll(' ', '')].map((product, key) => {
-                let currentproduct = new Object({ ...product, path: item.path + '/' + type.name + '/' + product.name })
+                let currentproduct = { ...product, path: item.path + '/' + type.name + '/' + product.name };
                 allproducts.push(currentproduct)
+           return currentproduct;
             })
+            return 0;
         })
-
+return 0;
 })
 const initState = {
     items: MenuItems,
@@ -35,23 +36,29 @@ const BangleItems = (state = initState, action) => {
         state.items.filter(subtype => subtype.types).map((maintype) => {
             maintype.types.map((subtype) => {
                 maintype[subtype.name.replaceAll(' ', '')].map((product) => {
-                    if (action.name == product.name)
+                    if (action.name === product.name)
                         addedItem = product;
-                })
+                        return 0;
+                    })
+            return 0;
             })
+            return 0;
         })
-        if (addedItem != undefined) {
+        if (addedItem !== undefined) {
 
             state.totalQuantity += 1
             var userid = state.userid;
             var totalQuantity = state.totalQuantity;
             let existed_item = state.addedItems.find(item => action.name === item.name)
+            var cart;
+            var total;
+            var totalDiscount;
             if (existed_item) {
                 addedItem.quantity += 1;
-                var cart = state.addedItems;
-                var total = state.total + addedItem.price - (addedItem.price * (addedItem.discount?addedItem.discount:0) / 100);
-                var totalDiscount = (addedItem.price * (addedItem.discount?addedItem.discount:0) / 100);
-                const { data } = axios.post('/updatecart', {
+                cart = state.addedItems;
+                total = state.total + addedItem.price - (addedItem.price * (addedItem.discount?addedItem.discount:0) / 100);
+                totalDiscount = (addedItem.price * (addedItem.discount?addedItem.discount:0) / 100);
+                axios.post('/updatecart', {
                     userid, cart, total, totalQuantity, totalDiscount
                 })
                 return {
@@ -64,10 +71,10 @@ const BangleItems = (state = initState, action) => {
                 addedItem.quantity = 1;
                 let discountedprice = addedItem.price - (addedItem.price * (addedItem.discount?addedItem.discount:0) / 100);
                 let newTotal = state.total + discountedprice
-                var cart = [...state.addedItems, addedItem];
-                var total = state.total + addedItem.price - (addedItem.price * (addedItem.discount?addedItem.discount:0) / 100);
-                var totalDiscount = (addedItem.price * (addedItem.discount?addedItem.discount:0) / 100);
-                const { data } = axios.post('/updatecart', {
+                cart = [...state.addedItems, addedItem];
+                total = state.total + addedItem.price - (addedItem.price * (addedItem.discount?addedItem.discount:0) / 100);
+                totalDiscount = (addedItem.price * (addedItem.discount?addedItem.discount:0) / 100);
+                axios.post('/updatecart', {
                     userid, cart, total, totalQuantity, totalDiscount
                 })
                 return {
@@ -94,13 +101,14 @@ const BangleItems = (state = initState, action) => {
             state.totalDiscount += product.quantity * (product.price *(product.discount?product.discount:0) / 100);
             state.total = state.total - (product.quantity * discountedprice) + (action.quantity * discountedprice);
             product.quantity = action.quantity;
+            return 0;
         })
-        var userid=state.userid;
-        var cart=state.addedItems
-        var total=state.total;
-        var totalQuantity=state.totalQuantity;
-        var totalDiscount=state.totalDiscount;
-        const {data} = axios.post('/updatecart', {
+        userid=state.userid;
+        cart=state.addedItems
+        total=state.total;
+        totalQuantity=state.totalQuantity;
+        totalDiscount=state.totalDiscount;
+        axios.post('/updatecart', {
             userid,cart,total,totalQuantity,totalDiscount
         })
         return { ...state }
@@ -118,10 +126,11 @@ const BangleItems = (state = initState, action) => {
                 var total=state.total;
                 var totalQuantity=state.totalQuantity;
                 var totalDiscount=state.totalDiscount;
-                const {data} = axios.post('/updatecart', {
+                axios.post('/updatecart', {
                     userid,cart,total,totalQuantity,totalDiscount
                 })
             }
+            return 0;
         })
         return { ...state }
     }
@@ -133,48 +142,50 @@ const BangleItems = (state = initState, action) => {
                 state.totalDiscount += (product.price * (product.discount?product.discount:0) / 100);
                 state.total += discountedprice;
                 product.quantity += 1;
-                var userid=state.userid;
-                var cart=state.addedItems
-                var total=state.total;
-                var totalQuantity=state.totalQuantity;
-                var totalDiscount=state.totalDiscount;
-                const {data} = axios.post('/updatecart', {
+                userid=state.userid;
+                cart=state.addedItems
+                total=state.total;
+                totalQuantity=state.totalQuantity;
+                totalDiscount=state.totalDiscount;
+                axios.post('/updatecart', {
                     userid,cart,total,totalQuantity,totalDiscount
                 })
             }
+            return 0;
         })
        
         return { ...state }
     }
-    else if (action.type == REMOVE_ITEM) {
-        if(action.cartname=='addtocart'){
+    else if (action.type === REMOVE_ITEM) {
+        if(action.cartname==='addtocart'){
         state.totalDiscount = 0;
         state.totalQuantity = 0;
         state.total = 0;
-        let addedItems = state.addedItems.filter(product => { return product.name != action.name })
+        let addedItems = state.addedItems.filter(product => { return product.name !== action.name })
         addedItems.map((product, index) => {
             state.totalDiscount += (product.price * (product.discount?product.discount:0) / 100) * product.quantity;
             state.totalQuantity += product.quantity;
             state.total += (product.quantity * product.price - (product.price * (product.discount?product.discount:0) / 100) * product.quantity);
+            return 0;
         })
         state.addedItems = addedItems;
-        var userid=state.userid;
-        var cart=state.addedItems
-        var total=state.total;
-        var totalQuantity=state.totalQuantity;
-        var totalDiscount=state.totalDiscount;
-        const {data} = axios.post('/updatecart', {
+        userid=state.userid;
+        cart=state.addedItems
+        total=state.total;
+        totalQuantity=state.totalQuantity;
+        totalDiscount=state.totalDiscount;
+        axios.post('/updatecart', {
             userid,cart,total,totalQuantity,totalDiscount
         })
         }
         else{
-            let addedItems = state.tryoutcart.filter(product => { return product.name != action.name })
+            let addedItems = state.tryoutcart.filter(product => { return product.name !== action.name })
             state.tryoutcart= addedItems;
         }
         
         return { ...state }
     }
-    else if (action.type == UPDATE_CART) {
+    else if (action.type === UPDATE_CART) {
         return {
             ...state,
             addedItems: action.addedItems,
@@ -184,14 +195,14 @@ const BangleItems = (state = initState, action) => {
 
         }
     }
-    else if (action.type == CHANGE_LOGIN_STATUS) {
+    else if (action.type === CHANGE_LOGIN_STATUS) {
         return {
             ...state,
             userid: action.userid,
             password: action.password
         }
     }
-    else if(action.type == TRYATHOME_STATE)
+    else if(action.type === TRYATHOME_STATE)
     {
         return{
             ...state,
@@ -205,15 +216,18 @@ const BangleItems = (state = initState, action) => {
         state.items.filter(subtype => subtype.types).map((maintype) => {
             maintype.types.map((subtype) => {
                 maintype[subtype.name.replaceAll(' ', '')].map((product) => {
-                    if (action.name == product.name)
+                    if (action.name === product.name)
                         addedItem = product;
-                })
+                return 0
+                    })
+                return 0
             })
+            return 0
         })
-        if (addedItem != undefined) {
+        if (addedItem !== undefined) {
             let existed_item = state.tryoutcart.find(item => action.name === item.name)
             if (existed_item) {
-                var cart = state.tryoutcart;
+                cart = state.tryoutcart;
                 // const { data } = axios.post('/updatetryoutcart', {
                 //    cart
                 // })
@@ -222,7 +236,7 @@ const BangleItems = (state = initState, action) => {
                 }
             }
             else {
-                var cart = [...state.tryoutcart, addedItem];
+                cart = [...state.tryoutcart, addedItem];
                 // const { data } = axios.post('/updatetryoutcart', {
                 //     cart
                 // })

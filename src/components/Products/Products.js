@@ -35,26 +35,25 @@ componentDidUpdate() {
     currentUrl = currentUrl.slice(10, currentUrl.length)
     const itemspath = currentUrl.split('/');
     let currentproduct = this.props.items.filter(item => {
-      return (itemspath[0] == item.title || itemspath[0] == 'Offers');
+      return (itemspath[0] === item.title || itemspath[0] === 'Offers');
     }).map((item, key) => {
       return (
         <div className='row' key={key}>
           <div className='col-xs-12'>
-            {itemspath[0] == 'Offers' ? null : <h1 className='page-title'>{item.title}</h1>}
+            {itemspath[0] === 'Offers' ? null : <h1 className='page-title'>{item.title}</h1>}
           </div>
           {item.types ? <div className='col-xs-12'>
             {item.types.filter(type => {
-              return (itemspath[1] == undefined || itemspath[1].replace('%20', ' ').indexOf(type.name) >= 0)
+              return (itemspath[1] === undefined || itemspath[1].replace('%20', ' ').indexOf(type.name) >= 0)
             }).map((type, key) => {
-              {
                 return (
                   <div className='row' key={key}><div className='col-12'>
-                    {itemspath[0] == 'Offers' ? <h2 className='title'>Offers on {type.name}</h2> : <h2 className='title'>{type.name}</h2>}
+                    {itemspath[0] === 'Offers' ? <h2 className='title'>Offers on {type.name}</h2> : <h2 className='title'>{type.name}</h2>}
                   </div>
                     <div className='col-xs-12'><div className='row'>
                       {
                         item[type.name.replaceAll(' ', '')].filter(product => {
-                          if (itemspath != 'Offers')
+                          if (itemspath !== 'Offers')
                             return true
                           else
                             return product.discount
@@ -77,7 +76,6 @@ componentDidUpdate() {
                     </div>
                   </div>
                 )
-              }
             })}
           </div> : null
           }

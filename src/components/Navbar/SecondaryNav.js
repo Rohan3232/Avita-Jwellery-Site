@@ -1,8 +1,5 @@
-import React, { Component, useState } from "react";
-import { connect } from 'react-redux';
-import { NavLink, Router, Link, Route } from 'react-router-dom';
-import { addProduct } from "../actions/cartActions";
-
+import React, { Component} from "react";
+import { NavLink,Link} from 'react-router-dom';
 class SecondaryNav extends Component {
     constructor(props) {
         super(props)
@@ -22,7 +19,7 @@ class SecondaryNav extends Component {
                             className='nav-links'>
                             {categories[item].name}
                         </NavLink>
-                        {MenuItems[categories[item].name.replaceAll(' ','')] != undefined ? <SecondaryNav {...this.props}  tag={Link} path={this.props.path+'/' + categories[item].name} MenuItems={MenuItems} categories={MenuItems[categories[item].name.replaceAll(' ','')]} /> : null}
+                        {MenuItems[categories[item].name.replaceAll(' ','')] !== undefined ? <SecondaryNav {...this.props}  tag={Link} path={this.props.path+'/' + categories[item].name} MenuItems={MenuItems} categories={MenuItems[categories[item].name.replaceAll(' ','')]} /> : null}
                     </li>
                 )
                 

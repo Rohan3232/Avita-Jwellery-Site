@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux'
 import { FaPlus, FaMinus } from "react-icons/fa";
 import { IoMdAdd } from "react-icons/io";
-import { addQuantity, addToCart, addSingleQuantity, subtractQuantity, removeItem, tryathomestate } from './actions/cartActions';
+import { addQuantity, addToCart, addSingleQuantity, subtractQuantity, removeItem} from './actions/cartActions';
 import SearchPage from './SearchPage';
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import 'react-tabs/style/react-tabs.css';
@@ -12,7 +12,7 @@ class Cart extends Component {
     constructor(props) {
         super(props);
         this.state={
-            tabIndex:(this.props.cart=='try-at-home'||(this.props.tryoutcart.length>0 && this.props.addedItems.length==0))?1:0,
+            tabIndex:(this.props.cart==='try-at-home'||(this.props.tryoutcart.length>0 && this.props.addedItems.length===0))?1:0,
         }
         this.Offerprice = this.Offerprice.bind(this);
         this.changeQuantity = this.changeQuantity.bind(this);
@@ -52,10 +52,11 @@ class Cart extends Component {
         var attachments=[];
         tryoutcart.map((item,index)=>{
             attachments.push({name:item.name,filename:item.images,path:'./src/components/Products/images/products/'+item.images})
+            return 0;
         })
         
           try {        
-            const {data} = await axios.post('/send', {
+            await axios.post('/send', {
                 email,attachments,dob,address
               })
                 alert('Success!!');

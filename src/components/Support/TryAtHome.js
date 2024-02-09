@@ -1,14 +1,12 @@
-import axios from "axios";
+
 import React, { Component } from 'react'
 import './TryAtHome.css'
-import { FaPlus, FaMinus } from "react-icons/fa";
 import { MdAddHomeWork } from "react-icons/md";
 import { connect } from 'react-redux';
 import DatePicker from "react-datepicker";
 import { tryathomestate, addtotryoutcart } from '../actions/cartActions';
 import "react-datepicker/dist/react-datepicker.css";
 import { FaCalendarAlt } from "react-icons/fa";
-import Products from "../Products/Products";
 import { NavLink } from "react-router-dom";
 export class TryAtHome extends Component {
   constructor(props) {
@@ -71,7 +69,7 @@ export class TryAtHome extends Component {
     })
   }
   handleClick = (e) => {
-    if(this.props.userid==0)
+    if(this.props.userid===0)
     {
       alert('please login');
     }
@@ -102,7 +100,7 @@ export class TryAtHome extends Component {
       currentdate.setDate(currentdate.getDate() + interval)
       return currentdate
     }
-    if (this.props.email.length == 0 || this.props.userid == 0) return (
+    if (this.props.email.length === 0 || this.props.userid === 0) return (
       <div className="tryathome-section">
         <div className="container" >
           <div className="row">
@@ -164,7 +162,6 @@ export class TryAtHome extends Component {
             <NavLink to={'/cart'} className={'homecart-icon'}><span>{this.props.tryoutcart.length}</span><MdAddHomeWork /></NavLink>
             {item.types ? <div className='col-xs-12'>
               {item.types.map((type, key) => {
-                {
                   return (
                     <div className='row' key={key}><div className='col-12'>
 
@@ -190,7 +187,6 @@ export class TryAtHome extends Component {
                       </div>
                     </div>
                   )
-                }
               })}
             </div> : null
             }

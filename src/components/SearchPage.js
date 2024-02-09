@@ -24,35 +24,36 @@ class SearchPage extends Component {
     const ProductImages = importAll(require.context('./Products/images/products/', false, /\.(PNG|jpe?g|svg|webp)$/))
 
     var currentUrl = window.location.pathname;
+    var searchkey;
     currentUrl = currentUrl.slice(1, currentUrl.length);
     const itemspath = currentUrl.split('/');
-    if (itemspath[0] != 'search') {
-      if (itemspath[0] == "Collection")
-        var searchkey = itemspath[itemspath.length - 1].split(/(?:,| |-)+/);
+    if (itemspath[0] !== 'search') {
+      if (itemspath[0] === "Collection")
+        searchkey = itemspath[itemspath.length - 1].split(/(?:,| |-)+/);
       else
-        var searchkey = this.props.searchkey.split(/(?:,| |-)+/);
+        searchkey = this.props.searchkey.split(/(?:,| |-)+/);
     }
     else {
       const searchParams = new URLSearchParams(document.location.search)
-      var searchkey = searchParams.get('searchfor').split(/(?:,| |-)+/);
+      searchkey = searchParams.get('searchfor').split(/(?:,| |-)+/);
     }
     let currentproduct = this.props.allItems;
     let searchedproduct = [];
     searchkey.map((searchvalue) => {
-      if (searchedproduct.length != 0 && searchvalue != 'collection') {
+      if (searchedproduct.length !== 0 && searchvalue !== 'collection') {
         currentproduct = searchedproduct;
         searchedproduct = [];
       }
-      else if (searchedproduct.length == 0)
+      else if (searchedproduct.length === 0)
         currentproduct = this.props.allItems;
       currentproduct.map((product, key) => {
         let flg = 0;
         for (let p in product) {
           let search = product[p];
-          if ((typeof search == 'string' && ((search.toLocaleLowerCase()).includes(searchvalue.toLocaleLowerCase()))) || (typeof search == 'number' && p.includes(searchvalue) && search > 10))
+          if ((typeof search === 'string' && ((search.toLocaleLowerCase()).includes(searchvalue.toLocaleLowerCase()))) || (typeof search ==='number' && p.includes(searchvalue) && search > 10))
             flg = 1;
         }
-        if (flg == 1)
+        if (flg === 1)
           searchedproduct.push(<div key={searchedproduct.length} className='col-lg-3 col-md-6 col-sm-6 col-12 cards-holder'>
             <NavLink className="product-link" to={product.path}>
               <div className=' product-cards'>
@@ -62,7 +63,9 @@ class SearchPage extends Component {
               </div>
             </NavLink>
           </div>);
+          return 0;
       })
+      return 0;
     })
 
     if (searchedproduct.length > 0) {

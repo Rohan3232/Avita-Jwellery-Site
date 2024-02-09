@@ -49,7 +49,7 @@ router.post('/login', async (req, res) => {
         }
         
         const password1 = await User.findOne({ userid, password });
-        if (password1 == null) {
+        if (password1 === null) {
             return res.json({
                 error: 'Password Incorrect'
             })

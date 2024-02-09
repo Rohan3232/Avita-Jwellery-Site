@@ -11,9 +11,10 @@ export class Home extends Component {
 
     addLink(key) {
         var currentproduct = this.props.items.filter(item => {
-            if (item.id == key) {
+            if (item.id === key) {
                 return item;
             }
+            return false
         })
         if (currentproduct[0])
             return currentproduct[0].path;

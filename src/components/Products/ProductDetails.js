@@ -35,8 +35,8 @@ export class ProductDetails extends Component {
     }
 
     Offerprice(discount, price) {
-        let discountedprice = price - (price * discount / 100)
-        return discountedprice.toFixed(2)
+        let discountedprice = price - (price * discount / 100);
+        return discountedprice.round();
     }
     updateList() {
 
@@ -45,33 +45,34 @@ export class ProductDetails extends Component {
         var urlList = currentUrl.split('/')
         var productList = {}
         this.props.items.filter(product => {
-            if (urlList[0] == product.title) {
-                if (urlList[1] == undefined) {
+            if (urlList[0] === product.title) {
+                if (urlList[1] === undefined) {
                     productList = product;
                     return product;
                 }
                 else {
                     product.types.filter(producttype => {
-                        if (producttype.name == urlList[1])
-                            if (urlList[2] == undefined) {
+                        if (producttype.name === urlList[1])
+                            if (urlList[2] === undefined) {
                                 productList = product[producttype.name.replaceAll(' ', '')];
                                 return product[producttype.name.replaceAll(' ', '')]
                             }
                             else
                                 product[producttype.name.replaceAll(' ', '')].filter(product => {
-                                    if (product.name == urlList[2]) {
+                                    if (product.name === urlList[2]) {
                                         productList = product;
                                         return product;
                                     }
+                                    return false;
                                 })
-
+                                return false;
                     })
                     return null;
                 }
             }
-
+return false;
         })
-        if (productList.id != undefined)
+        if (productList.id !== undefined)
             this.props.addProduct(productList)
 
     }
@@ -83,7 +84,7 @@ export class ProductDetails extends Component {
         }
         const ProductImages = importAll(require.context('./images/products/', false, /\.(PNG|jpe?g|svg|webp)$/));
         this.updateList(e);
-        if (this.props.currentproduct.id != undefined) {
+        if (this.props.currentproduct.id !== undefined) {
             return (<div key={this.props.currentproduct.id} className='container details-page'>
                 <div className='row'>
                     <div className='col-md-5 col-12 product-page'>

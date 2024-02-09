@@ -35,7 +35,7 @@ export class ContactUs extends Component {
       }
       if (nam === "nm") 
       {
-          if (val=="" ) 
+          if (val==="" ) 
           {
           err2 = <strong style={{color:"red"}}>Name Should not be blank</strong>;
           }
@@ -60,7 +60,7 @@ export class ContactUs extends Component {
               mob: this.state.mob,
 
    }
-   if(this.state.errorm1!=''||this.state.errorm2!=""||this.state.errorm3!="")
+   if(this.state.errorm1!==''||this.state.errorm2!==""||this.state.errorm3!=="")
 {
     alert("please enter valid data");
 }
@@ -138,7 +138,7 @@ resetForm(){
                <p>123456</p>
             </div>
             <div className="child2" style={{float:"left",display:'inline-block'}}>
-            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d121035.86684761179!2d73.7764778066407!3d18.557312683860314!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bc2bbe5b036291d%3A0xcb8abc91bdca4c48!2sLTI!5e0!3m2!1sen!2sin!4v1609492504579!5m2!1sen!2sin" width="370" height="450" frameborder="0" style={{border:"0px"}} allowfullscreen="" aria-hidden="false" tabindex="0"></iframe>
+            <iframe title="Maps" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d121035.86684761179!2d73.7764778066407!3d18.557312683860314!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bc2bbe5b036291d%3A0xcb8abc91bdca4c48!2sLTI!5e0!3m2!1sen!2sin!4v1609492504579!5m2!1sen!2sin" width="370" height="450" frameborder="0" style={{border:"0px"}} allowfullscreen="" aria-hidden="false" tabindex="0"></iframe>
 
             </div>
                 

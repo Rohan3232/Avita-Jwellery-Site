@@ -4,7 +4,7 @@ import { NavLink } from 'react-router-dom'
 import './Footer.css';
 import { MDBCol, MDBContainer, MDBRow } from 'mdbreact';
 import { RiVisaLine } from "react-icons/ri";
-import { FaFacebookF, FaInstagram, FaTwitter,FaHome } from 'react-icons/fa';
+import { FaFacebookF, FaInstagram, FaTwitter} from 'react-icons/fa';
 import { FaCcMastercard, FaAmazonPay } from "react-icons/fa6";
 export default function Footer() {
   return (
@@ -116,14 +116,14 @@ export default function Footer() {
         <MDBRow >
       <MDBCol md="12" lg="12" xl="12" className=" text-left d-flex">
             <div className="social-icons">
-              <a className="btn-floating btn-small btn-fb">
+              <a href='https://www.facebook.com/' className="btn-floating btn-small btn-fb">
                 <FaFacebookF size="25" />
               </a>
-              <a className="btn-floating btn-sm rgba-white-slight mx-1">
+              <a href='https://www.instagram.com/' className="btn-floating btn-sm rgba-white-slight mx-1">
                 <FaInstagram size="25" />
               </a>
 
-              <a className="btn-floating btn-sm rgba-white-slight mx-1">
+              <a href='https://twitter.com/?lang=en' className="btn-floating btn-sm rgba-white-slight mx-1">
                 <FaTwitter size="25" />
               </a>
               
