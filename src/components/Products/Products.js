@@ -10,7 +10,7 @@ class Bangles extends Component {
   }
   Offerprice(discount, price) {
     let discountedprice = price - (price * discount / 100)
-    return discountedprice;
+    return Math.round(discountedprice);
   }
   
   componentDidMount() {

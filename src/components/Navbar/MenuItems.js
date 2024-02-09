@@ -1252,7 +1252,6 @@ export const MenuItems = [
       }
     ]
   },
-  ,
   {
     id: 3,
     title: 'Pendants',
@@ -1292,7 +1291,7 @@ export const MenuItems = [
             "rating": 4,
             "comment": "Classic design, great addition to my jewelry collection."
           }
-        ],
+        ]
        },
       {
         "id": 2,
@@ -1321,7 +1320,7 @@ export const MenuItems = [
             "rating": 3,
             "comment": "Lovely design, but the chain is a bit delicate."
           }
-        ],
+        ]
         },
       {
         "id": 3,
@@ -1350,7 +1349,7 @@ export const MenuItems = [
             "rating": 4,
             "comment": "Beautiful, but the chain length is shorter than expected."
           }
-        ],
+        ]
        },
       {
         "id": 4,
@@ -1379,7 +1378,7 @@ export const MenuItems = [
             "rating": 4,
             "comment": "Beautiful craftsmanship, worth the investment."
           }
-        ],
+        ]
        },
       {
         "id": 5,
@@ -1410,7 +1409,7 @@ export const MenuItems = [
             "rating": 4,
             "comment": "Unique design, great combination of diamond and sapphires."
           }
-        ],
+        ]
       },
       {
         "id": 6,
@@ -1439,7 +1438,7 @@ export const MenuItems = [
             "rating": 3,
             "comment": "Beautiful design, but the pendant is a bit heavy."
           }
-        ],
+        ]
         },
       {
         "id": 7,
@@ -1468,7 +1467,7 @@ export const MenuItems = [
             "rating": 5,
             "comment": "Absolutely charming! Love the pear-shaped diamonds."
           }
-        ],
+        ]
        },
       {
         "id": 8,
@@ -1497,7 +1496,7 @@ export const MenuItems = [
             "rating": 4,
             "comment": "Great craftsmanship, comfortable to wear."
           }
-        ],
+        ]
       },
       {
         "id": 9,
@@ -1527,7 +1526,7 @@ export const MenuItems = [
             "rating": 3,
             "comment": "Beautiful design, but the chain is delicate."
           }
-        ],
+        ]
       },
       {
         "id": 10,
@@ -1556,7 +1555,7 @@ export const MenuItems = [
             "rating": 4,
             "comment": "Beautiful design, love the drop setting."
           }
-        ],
+        ]
       }
     ],
     "Pendants": [
@@ -1852,8 +1851,8 @@ export const MenuItems = [
             "rating": 4,
             "comment": "Lovely design, but the size runs a bit small."
           }
-        ],
-      },
+        ]
+      }
     ],
 
   },
@@ -1892,7 +1891,7 @@ export const MenuItems = [
             "rating": 4,
             "comment": "Lovely design, but a bit heavier than expected."
           }
-        ],
+        ]
        },
       {
         "id": 2,

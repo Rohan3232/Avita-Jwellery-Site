@@ -36,7 +36,7 @@ export class ProductDetails extends Component {
 
     Offerprice(discount, price) {
         let discountedprice = price - (price * discount / 100);
-        return discountedprice.round();
+        return Math.round(discountedprice);
     }
     updateList() {
 
