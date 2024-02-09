@@ -6,7 +6,7 @@ MenuItems.map((item, key) => {
     if (item.types)
         item.types.map((type, key) => {
             item[type.name.replaceAll(' ', '')].map((product, key) => {
-                let currentproduct = { ...product, path: item.path + '/' + type.name + '/' + product.name };
+                let currentproduct = new Object({ ...product, path: item.path + '/' + type.name + '/' + product.name });
                 allproducts.push(currentproduct)
            return currentproduct;
             })
