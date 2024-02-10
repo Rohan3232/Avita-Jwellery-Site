@@ -116,7 +116,7 @@ class NavbarMain extends Component {
               resetPassword: false
             })
             this.props.changeLoginStatus(result.userid, result.password)
-            console.log(tryoutcart);
+          console.log(result.tryoutcart);
             this.props.updateCart(result.cart, result.total, result.totalQuantity, result.totalDiscount,result.tryoutcart)
             this.props.tryathomestate(result.email,result.address)
             const cookies = new Cookies();
@@ -270,7 +270,8 @@ class NavbarMain extends Component {
               resetPassword: false
             })
             this.props.changeLoginStatus(result.userid, result.password)
-            this.props.updateCart(result.cart, result.total, result.totalQuantity, result.totalDiscount)
+              this.props.updateCart(result.cart, result.total, result.totalQuantity, result.totalDiscount,result.tryoutcart)
+              this.props.tryathomestate(result.email,result.address)
           }
 
           this.setState({
