@@ -5,7 +5,7 @@ import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import { NavLink } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { changeLoginStatus, updateCart } from '../actions/cartActions';
+import { changeLoginStatus, updateCart,tryathomestate,addtotryoutcart } from '../actions/cartActions';
 import { FaShoppingCart, FaUser, FaSearch, FaBars, FaHome } from "react-icons/fa";
 import { MdClose } from "react-icons/md";
 import './Navbar.css';
@@ -65,11 +65,13 @@ class NavbarMain extends Component {
       var totalQuantity = this.props.totalQuantity ? this.props.totalQuantity : 0;
       var totalDiscount = this.props.totalDiscount ? this.props.totalDiscount : 0;
       var result;
-
+      var tryoutcart=this.props.tryoutcart;
+      var email=this.props.email;
+      var address=this.props.address;
       if (this.state.signup) {
         try {
           const { data } = await axios.post('/register', {
-            userid, password, cart, total, totalQuantity, totalDiscount
+            userid, password, cart, total, totalQuantity, totalDiscount,tryoutcart,email,address
           })
           result = data
           if (result.error) {
@@ -115,6 +117,8 @@ class NavbarMain extends Component {
             })
             this.props.changeLoginStatus(result.userid, result.password)
             this.props.updateCart(result.cart, result.total, result.totalQuantity, result.totalDiscount)
+            this.props.addtotryoutcart(result.name);
+            this.props.tryathomestate(result.email,result.address)
             const cookies = new Cookies();
             cookies.set('login-cred',result.userid+'='+result.password,30)
             alert('Success!!');
@@ -361,15 +365,14 @@ class NavbarMain extends Component {
                                 <label className={(this.state.moveup ? "move " : "") + "number-label"}>Enter Mobile Number:</label>
                                 <span className="country-code">+91</span>
                                 <input type="tel" onFocus={(e) => this.handleFocus(e, true)} onBlur={(e) => this.handleFocus(e, false)} value={this.state.userid} pattern="[0-9]{10}" onChange={(e) => this.handleChange(e)}></input>
-                                <span className="validity-alert">{this.state.validity ? this.state.validity : ''}</span>
-                              </div>
+                                  </div>
                               <div className="input-password">
                                 <input className="password-input" type="password" value={this.state.password} onChange={(e) => this.handlePassChange(e)}></input>
                                 <label className={(this.state.moveup ? "move " : "") + "password-label"}>Enter Password:</label>
-
                               </div>
                               <p className="privacy-terms text-center">By continuing, you agree for our <NavLink onClick={() => { this.setState({ show: false }) }} to="TermsCond">Terms of Use</NavLink> and <NavLink onClick={() => { this.setState({ show: false }) }} to="Privacy">Privacy policy.</NavLink></p>
                               <div className="modal-footer">
+                              <span className="validity-alert">{this.state.validity ? this.state.validity : ''}</span>
                                 <div className={(this.state.signup ? "login-buttons " : "signup-button ") + "footer-button"}>
                                   <button type="submit" className="login-button w-50" onClick={(e) => this.formSubmit(e)}>{this.state.signup ? "Signup" : "Login"}</button>
                                   {this.state.signup ? <p className="signup-link text-center">Already a user?,<br/> <button className="link" onClick={(e) => this.changeMethod()}>Login</button></p> : <p className="signup-link text-center">New here?<br /> <button className="link" onClick={(e) => this.changeMethod()}>signup</button></p>}
@@ -443,11 +446,15 @@ const mapStateToProps = (state) => {
     allItems: state.allItems,
     userid: state.userid,
     password: state.password,
+    email:state.email,
+    address:state.address,
     tryoutcart: state.tryoutcart
   }
 }
 const mapDispatchToProps = (dispatch) => {
   return {
+    tryathomestate: (email,dob,address) => { dispatch(tryathomestate(email,dob,address)) },
+    addtotryoutcart: (name) => { dispatch(addtotryoutcart(name)) },
     changeLoginStatus: (userid, password) => { dispatch(changeLoginStatus(userid, password)) },
     updateCart: (addedItems, total, totalQuantity, totalDiscount) => { dispatch(updateCart(addedItems, total, totalQuantity, totalDiscount)) }
   }

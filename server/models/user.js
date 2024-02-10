@@ -21,6 +21,15 @@ const userSchema=new Schema({
     },
     totalDiscount:{
         type:Number
+    },
+    tryoutcart:{
+        type:Object
+    },
+    email:{
+        type:String
+    },
+    address:{
+        type:String
     }
 })
 const userModel=mongo.model('User',userSchema);

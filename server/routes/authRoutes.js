@@ -17,7 +17,7 @@ router.get('/', (req, res) => {
 })
 router.post('/register', async (req, res) => {
     try {
-        const { userid, password, cart, total, totalQuantity, totalDiscount } = req.body;
+        const { userid, password, cart, total, totalQuantity, totalDiscount,tryoutcart,email,address } = req.body;
         if (!password || password.length < 6) {
             return res.json({
                 error: 'Password is required and should be at least 6 characters long'
@@ -30,7 +30,7 @@ router.post('/register', async (req, res) => {
             })
         }
         const user = await User.create({
-            userid, password, cart, total, totalQuantity, totalDiscount, tryoutcart
+            userid, password, cart, total, totalQuantity, totalDiscount, tryoutcart,email,address
         })
         return res.json(user)
     }
@@ -87,7 +87,7 @@ router.post('/updatecart', async (req, res) => {
 
 router.post('/updatetryoutcart', async (req, res) => {
     try {
-        const { userid, tryoutcart } = req.body;
+        const { userid, tryoutcart, email } = req.body;
         const exist = await User.findOne({ userid })
         if (!exist) {
             return res.json({
@@ -98,7 +98,8 @@ router.post('/updatetryoutcart', async (req, res) => {
             userid: userid
         }, {
             $set: {
-                tryoutcart: tryoutcart
+                tryoutcart: tryoutcart,
+                email: email,
             }
         })
         return res.json(user)
