@@ -1,10 +1,45 @@
 .form-control {
     width:400px;
 }
-.child1{
-    float: left;
+
+.contactus-section{
+    background: linear-gradient(#ff9968, #ff5e63) no-repeat;
 }
-.child2{
-    float: left;
-    margin-top:20px ;
+.form1,.address-details{
+    width: fit-content;
+    padding: 15px 40px;
+    margin: 40px 0;
+    border-radius: 16px;
+}
+iframe{
+    width: 100%;
+    height: 50%;
+    margin-top: 40px;
+}
+.address-details p{
+    color: #333;
+    white-space: break-spaces;
+}
+.address-details{
+    margin: 40px auto;
+    width: 100%;
+    display: flex;
+}
+.f50{
+    flex-basis: 50%;
+}
+@media(max-width:992px){
+    
+    iframe{
+        height: auto;
+    }
+
+}
+@media(max-width:720px){
+    .contactus-section .address-details{
+        flex-direction: column;
+    }
+    .form1,.form-control {
+        width:100%;
+    }
 }

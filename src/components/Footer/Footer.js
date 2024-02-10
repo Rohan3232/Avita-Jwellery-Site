@@ -9,7 +9,7 @@ import { FaCcMastercard, FaAmazonPay } from "react-icons/fa6";
 export default function Footer() {
   return (
     <div className="FooterBody">
-      <MDBContainer className="footer-main mt-5 text-center text-md-left">
+      <MDBContainer className="footer-main text-center text-md-left">
         <MDBRow className="mt-3">
           <MDBCol md="6" sm="6" lg="3" xl="3" className="mb-3 text-left">
             <h6 className="text-uppercase font-weight-bold">

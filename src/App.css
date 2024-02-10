@@ -1,12 +1,5 @@
 .App .Body {
     margin-top: 80px;
-    margin-bottom: 5px;
-}
-
-.App .Header-Top {
-    max-height: auto;
-    max-width: auto;
-    top: 0;
 }
 
 .App .Footer {
