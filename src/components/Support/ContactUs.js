@@ -17,6 +17,7 @@ export class ContactUs extends Component {
         };
         this.myChangeHandler = this.myChangeHandler.bind(this);
         this.submitEmail = this.submitEmail.bind(this);
+        this.resetForm=this.resetForm.bind(this);
     }
     myChangeHandler = (event) => {
         let nam = event.target.name;
