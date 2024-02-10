@@ -13,7 +13,8 @@ export const updateCart=(addedItems,total,totalQuantity,totalDiscount)=>{
         addedItems,
         total,
         totalQuantity,
-        totalDiscount
+        totalDiscount,
+        tryoutcart
     }
 }
 //remove item action

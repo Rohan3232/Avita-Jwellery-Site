@@ -192,6 +192,7 @@ const BangleItems = (state = initState, action) => {
             total: action.total,
             totalQuantity: action.totalQuantity,
             totalDiscount: action.totalDiscount,
+            tryoutcart:action.tryoutcart
 
         }
     }

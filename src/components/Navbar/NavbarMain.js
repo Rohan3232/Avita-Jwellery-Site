@@ -116,8 +116,7 @@ class NavbarMain extends Component {
               resetPassword: false
             })
             this.props.changeLoginStatus(result.userid, result.password)
-            this.props.updateCart(result.cart, result.total, result.totalQuantity, result.totalDiscount)
-            this.props.addtotryoutcart(result.name);
+            this.props.updateCart(result.cart, result.total, result.totalQuantity, result.totalDiscount,result.tryoutcart)
             this.props.tryathomestate(result.email,result.address)
             const cookies = new Cookies();
             cookies.set('login-cred',result.userid+'='+result.password,30)
@@ -373,6 +372,7 @@ class NavbarMain extends Component {
                               <p className="privacy-terms text-center">By continuing, you agree for our <NavLink onClick={() => { this.setState({ show: false }) }} to="TermsCond">Terms of Use</NavLink> and <NavLink onClick={() => { this.setState({ show: false }) }} to="Privacy">Privacy policy.</NavLink></p>
                               <div className="modal-footer">
                               <span className="validity-alert">{this.state.validity ? this.state.validity : ''}</span>
+                            
                                 <div className={(this.state.signup ? "login-buttons " : "signup-button ") + "footer-button"}>
                                   <button type="submit" className="login-button w-50" onClick={(e) => this.formSubmit(e)}>{this.state.signup ? "Signup" : "Login"}</button>
                                   {this.state.signup ? <p className="signup-link text-center">Already a user?,<br/> <button className="link" onClick={(e) => this.changeMethod()}>Login</button></p> : <p className="signup-link text-center">New here?<br /> <button className="link" onClick={(e) => this.changeMethod()}>signup</button></p>}
