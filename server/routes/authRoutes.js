@@ -158,14 +158,26 @@ router.post('/sendContact', async (req, res) => {
         from: 'rohanardhapure83@gmail.com',
         to: req.body.email,
         subject: 'Feedback recorded!',
-        html: "<h4>Hi "+req.body.nm+"</h4><h4>Thank you for contacting us. You're helping us make better! We couldn't be more grateful for your feedback. Your opinion matters, is hugely appreciated, and we'll take that into consideration to make our offerings better.</h4>",
+        html: "<h4>Hi "+req.body.nm+"</h4><h4>Thank you for contacting us. You're helping us make better! We couldn't be more grateful for your feedback. Your opinion matters, is hugely appreciated, and we'll take that into consideration to make our offerings better.</h4><h4>Thanks & Regards</br>,Avita Jwellery</h4>",
+    };
+    var mailOptions1 = {
+        from: 'rohanardhapure83@gmail.com',
+        to: 'rohanardhapure83@gmail.com',
+        subject: 'Feedback Recieved',
+        html: "<p>"+req.body.remarks+"</p>",
     };
     try {
         await transporter.sendMail(mailOptions, function (err, data) {
+             transporter.sendMail(mailOptions1, function (err, data) {
+                return res.json({
+                    status: 'success'
+                })
+            });
             return res.json({
                 status: 'success'
             })
         });
+       
     } catch (err) {
         console.log(err)
     }

@@ -61,6 +61,7 @@ export class ContactUs extends Component {
             axios.post('/sendContact', data)
                 .then(function (response) {
                     alert('your response recorded Successfully!!!');
+                    this.resetForm();
                 })
                 .catch(function (error) {
                     console.log(error)
