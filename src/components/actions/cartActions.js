@@ -7,7 +7,7 @@ export const addToCart= (name)=>{
         name
     }
 }
-export const updateCart=(addedItems,total,totalQuantity,totalDiscount)=>{
+export const updateCart=(addedItems,total,totalQuantity,totalDiscount,tryoutcart)=>{
     return{
         type:UPDATE_CART,
         addedItems,
