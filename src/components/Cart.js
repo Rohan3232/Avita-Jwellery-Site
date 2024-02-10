@@ -66,7 +66,6 @@ class Cart extends Component {
               }
     }
     render() {
-        console.log(this.props)
         function importAll(r) {
             let carouselImages = {};
             r.keys().forEach((item, index) => { carouselImages[item.replace('./', '')] = r(item); });

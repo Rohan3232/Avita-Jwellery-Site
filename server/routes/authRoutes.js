@@ -99,7 +99,6 @@ router.post('/updatetryoutcart', async (req, res) => {
         }, {
             $set: {
                 tryoutcart: tryoutcart,
-                email: email,
             }
         })
         return res.json(user)
