@@ -215,7 +215,7 @@ const BangleItems = (state = initState, action) => {
     }
     if (action.type ===ADD_TO_TRYOUTCART) {
        var userid=state.userid;
-       var cart;
+       var cart=[];
         let addedItem;
         state.items.filter(subtype => subtype.types).map((maintype) => {
             maintype.types.map((subtype) => {
