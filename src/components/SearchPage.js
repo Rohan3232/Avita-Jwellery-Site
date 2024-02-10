@@ -5,7 +5,6 @@ import { NavLink } from 'react-router-dom';
 class SearchPage extends Component {
   constructor(props) {
     super(props);
-    console.log(props)
     this.state = {
       flg: false
     }
