@@ -9,6 +9,7 @@ export class ContactUs extends Component {
             nm: '',
             email: '',
             mob: null,
+            remarks:'',
             errorm1: '',
             errorm2: '',
             errorm3: ''
@@ -100,7 +101,7 @@ export class ContactUs extends Component {
 
                                 <div className="form-outline mb-4">
                                     <label className="form-label" htmlFor="form4Example3">Remark</label>
-                                    <textarea className="form-control" name="remarks" id="form4Example3" rows="4"></textarea>
+                                    <textarea className="form-control" onChange={(e)=>{this.myChangeHandler(e)}} name="remarks" id="form4Example3" rows="4"></textarea>
 
                                 </div>
 
