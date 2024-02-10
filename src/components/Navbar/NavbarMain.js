@@ -315,7 +315,7 @@ class NavbarMain extends Component {
       })
 
     }
-
+console.log(this.props)
     return (
       <div className="Top" autoFocus >
         <div className="container-fluid">
