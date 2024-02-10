@@ -58,7 +58,7 @@ export class ContactUs extends Component {
             alert("please enter valid data");
         }
         else {
-            axios.post('http://localhost:3001/sendContact', data)
+            axios.post('/sendContact', data)
                 .then(function (response) {
                     alert('your response recorded Successfully!!!');
                 })
