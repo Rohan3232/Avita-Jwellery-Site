@@ -116,6 +116,7 @@ class NavbarMain extends Component {
               resetPassword: false
             })
             this.props.changeLoginStatus(result.userid, result.password)
+            console.log(tryoutcart);
             this.props.updateCart(result.cart, result.total, result.totalQuantity, result.totalDiscount,result.tryoutcart)
             this.props.tryathomestate(result.email,result.address)
             const cookies = new Cookies();
@@ -456,7 +457,7 @@ const mapDispatchToProps = (dispatch) => {
     tryathomestate: (email,dob,address) => { dispatch(tryathomestate(email,dob,address)) },
     addtotryoutcart: (name) => { dispatch(addtotryoutcart(name)) },
     changeLoginStatus: (userid, password) => { dispatch(changeLoginStatus(userid, password)) },
-    updateCart: (addedItems, total, totalQuantity, totalDiscount) => { dispatch(updateCart(addedItems, total, totalQuantity, totalDiscount)) }
+    updateCart: (addedItems, total, totalQuantity, totalDiscount,tryoutcart) => { dispatch(updateCart(addedItems, total, totalQuantity, totalDiscount,tryoutcart)) }
   }
 }
 export default connect(mapStateToProps, mapDispatchToProps)(NavbarMain)
