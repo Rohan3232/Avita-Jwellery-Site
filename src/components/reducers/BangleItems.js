@@ -197,6 +197,7 @@ const BangleItems = (state = initState, action) => {
         }
     }
     else if (action.type === CHANGE_LOGIN_STATUS) {
+        
         return {
             ...state,
             userid: action.userid,
@@ -230,7 +231,7 @@ const BangleItems = (state = initState, action) => {
             if (existed_item) {
                 cart = state.tryoutcart;
                 axios.post('/updatetryoutcart', {
-                   cart
+                   userid,cart
                 })
                 return {
                     ...state,
@@ -238,8 +239,9 @@ const BangleItems = (state = initState, action) => {
             }
             else {
                 cart = [...state.tryoutcart, addedItem];
+                
                 axios.post('/updatetryoutcart', {
-                    cart
+                    userid,cart
                 })
                 return {
                     ...state,

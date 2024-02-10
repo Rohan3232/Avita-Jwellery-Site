@@ -87,7 +87,7 @@ router.post('/updatecart', async (req, res) => {
 
 router.post('/updatetryoutcart', async (req, res) => {
     try {
-        const { userid, tryoutcart, email } = req.body;
+        const { userid, tryoutcart} = req.body;
         const exist = await User.findOne({ userid })
         if (!exist) {
             return res.json({
