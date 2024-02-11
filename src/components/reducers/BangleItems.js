@@ -1,4 +1,4 @@
-import { ADD_PRODUCT, UPDATE_CART, CHANGE_LOGIN_STATUS, ADD_SINGLEQUANTITY, ADD_QUANTITY, ADD_TO_CART, SUB_QUANTITY, REMOVE_ITEM, TRYATHOME_STATE, ADD_TO_TRYOUTCART } from '../actions/action-types/cart-actions';
+import { ADD_PRODUCT, UPDATE_CART, CHANGE_LOGIN_STATUS, ADD_SINGLEQUANTITY, ADD_QUANTITY, ADD_TO_CART, SUB_QUANTITY, REMOVE_ITEM, TRYATHOME_STATE, ADD_TO_TRYOUTCART, ADD_FEEDBACK } from '../actions/action-types/cart-actions';
 import { MenuItems } from '../Navbar/MenuItems';
 import axios from 'axios';
 let allproducts = [];
@@ -255,6 +255,22 @@ const BangleItems = (state = initState, action) => {
             }
 
         }
+    }
+    if (action.type === ADD_FEEDBACK) {
+        console.log(action.itemname)
+        let addedItem=state.items.filter(subtype => subtype.types).map((maintype) => {
+            maintype.types.map((subtype) => {
+                maintype[subtype.name.replaceAll(' ', '')].map((product) => {
+                    if (action.itemname === product.name){
+                            product.ratings.push({"user":action.username,"comment":action.feedback,"rating":action.rating})
+                    }
+                        return product;
+                    })
+            return subtype;
+            })
+            return maintype;
+        })
+        console.log(addedItem)
     }
     else {
         return state

@@ -1,4 +1,4 @@
-import { ADD_TO_CART,UPDATE_CART,CHANGE_LOGIN_STATUS,ADD_SINGLEQUANTITY,REMOVE_ITEM,SUB_QUANTITY,ADD_QUANTITY,ADD_SHIPPING,ADD_PRODUCT, TRYATHOME_STATE, ADD_TO_TRYOUTCART} from './action-types/cart-actions'
+import { ADD_TO_CART,UPDATE_CART,CHANGE_LOGIN_STATUS,ADD_SINGLEQUANTITY,REMOVE_ITEM,SUB_QUANTITY,ADD_QUANTITY,ADD_SHIPPING,ADD_PRODUCT, TRYATHOME_STATE, ADD_TO_TRYOUTCART, ADD_FEEDBACK} from './action-types/cart-actions'
 
 //add cart action
 export const addToCart= (name)=>{
@@ -79,5 +79,15 @@ export const addtotryoutcart=(name)=>{
     return{
         type:ADD_TO_TRYOUTCART,
         name
+    }
+}
+
+export const addFeedback=(itemname,feedback,username,rating)=>{
+    return{
+        type:ADD_FEEDBACK,
+        itemname,
+        feedback,
+        username,
+        rating
     }
 }

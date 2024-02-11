@@ -46,7 +46,7 @@ class NavbarMain extends Component {
   }
   logoutAll() {
     this.props.changeLoginStatus('', '')
-    this.props.updateCart([], 0, 0, 0);
+    this.props.updateCart([], 0, 0, 0,[]);
     alert('Successfully Logged Out')
     const cookies=new Cookies();
     this.setState({
