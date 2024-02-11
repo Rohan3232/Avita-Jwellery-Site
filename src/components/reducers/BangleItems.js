@@ -213,7 +213,8 @@ const BangleItems = (state = initState, action) => {
             address:action.address
         }
     }
-    if (action.type ===ADD_TO_TRYOUTCART) {
+    if (action.type === ADD_TO_TRYOUTCART) {
+        console.log('adding data')
        var userid=state.userid;
        var cart=[];
         let addedItem;

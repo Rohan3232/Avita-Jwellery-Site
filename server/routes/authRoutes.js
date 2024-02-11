@@ -7,7 +7,7 @@ const transporter = require('../models/mail');
 router.use(
     cors({
         credentials: true,
-        origin: 'https://jwellerysite.onrender.com'
+        origin: 'https://jwellerysite.onrender.com'//http://localhost:3000
     }
     )
 )
@@ -87,7 +87,8 @@ router.post('/updatecart', async (req, res) => {
 
 router.post('/updatetryoutcart', async (req, res) => {
     try {
-        const { userid, tryoutcart} = req.body;
+        const { userid, cart} = req.body;
+        console.log(cart)
         const exist = await User.findOne({ userid })
         if (!exist) {
             return res.json({
@@ -98,7 +99,7 @@ router.post('/updatetryoutcart', async (req, res) => {
             userid: userid
         }, {
             $set: {
-                tryoutcart: tryoutcart,
+                tryoutcart: cart,
             }
         })
         return res.json(user)
