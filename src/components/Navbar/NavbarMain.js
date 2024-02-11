@@ -119,7 +119,7 @@ class NavbarMain extends Component {
             this.props.updateCart(result.cart, result.total, result.totalQuantity, result.totalDiscount,result.tryoutcart)
             this.props.tryathomestate(result.email,result.address)
             const cookies = new Cookies();
-            cookies.set('login-cred',result.userid+'='+result.password,30)
+            cookies.set('login-cred',result.userid+'='+result.password)
             alert('Success!!');
           }
 
@@ -259,7 +259,6 @@ class NavbarMain extends Component {
               'Content-Type': 'application/json'
             }
           })
-          console.log(data)
           result = data
           if (result.error) {
           }

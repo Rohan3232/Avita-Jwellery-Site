@@ -124,6 +124,7 @@ export class ProductDetails extends Component {
 
     }
     render(e) {
+        console.log(this.props)
         function importAll(r) {
             let carouselImages = {};
             r.keys().forEach((item, index) => { carouselImages[item.replace('./', '')] = r(item); });
@@ -137,9 +138,10 @@ export class ProductDetails extends Component {
                     <div className='col-md-5 col-12 product-page'>
                         <div className=' product-image'>
                             {ProductImages[this.props.currentproduct.images] ? <div className='image-holder'><img className='w-100 h-auto' src={ProductImages[this.props.currentproduct.images]} alt={this.props.currentproduct.description} /></div> : null}
-                            <div className='offers'><span><GiReturnArrow />15 days Moneyback</span><span><MdOutlineVerified />100% Certified</span><span><FaExchangeAlt></FaExchangeAlt> Lifetime Exchange</span></div>
-
+                            
                         </div>
+                        <div className='offers'><span><GiReturnArrow />15 days Moneyback</span><span><MdOutlineVerified />100% Certified</span><span><FaExchangeAlt></FaExchangeAlt> Lifetime Exchange</span></div>
+
                     </div>
                     <div className='col-md-7 col-12 product-details'>
                         <h6 className='product-name'>{this.props.currentproduct.name}</h6>
@@ -186,8 +188,6 @@ export class ProductDetails extends Component {
 
                             {this.props.currentproduct.ratings != null ? <span>
                                 {this.props.currentproduct.ratings.map((item, index) => {
-                                    console.log(item.user)
-                                    console.log(this.props.userid)
                                     return (
                                         <div key={index} style={item.user === this.props.userid ? { borderColor: 'green' } : { borderColor: 'black' }} className='customer-feedback'>
                                             <p>{item.comment} <span className='rating'><FaStar />{item.rating}</span></p>

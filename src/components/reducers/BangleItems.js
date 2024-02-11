@@ -1,8 +1,23 @@
 import { ADD_PRODUCT, UPDATE_CART, CHANGE_LOGIN_STATUS, ADD_SINGLEQUANTITY, ADD_QUANTITY, ADD_TO_CART, SUB_QUANTITY, REMOVE_ITEM, TRYATHOME_STATE, ADD_TO_TRYOUTCART, ADD_FEEDBACK } from '../actions/action-types/cart-actions';
-import { MenuItems } from '../Navbar/MenuItems';
 import axios from 'axios';
 let allproducts = [];
-MenuItems.map((item, key) => {
+let allitems=[];
+try {
+    const { data } = await axios.post('/getItems', {
+     _id:'65c8dc31f079fb18c4832dea'}, {
+      withCredentials: false,
+      headers: {
+        'Access-Control-Allow-Origin': true,
+        'Content-Type': 'application/json'
+      }
+    })
+    allitems=data.MenuItems
+}catch(error)
+{
+    console.log(error)
+}
+
+allitems.map((item, key) => {
     if (item.types)
         item.types.map((type, key) => {
             item[type.name.replaceAll(' ', '')].map((product, key) => {
@@ -14,8 +29,9 @@ MenuItems.map((item, key) => {
         })
 return 0;
 })
+
 const initState = {
-    items: MenuItems,
+    items: allitems,
     allItems: allproducts,
     addedItems: [],
     total: 0,
@@ -214,7 +230,6 @@ const BangleItems = (state = initState, action) => {
         }
     }
     if (action.type === ADD_TO_TRYOUTCART) {
-        console.log('adding data')
        var userid=state.userid;
        var cart=[];
         let addedItem;
@@ -233,7 +248,6 @@ const BangleItems = (state = initState, action) => {
             let existed_item = state.tryoutcart.find(item => action.name === item.name)
             if (existed_item) {
                 cart = state.tryoutcart;
-                console.log(cart);
                 axios.post('/updatetryoutcart', {
                    userid,cart
                 })
@@ -243,7 +257,6 @@ const BangleItems = (state = initState, action) => {
             }
             else {
                 cart = [...state.tryoutcart, addedItem];
-                console.log(cart)
                 axios.post('/updatetryoutcart', {
                     userid,cart
                 })
@@ -257,8 +270,7 @@ const BangleItems = (state = initState, action) => {
         }
     }
     if (action.type === ADD_FEEDBACK) {
-        console.log(action.itemname)
-        let addedItem=state.items.filter(subtype => subtype.types).map((maintype) => {
+        let allItems=state.items.filter(subtype => subtype.types).map((maintype) => {
             maintype.types.map((subtype) => {
                 maintype[subtype.name.replaceAll(' ', '')].map((product) => {
                     if (action.itemname === product.name){
@@ -270,7 +282,24 @@ const BangleItems = (state = initState, action) => {
             })
             return maintype;
         })
-        console.log(addedItem)
+        try {
+            const { data } = axios.post('/updateItems', {
+             _id:'65c8dc31f079fb18c4832dea',allItems}, {
+              withCredentials: false,
+              headers: {
+                'Access-Control-Allow-Origin': true,
+                'Content-Type': 'application/json'
+              }
+            })
+        }catch(error)
+        {
+            console.log(error)
+        }
+        
+        return{
+            ...state,
+            items:allItems
+        }
     }
     else {
         return state

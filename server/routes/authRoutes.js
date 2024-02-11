@@ -3,7 +3,7 @@ const router = express.Router();
 const cors = require('cors');
 const User = require('../models/user')
 const transporter = require('../models/mail');
-
+const Items=require('../models/items');
 router.use(
     cors({
         credentials: true,
@@ -11,6 +11,34 @@ router.use(
     }
     )
 )
+router.post('/getItems',async(req,res)=>{
+    
+   try{
+    const {_id}=req.body;
+    const items = await Items.findOne({ _id})
+    return res.json(items);
+    }
+    catch(error){
+        console.log(error);
+    }
+})
+router.post('/updateItems',async(req,res)=>{
+    
+    try{
+     const {_id,allItems}=req.body;
+     console.log(_id);
+     const items = await Items.updateOne({
+        _id: _id
+    }, {
+        $set: { MenuItems: allItems }
+    })
+    console.log(items);
+     return res.json(items);
+     }
+     catch(error){
+         console.log(error);
+     }
+ })
 router.get('/', (req, res) => {
     res.getHeaders
     res.json('test is working');

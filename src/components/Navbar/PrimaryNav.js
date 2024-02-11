@@ -1,5 +1,5 @@
 import React, { Component} from "react";
-import { MenuItems } from './MenuItems';
+import { connect } from 'react-redux';
 import { NavLink } from 'react-router-dom';
 import SecondaryNav from "./SecondaryNav";
 
@@ -24,7 +24,7 @@ class PrimaryNav extends Component {
     return (
       <div className="primary-links">
         <ul className="links-holder">
-          {MenuItems.map((item, index) => {
+          {this.props.items.map((item, index) => {
             return (
               <li key={index} className={'nav-item'} >
                 <div className="nav-item-primary">
@@ -45,4 +45,10 @@ class PrimaryNav extends Component {
     );
   }
 }
-export default PrimaryNav;
+
+const mapStateToProps = (state) => {
+  return {
+    items: state.items,
+  }
+}
+export default connect(mapStateToProps)(PrimaryNav);
