@@ -232,6 +232,7 @@ const BangleItems = (state = initState, action) => {
             let existed_item = state.tryoutcart.find(item => action.name === item.name)
             if (existed_item) {
                 cart = state.tryoutcart;
+                console.log(cart);
                 axios.post('/updatetryoutcart', {
                    userid,cart
                 })
@@ -241,7 +242,7 @@ const BangleItems = (state = initState, action) => {
             }
             else {
                 cart = [...state.tryoutcart, addedItem];
-                
+                console.log(cart)
                 axios.post('/updatetryoutcart', {
                     userid,cart
                 })
