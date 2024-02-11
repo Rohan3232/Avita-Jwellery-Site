@@ -1,6 +1,11 @@
 const mongo=require('mongoose');
 const {Schema}=mongo;
 const userSchema=new Schema({
+    username:{
+        type:String,
+        unique:true,
+        required:true
+    },
     userid:{
         type:String,
         unique:true,

@@ -1,11 +1,11 @@
 import React, { Component } from "react";
 import { Form, FormControl } from 'react-bootstrap';
-import {Cookies } from 'react-cookie';
+import { Cookies } from 'react-cookie';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import { NavLink } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { changeLoginStatus, updateCart,tryathomestate,addtotryoutcart } from '../actions/cartActions';
+import { changeLoginStatus, updateCart, tryathomestate, addtotryoutcart } from '../actions/cartActions';
 import { FaShoppingCart, FaUser, FaSearch, FaBars, FaHome } from "react-icons/fa";
 import { MdClose } from "react-icons/md";
 import './Navbar.css';
@@ -45,14 +45,14 @@ class NavbarMain extends Component {
     this.logoutAll = this.logoutAll.bind(this);
   }
   logoutAll() {
-    this.props.changeLoginStatus('', '')
-    this.props.updateCart([], 0, 0, 0,[]);
+    this.props.changeLoginStatus('','', '')
+    this.props.updateCart([], 0, 0, 0, []);
     alert('Successfully Logged Out')
-    const cookies=new Cookies();
+    const cookies = new Cookies();
     this.setState({
-      show:false
+      show: false
     })
-    cookies.set('login-cred','');
+    cookies.set('login-cred', '');
   }
   async submitForm(e) {
 
@@ -65,13 +65,14 @@ class NavbarMain extends Component {
       var totalQuantity = this.props.totalQuantity ? this.props.totalQuantity : 0;
       var totalDiscount = this.props.totalDiscount ? this.props.totalDiscount : 0;
       var result;
-      var tryoutcart=this.props.tryoutcart;
-      var email=this.props.email;
-      var address=this.props.address;
+      var tryoutcart = this.props.tryoutcart;
+      var email = this.props.email;
+      var address = this.props.address;
       if (this.state.signup) {
+        if(this.username.value!=""){
         try {
-          const { data } = await axios.post('/register', {
-            userid, password, cart, total, totalQuantity, totalDiscount,tryoutcart,email,address
+          const { data } =  await axios.post('/register', {
+            username:this.username.value,userid, password, cart, total, totalQuantity, totalDiscount, tryoutcart, email, address
           })
           result = data
           if (result.error) {
@@ -94,9 +95,13 @@ class NavbarMain extends Component {
           console.log(error);
         }
       }
+      else{
+        alert("please enter username")
+      }
+      }
       else {
         try {
-          const { data } = await axios.post('/login', {
+          const { data } =  await axios.post('/login', {
             userid, password
           }, {
             withCredentials: false,
@@ -115,11 +120,11 @@ class NavbarMain extends Component {
               show: false,
               resetPassword: false
             })
-            this.props.changeLoginStatus(result.userid, result.password)
-            this.props.updateCart(result.cart, result.total, result.totalQuantity, result.totalDiscount,result.tryoutcart)
-            this.props.tryathomestate(result.email,result.address)
+            this.props.changeLoginStatus(result.userid,result.username, result.password)
+            this.props.updateCart(result.cart, result.total, result.totalQuantity, result.totalDiscount, result.tryoutcart)
+            this.props.tryathomestate(result.email, result.address)
             const cookies = new Cookies();
-            cookies.set('login-cred',result.userid+'='+result.password)
+            cookies.set('login-cred', result.userid + '=' + result.password)
             alert('Success!!');
           }
 
@@ -135,7 +140,7 @@ class NavbarMain extends Component {
     else {
       var oldPassword = this.state.oldPassword;
       try {
-        await axios.post('/resetpass', {
+         await await axios.post('/resetpass', {
           userid, password, oldPassword
         })
         this.setState({
@@ -161,7 +166,8 @@ class NavbarMain extends Component {
       document.querySelector('.validity-alert').style.display = "block";
     }
   }
-  changeMethod() {
+  changeMethod(e) {
+    e.preventDefault();
     this.setState(prevState => ({ signup: !prevState.signup }))
   }
   handleFocus(e, move) {
@@ -233,8 +239,8 @@ class NavbarMain extends Component {
         if (flg === 1)
           searchedproduct.push(product);
         return 0
-        })
-        return 0;
+      })
+      return 0;
     })
     this.setState({
       searchresult: searchedproduct
@@ -242,45 +248,45 @@ class NavbarMain extends Component {
   }
   async componentDidMount() {
     window.scrollTo(0, 0);
-    const cookies=new Cookies();
-    var getCred=cookies.get('login-cred');
-    if(getCred!==undefined)
-    { var details=getCred.split('=');
-      var userid=details[0];
+    const cookies = new Cookies();
+    var getCred = cookies.get('login-cred');
+    if (getCred !== undefined) {
+      var details = getCred.split('=');
+      var userid = details[0];
       var result;
-      var password=details[1];
-        try {
-          const { data } = await axios.post('/login', {
-            userid, password
-          }, {
-            withCredentials: false,
-            headers: {
-              'Access-Control-Allow-Origin': true,
-              'Content-Type': 'application/json'
-            }
-          })
-          result = data
-          if (result.error) {
+      var password = details[1];
+      try {
+        const { data } =  await axios.post('/login', {
+          userid, password
+        }, {
+          withCredentials: false,
+          headers: {
+            'Access-Control-Allow-Origin': true,
+            'Content-Type': 'application/json'
           }
-          else {
-            this.setState({
-              show: false,
-              resetPassword: false
-            })
-            this.props.changeLoginStatus(result.userid, result.password)
-              this.props.updateCart(result.cart, result.total, result.totalQuantity, result.totalDiscount,result.tryoutcart)
-              this.props.tryathomestate(result.email,result.address)
-          }
-
+        })
+        result = data
+        if (result.error) {
+        }
+        else {
           this.setState({
-            validity: result.error
+            show: false,
+            resetPassword: false
           })
+          this.props.changeLoginStatus(result.userid,result.username, result.password)
+          this.props.updateCart(result.cart, result.total, result.totalQuantity, result.totalDiscount, result.tryoutcart)
+          this.props.tryathomestate(result.email, result.address)
         }
-        catch (error) {
-          console.log(error);
-        }
+
+        this.setState({
+          validity: result.error
+        })
+      }
+      catch (error) {
+        console.log(error);
+      }
     }
-    
+
     setTimeout(() => {
       this.setState({ currentUrl: window.location.pathname });
     }, 100);
@@ -290,7 +296,7 @@ class NavbarMain extends Component {
       this.setState({ currentUrl: window.location.pathname });
     }, 100);
   }
-  render() {  
+  render() {
     const handleClose = () => {
       this.setState({
         show: false,
@@ -358,23 +364,29 @@ class NavbarMain extends Component {
                           </Modal.Header>
                           <Modal.Body><div className="modal-body">
 
-                            <form onSubmit={(e) => this.submitForm(e)} action="/">
+                            <form onSubmit={(e) => this.submitForm(e)}>
+                              <div className={(this.state.signup?'show ':'hide ')+"input-number mb-5"} >
+                                 <input type="text" ref={(uname)=>this.username=uname} className="username-input"></input>
+                                 <label className="username-label">Enter UserName</label>
+                               
+                              </div>
                               <div className={(this.state.userid !== '' ? "no-number " : "") + "input-number"}>
-                                <label className={(this.state.moveup ? "move " : "") + "number-label"}>Enter Mobile Number:</label>
-                                <span className="country-code">+91</span>
+                               <span className="country-code">+91</span>
                                 <input type="tel" onFocus={(e) => this.handleFocus(e, true)} onBlur={(e) => this.handleFocus(e, false)} value={this.state.userid} pattern="[0-9]{10}" onChange={(e) => this.handleChange(e)}></input>
-                                  </div>
+                                <label className={(this.state.moveup ? "move " : "") + "number-label"}>Enter Mobile Number:</label>
+                                
+                              </div>
                               <div className="input-password">
                                 <input className="password-input" type="password" value={this.state.password} onChange={(e) => this.handlePassChange(e)}></input>
                                 <label className={(this.state.moveup ? "move " : "") + "password-label"}>Enter Password:</label>
                               </div>
                               <p className="privacy-terms text-center">By continuing, you agree for our <NavLink onClick={() => { this.setState({ show: false }) }} to="TermsCond">Terms of Use</NavLink> and <NavLink onClick={() => { this.setState({ show: false }) }} to="Privacy">Privacy policy.</NavLink></p>
                               <div className="modal-footer">
-                              <span className="validity-alert">{this.state.validity ? this.state.validity : ''}</span>
-                            
+                                <span className="validity-alert">{this.state.validity ? this.state.validity : ''}</span>
+
                                 <div className={(this.state.signup ? "login-buttons " : "signup-button ") + "footer-button"}>
-                                  <button type="submit" className="login-button w-50" onClick={(e) => this.formSubmit(e)}>{this.state.signup ? "Signup" : "Login"}</button>
-                                  {this.state.signup ? <p className="signup-link text-center">Already a user?,<br/> <button className="link" onClick={(e) => this.changeMethod()}>Login</button></p> : <p className="signup-link text-center">New here?<br /> <button className="link" onClick={(e) => this.changeMethod()}>signup</button></p>}
+                                  <button type="submit" className="login-button w-50">{this.state.signup ? "Signup" : "Login"}</button>
+                                  {this.state.signup ? <p className="signup-link text-center">Already a user?,<br /> <button className="link" onClick={(e) => this.changeMethod(e)}>Login</button></p> : <p className="signup-link text-center">New here?<br /> <button className="link" onClick={(e) => this.changeMethod(e)}>signup</button></p>}
                                 </div>
                               </div>
                             </form>
@@ -445,17 +457,18 @@ const mapStateToProps = (state) => {
     allItems: state.allItems,
     userid: state.userid,
     password: state.password,
-    email:state.email,
-    address:state.address,
-    tryoutcart: state.tryoutcart
+    email: state.email,
+    address: state.address,
+    tryoutcart: state.tryoutcart,
+    username:state.username
   }
 }
 const mapDispatchToProps = (dispatch) => {
   return {
-    tryathomestate: (email,dob,address) => { dispatch(tryathomestate(email,dob,address)) },
+    tryathomestate: (email, dob, address) => { dispatch(tryathomestate(email, dob, address)) },
     addtotryoutcart: (name) => { dispatch(addtotryoutcart(name)) },
-    changeLoginStatus: (userid, password) => { dispatch(changeLoginStatus(userid, password)) },
-    updateCart: (addedItems, total, totalQuantity, totalDiscount,tryoutcart) => { dispatch(updateCart(addedItems, total, totalQuantity, totalDiscount,tryoutcart)) }
+    changeLoginStatus: (userid,username, password) => { dispatch(changeLoginStatus(userid,username, password)) },
+    updateCart: (addedItems, total, totalQuantity, totalDiscount, tryoutcart) => { dispatch(updateCart(addedItems, total, totalQuantity, totalDiscount, tryoutcart)) }
   }
 }
 export default connect(mapStateToProps, mapDispatchToProps)(NavbarMain)

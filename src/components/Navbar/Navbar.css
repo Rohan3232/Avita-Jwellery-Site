@@ -152,6 +152,9 @@
     color: darkmagenta !important;
     margin: 0;
 }
+.input-number.hide{
+    display: none;
+}
 .input-number,.input-password{
     display: flex;
     flex-direction: column;
@@ -184,7 +187,7 @@
 .no-number .country-code{
     display: block;
 }
-.number-label,.password-label{
+.number-label,.password-label,.username-label{
     position: absolute;
     z-index: 1;
     color: #878787;
@@ -192,6 +195,7 @@
     transition: top 0.5s,font-size 0.2s;
     font-size: 15px;
 }
+
 .number-label.move{
     top: -20px;
     font-size:12px;
@@ -210,7 +214,9 @@
 }
 .password-input:focus + .password-label,
 .password-input:not([value=""]) + .password-label,
-.input-number input:not([value=""]) + .number-label{
+.input-number input:not([value=""]) + .number-label,
+.username-input:focus + .username-label,
+.username-input:not([value=""]) + .username-label{
     top: -20px;
     font-size:12px;
 }

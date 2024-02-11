@@ -46,7 +46,7 @@ export class ProductDetails extends Component {
             this.setState({
                 alreadygivenfbk: true
             })
-            this.props.addFeedback(this.props.currentproduct.name, this.state.feedbackvalue, this.props.userid, this.state.rating)
+            this.props.addFeedback(this.props.currentproduct.name, this.state.feedbackvalue, this.props.username, this.state.rating)
         }
         else {
             alert('please fill all fields')
@@ -236,7 +236,8 @@ const mapStateToProps = (state) => {
         totalQuantity: state.totalQuantity,
         totalDiscount: state.totalDiscount,
         userid: state.userid,
-        password: state.password
+        password: state.password,
+        username:state.username
     }
 }
 const mapDispatchToProps = (dispatch) => {

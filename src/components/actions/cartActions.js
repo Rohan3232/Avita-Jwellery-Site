@@ -60,10 +60,11 @@ export const addProduct=(product)=>{
     }
 }
 
-export const changeLoginStatus=(userid,password)=>{
+export const changeLoginStatus=(userid,username,password)=>{
     return{
         type:CHANGE_LOGIN_STATUS,
         userid,
+        username,
         password
     }
 }

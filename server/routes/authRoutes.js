@@ -45,7 +45,7 @@ router.get('/', (req, res) => {
 })
 router.post('/register', async (req, res) => {
     try {
-        const { userid, password, cart, total, totalQuantity, totalDiscount,tryoutcart,email,address } = req.body;
+        const { username,userid, password, cart, total, totalQuantity, totalDiscount,tryoutcart,email,address } = req.body;
         if (!password || password.length < 6) {
             return res.json({
                 error: 'Password is required and should be at least 6 characters long'
@@ -58,7 +58,7 @@ router.post('/register', async (req, res) => {
             })
         }
         const user = await User.create({
-            userid, password, cart, total, totalQuantity, totalDiscount, tryoutcart,email,address
+            username,userid, password, cart, total, totalQuantity, totalDiscount, tryoutcart,email,address
         })
         return res.json(user)
     }

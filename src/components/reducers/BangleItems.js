@@ -43,7 +43,8 @@ const initState = {
     email:'',
     dob:new Date(),
     address:'',
-    tryoutcart:[]
+    tryoutcart:[],
+    username:''
 
 }
 const BangleItems = (state = initState, action) => {
@@ -217,6 +218,7 @@ const BangleItems = (state = initState, action) => {
         return {
             ...state,
             userid: action.userid,
+            username:action.username,
             password: action.password
         }
     }
