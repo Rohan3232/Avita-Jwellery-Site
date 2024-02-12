@@ -6,12 +6,9 @@ import Modal from 'react-bootstrap/Modal';
 import { NavLink } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { changeLoginStatus, updateCart, tryathomestate, addtotryoutcart } from '../actions/cartActions';
-import { FaShoppingCart, FaUser, FaSearch, FaBars, FaHome } from "react-icons/fa";
-import { MdClose } from "react-icons/md";
 import './Navbar.css';
 import logo from './images/logo.jpeg'
 import PrimaryNav from "./PrimaryNav";
-import { isNumeric } from "jquery";
 import axios from "axios";
 class NavbarMain extends Component {
   constructor(props) {
@@ -45,7 +42,7 @@ class NavbarMain extends Component {
     this.logoutAll = this.logoutAll.bind(this);
   }
   logoutAll() {
-    this.props.changeLoginStatus('','', '')
+    this.props.changeLoginStatus('', '', '')
     this.props.updateCart([], 0, 0, 0, []);
     alert('Successfully Logged Out')
     const cookies = new Cookies();
@@ -69,39 +66,39 @@ class NavbarMain extends Component {
       var email = this.props.email;
       var address = this.props.address;
       if (this.state.signup) {
-        if(this.username.value!=""){
-        try {
-          const { data } =  await axios.post('/register', {
-            username:this.username.value,userid, password, cart, total, totalQuantity, totalDiscount, tryoutcart, email, address
-          })
-          result = data
-          if (result.error) {
-            document.querySelector('.validity-alert').style.display = "block";
-          }
-          else {
-            document.querySelector('.validity-alert').style.display = "none";
-            this.setState({
-              show: false,
-              resetPassword: false
+        if (this.username.value != "") {
+          try {
+            const { data } = await axios.post('/register', {
+              username: this.username.value, userid, password, cart, total, totalQuantity, totalDiscount, tryoutcart, email, address
             })
-            alert('Success!!');
-          }
+            result = data
+            if (result.error) {
+              document.querySelector('.validity-alert').style.display = "block";
+            }
+            else {
+              document.querySelector('.validity-alert').style.display = "none";
+              this.setState({
+                show: false,
+                resetPassword: false
+              })
+              alert('Success!!');
+            }
 
-          this.setState({
-            validity: result.error
-          })
+            this.setState({
+              validity: result.error
+            })
+          }
+          catch (error) {
+            console.log(error);
+          }
         }
-        catch (error) {
-          console.log(error);
+        else {
+          alert("please enter username")
         }
-      }
-      else{
-        alert("please enter username")
-      }
       }
       else {
         try {
-          const { data } =  await axios.post('/login', {
+          const { data } = await axios.post('/login', {
             userid, password
           }, {
             withCredentials: false,
@@ -120,7 +117,7 @@ class NavbarMain extends Component {
               show: false,
               resetPassword: false
             })
-            this.props.changeLoginStatus(result.userid,result.username, result.password)
+            this.props.changeLoginStatus(result.userid, result.username, result.password)
             this.props.updateCart(result.cart, result.total, result.totalQuantity, result.totalDiscount, result.tryoutcart)
             this.props.tryathomestate(result.email, result.address)
             const cookies = new Cookies();
@@ -140,7 +137,7 @@ class NavbarMain extends Component {
     else {
       var oldPassword = this.state.oldPassword;
       try {
-         await await axios.post('/resetpass', {
+        await await axios.post('/resetpass', {
           userid, password, oldPassword
         })
         this.setState({
@@ -187,7 +184,7 @@ class NavbarMain extends Component {
     })
   }
   handleChange(e) {
-    if (isNumeric(e.target.value) || e.target.value === '') {
+    if (isNaN(e.target.value) || e.target.value === '') {
       this.setState({
         userid: e.target.value
       })
@@ -256,7 +253,7 @@ class NavbarMain extends Component {
       var result;
       var password = details[1];
       try {
-        const { data } =  await axios.post('/login', {
+        const { data } = await axios.post('/login', {
           userid, password
         }, {
           withCredentials: false,
@@ -273,7 +270,7 @@ class NavbarMain extends Component {
             show: false,
             resetPassword: false
           })
-          this.props.changeLoginStatus(result.userid,result.username, result.password)
+          this.props.changeLoginStatus(result.userid, result.username, result.password)
           this.props.updateCart(result.cart, result.total, result.totalQuantity, result.totalDiscount, result.tryoutcart)
           this.props.tryathomestate(result.email, result.address)
         }
@@ -327,7 +324,7 @@ class NavbarMain extends Component {
             <div className="col-lg-12 Navbar">
               <div className="logo">
                 <NavLink to={'/'}>
-                  <img src={logo} alt="Company Logo" className="responsive-logo"></img>
+                  <img loading="lazy" src={logo} alt="Company Logo" className="responsive-logo"></img>
                 </NavLink>
               </div>
               <div className={"overlay " + (this.state.menuToggleClass ? 'show' : 'hide')}></div>
@@ -341,7 +338,11 @@ class NavbarMain extends Component {
                     pathname: 'search',
                     search: '?searchfor=' + this.state.searchkey
                   }}>
-                    <span style={{ color: 'white' }}><FaSearch size="20px" /></span>
+                    <span style={{ color: 'white' }}>
+                      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+                        <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0" />
+                      </svg>
+                    </span>
                   </NavLink>
                   </Button>
                 </Form>
@@ -354,7 +355,10 @@ class NavbarMain extends Component {
                   <ul className="sidebar">
                     <li className="login-modal navlink">
                       <Button variant="primary" onClick={handleShow}>
-                        <FaUser className="icon" size="25px" />
+                        <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi icon bi-person-circle" viewBox="0 0 16 16">
+                          <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0" />
+                          <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8m8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1" />
+                        </svg>
                       </Button>
 
                       {this.props.userid === "" ?
@@ -365,16 +369,16 @@ class NavbarMain extends Component {
                           <Modal.Body><div className="modal-body">
 
                             <form onSubmit={(e) => this.submitForm(e)}>
-                              <div className={(this.state.signup?'show ':'hide ')+"input-number mb-5"} >
-                                 <input type="text" ref={(uname)=>this.username=uname} className="username-input"></input>
-                                 <label className="username-label">Enter UserName</label>
-                               
+                              <div className={(this.state.signup ? 'show ' : 'hide ') + "input-number mb-5"} >
+                                <input type="text" ref={(uname) => this.username = uname} className="username-input"></input>
+                                <label className="username-label">Enter UserName</label>
+
                               </div>
                               <div className={(this.state.userid !== '' ? "no-number " : "") + "input-number"}>
-                               <span className="country-code">+91</span>
+                                <span className="country-code">+91</span>
                                 <input type="tel" onFocus={(e) => this.handleFocus(e, true)} onBlur={(e) => this.handleFocus(e, false)} value={this.state.userid} pattern="[0-9]{10}" onChange={(e) => this.handleChange(e)}></input>
                                 <label className={(this.state.moveup ? "move " : "") + "number-label"}>Enter Mobile Number:</label>
-                                
+
                               </div>
                               <div className="input-password">
                                 <input className="password-input" type="password" value={this.state.password} onChange={(e) => this.handlePassChange(e)}></input>
@@ -420,13 +424,18 @@ class NavbarMain extends Component {
                     </li>
                     <li>
                       <NavLink to="/TryAtHome" className="navlink">
-                        <FaHome size="25"></FaHome>
+                      <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-house-fill" viewBox="0 0 16 16">
+  <path d="M8.707 1.5a1 1 0 0 0-1.414 0L.646 8.146a.5.5 0 0 0 .708.708L8 2.207l6.646 6.647a.5.5 0 0 0 .708-.708L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293z"/>
+  <path d="m8 3.293 6 6V13.5a1.5 1.5 0 0 1-1.5 1.5h-9A1.5 1.5 0 0 1 2 13.5V9.293z"/>
+</svg>
                       </NavLink>
                     </li>
                     <li>
                       <NavLink to="/Cart/shopping-cart" className="navlink">
                         <span>
-                          <FaShoppingCart className="icon" size="25px" />
+                          <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi icon bi-cart-fill" viewBox="0 0 16 16">
+                            <path d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13 12H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5M5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4m7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4m-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2m7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2" />
+                          </svg>
                         </span>
                         <span className="cart-items">{this.props.totalQuantity > 0 || this.props.tryoutcart.length > 0 ? this.props.totalQuantity + this.props.tryoutcart.length : null}</span>
                       </NavLink>
@@ -435,8 +444,12 @@ class NavbarMain extends Component {
                 </div>
               </div>
               <div className={"hamburger-menu " + (this.state.menuToggleClass ? 'open-menu' : 'close-menu')} onClick={this.menuToggle}>
-                <FaBars className="open-icon"></FaBars>
-                <MdClose className="close-icon" />
+              <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-list open-icon" viewBox="0 0 16 16">
+  <path fill-rule="evenodd" d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5"/>
+</svg>
+<svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-x-lg close-icon" viewBox="0 0 16 16">
+  <path d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8z"/>
+</svg>
               </div>
             </div>
           </div>
@@ -460,14 +473,14 @@ const mapStateToProps = (state) => {
     email: state.email,
     address: state.address,
     tryoutcart: state.tryoutcart,
-    username:state.username
+    username: state.username
   }
 }
 const mapDispatchToProps = (dispatch) => {
   return {
     tryathomestate: (email, dob, address) => { dispatch(tryathomestate(email, dob, address)) },
     addtotryoutcart: (name) => { dispatch(addtotryoutcart(name)) },
-    changeLoginStatus: (userid,username, password) => { dispatch(changeLoginStatus(userid,username, password)) },
+    changeLoginStatus: (userid, username, password) => { dispatch(changeLoginStatus(userid, username, password)) },
     updateCart: (addedItems, total, totalQuantity, totalDiscount, tryoutcart) => { dispatch(updateCart(addedItems, total, totalQuantity, totalDiscount, tryoutcart)) }
   }
 }

@@ -166,7 +166,7 @@ router.post('/send', async (req, res) => {
         to: req.body.email,
         subject: 'Appointment Booking Details',
         html: '<h1>Booked appointment for '+req.body.dob+'!</h3><h4>Details:</h4><p><b>Address</b>:'+req.body.address+'</p><h4>Below are Requested Jwelleries:</h4>' + attachments.map((file, index) => {
-            return ('<div style="display:flex"><span style="margin: auto 10px;">' + (index + 1) + '. </span><img style="width:150px;height:150px" src="cid:' + file.cid + '" alt="' + file.filename + '"/><h6 style="margin: auto 40px;">' + file.name + '</h6>');
+            return ('<div style="display:flex"><span style="margin: auto 10px;">' + (index + 1) + '. </span><img loading="lazy" style="width:150px;height:150px" src="cid:' + file.cid + '" alt="' + file.filename + '"/><h6 style="margin: auto 40px;">' + file.name + '</h6>');
         }) +'</div><p>Thank you for choosing us, and we appreciate the opportunity to serve you.</p>',
         attachments: attachments
     };
