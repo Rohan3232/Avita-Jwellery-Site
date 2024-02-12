@@ -1,13 +1,13 @@
 
 import React, { Component } from 'react'
 import './TryAtHome.css'
+import { MdAddHomeWork } from "react-icons/md";
 import { connect } from 'react-redux';
 import DatePicker from "react-datepicker";
 import { tryathomestate, addtotryoutcart } from '../actions/cartActions';
 import "react-datepicker/dist/react-datepicker.css";
-import { NavLink } from "react-router-dom";
-import { MdAddHomeWork } from "react-icons/md";
 import { FaCalendarAlt } from "react-icons/fa";
+import { NavLink } from "react-router-dom";
 export class TryAtHome extends Component {
   constructor(props) {
     super(props);
@@ -174,7 +174,7 @@ export class TryAtHome extends Component {
                             return (
                               <div key={key} className='col-md-3 col-12 cards-holder'>
                                 <div className=' product-cards'>
-                                  {ProductImages[product.images] ? <div className='image-holder'><img loading="lazy" className='h-auto' src={ProductImages[product.images]} alt={product.description} /></div> : null}
+                                  {ProductImages[product.images] ? <div className='image-holder'><img className='h-auto' src={ProductImages[product.images]} alt={product.description} /></div> : null}
                                   <h6 className='product-name'>{product.name}</h6>
                                   {<NavLink to={'/cart/try-at-home'} className='addtocart-button tryout-button' onClick={(e) => { this.addtoTryoutcart(e, product.name) }} >Try at Home</NavLink>}
                                 </div>

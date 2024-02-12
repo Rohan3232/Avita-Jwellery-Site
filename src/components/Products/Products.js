@@ -62,7 +62,7 @@ componentDidUpdate() {
                             <div key={key} className='col-xl-3 col-lg-4 col-md-6 col-sm-6 col-12 cards-holder'>
                               <NavLink className="product-link" to={item.path + '/' + type.name + '/' + product.name}>
                                 <div className=' product-cards'>
-                                  {ProductImages[product.images] ? <div className='image-holder'><img loading="lazy" className='h-auto' src={ProductImages[product.images]} alt={product.description} /></div> : null}
+                                  {ProductImages[product.images] ? <div className='image-holder'><img className='h-auto' src={ProductImages[product.images]} alt={product.description} /></div> : null}
                                   <h6 className='product-name'>{product.name}</h6>
                                   <h6 className='price'>₹{product.discount ? <span>{this.Offerprice(product.discount, product.price)} <span className='old-price'>{product.price}</span><span className='discount'>-{product.discount}%off</span></span> : <span>{product.price}</span>}</h6>
                                  

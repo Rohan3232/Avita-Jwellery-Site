@@ -1,9 +1,13 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux';
 import './ProductDetails.css';
+import { FaExchangeAlt } from "react-icons/fa";
 import { addToCart, addProduct, addFeedback } from '../actions/cartActions';
+import { MdOutlineVerified } from "react-icons/md";
+import { FaStar } from "react-icons/fa";
+import { GiReturnArrow } from "react-icons/gi";
+import { IoSend } from "react-icons/io5";
 import { NavLink } from 'react-router-dom';
-import { FaExchangeAlt } from "fa";
 export class ProductDetails extends Component {
     constructor(props) {
         super(props);
@@ -133,14 +137,10 @@ export class ProductDetails extends Component {
                 <div className='row'>
                     <div className='col-md-5 col-12 product-page'>
                         <div className=' product-image'>
-                            {ProductImages[this.props.currentproduct.images] ? <div className='image-holder'><img loading="lazy" className='w-100 h-auto' src={ProductImages[this.props.currentproduct.images]} alt={this.props.currentproduct.description} /></div> : null}
-
+                            {ProductImages[this.props.currentproduct.images] ? <div className='image-holder'><img className='w-100 h-auto' src={ProductImages[this.props.currentproduct.images]} alt={this.props.currentproduct.description} /></div> : null}
+                            
                         </div>
-                        <div className='offers'><span><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-return-left" viewBox="0 0 16 16">
-  <path fill-rule="evenodd" d="M14.5 1.5a.5.5 0 0 1 .5.5v4.8a2.5 2.5 0 0 1-2.5 2.5H2.707l3.347 3.346a.5.5 0 0 1-.708.708l-4.2-4.2a.5.5 0 0 1 0-.708l4-4a.5.5 0 1 1 .708.708L2.707 8.3H12.5A1.5 1.5 0 0 0 14 6.8V2a.5.5 0 0 1 .5-.5"/>
-</svg>15 days Moneyback</span><span><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-patch-check-fill" viewBox="0 0 16 16">
-  <path d="M10.067.87a2.89 2.89 0 0 0-4.134 0l-.622.638-.89-.011a2.89 2.89 0 0 0-2.924 2.924l.01.89-.636.622a2.89 2.89 0 0 0 0 4.134l.637.622-.011.89a2.89 2.89 0 0 0 2.924 2.924l.89-.01.622.636a2.89 2.89 0 0 0 4.134 0l.622-.637.89.011a2.89 2.89 0 0 0 2.924-2.924l-.01-.89.636-.622a2.89 2.89 0 0 0 0-4.134l-.637-.622.011-.89a2.89 2.89 0 0 0-2.924-2.924l-.89.01zm.287 5.984-3 3a.5.5 0 0 1-.708 0l-1.5-1.5a.5.5 0 1 1 .708-.708L7 8.793l2.646-2.647a.5.5 0 0 1 .708.708"/>
-</svg>100% Certified</span><span><FaExchangeAlt></FaExchangeAlt> Lifetime Exchange</span></div>
+                        <div className='offers'><span><GiReturnArrow />15 days Moneyback</span><span><MdOutlineVerified />100% Certified</span><span><FaExchangeAlt></FaExchangeAlt> Lifetime Exchange</span></div>
 
                     </div>
                     <div className='col-md-7 col-12 product-details'>
@@ -190,9 +190,7 @@ export class ProductDetails extends Component {
                                 {this.props.currentproduct.ratings.map((item, index) => {
                                     return (
                                         <div key={index} style={item.user === this.props.userid ? { borderColor: 'green' } : { borderColor: 'black' }} className='customer-feedback'>
-                                            <p>{item.comment} <span className='rating'><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-star-fill" viewBox="0 0 16 16">
-                                                <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z" />
-                                            </svg>{item.rating}</span></p>
+                                            <p>{item.comment} <span className='rating'><FaStar />{item.rating}</span></p>
                                             <p><b>- {item.user}</b></p>
                                         </div>
                                     )
@@ -200,27 +198,10 @@ export class ProductDetails extends Component {
                             </span> : null}
                             {!this.state.alreadygivenfbk ?
                                 <form onSubmit={(e) => { this.submitForm(e) }} ref={(ff) => this.fdbkform = ff} className='feedback-form' hidden>
-                                    <div className='rating-star' onClick={(e) => this.setRating(e)}>
-                                        <svg color={this.state.rating >= 1 ? 'goldenrod' : 'black'} id="1" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-star-fill" viewBox="0 0 16 16">
-                                            <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z" />
-                                        </svg>
-                                        <svg color={this.state.rating >= 2 ? 'goldenrod' : 'black'} id="2" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-star-fill" viewBox="0 0 16 16">
-                                            <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z" />
-                                        </svg>
-                                        <svg color={this.state.rating >= 3 ? 'goldenrod' : 'black'} id="3" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-star-fill" viewBox="0 0 16 16">
-                                            <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z" />
-                                        </svg>
-                                        <svg color={this.state.rating >= 4 ? 'goldenrod' : 'black'} id="4" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-star-fill" viewBox="0 0 16 16">
-                                            <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z" />
-                                        </svg>
-                                        <svg color={this.state.rating >= 5 ? 'goldenrod' : 'black'} id="5" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-star-fill" viewBox="0 0 16 16">
-                                            <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z" />
-                                        </svg>
+                                    <div className='rating-star' onClick={(e) => this.setRating(e)}><FaStar color={this.state.rating >= 1 ? 'goldenrod' : 'black'} id="1" /><FaStar color={this.state.rating >= 2 ? 'goldenrod' : 'black'} id="2" /><FaStar color={this.state.rating >= 3 ? 'goldenrod' : 'black'} id="3" /><FaStar color={this.state.rating >= 4 ? 'goldenrod' : 'black'} id="4" /><FaStar color={this.state.rating >= 5 ? 'goldenrod' : 'black'} id="5" />
                                     </div>
                                     <div className='d-flex'>
-                                        <input value={this.state.feedbackvalue} onChange={(e) => { this.updateFeedback(e) }} type='text' ref={(fi) => this.fdbkinput = fi}></input><button type='submit'><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-send-fill" viewBox="0 0 16 16">
-  <path d="M15.964.686a.5.5 0 0 0-.65-.65L.767 5.855H.766l-.452.18a.5.5 0 0 0-.082.887l.41.26.001.002 4.995 3.178 3.178 4.995.002.002.26.41a.5.5 0 0 0 .886-.083zm-1.833 1.89L6.637 10.07l-.215-.338a.5.5 0 0 0-.154-.154l-.338-.215 7.494-7.494 1.178-.471z"/>
-</svg></button>
+                                        <input value={this.state.feedbackvalue} onChange={(e) => { this.updateFeedback(e) }} type='text' ref={(fi) => this.fdbkinput = fi}></input><button type='submit'><IoSend /></button>
                                     </div>
 
                                 </form>
@@ -256,7 +237,7 @@ const mapStateToProps = (state) => {
         totalDiscount: state.totalDiscount,
         userid: state.userid,
         password: state.password,
-        username: state.username
+        username:state.username
     }
 }
 const mapDispatchToProps = (dispatch) => {
