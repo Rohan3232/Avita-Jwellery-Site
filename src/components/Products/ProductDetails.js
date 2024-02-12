@@ -54,9 +54,13 @@ export class ProductDetails extends Component {
 
     }
     addFeedback() {
+        
         if (this.props.userid != '') {
             this.fdbkform.hidden = false;
             this.fdbkinput.focus()
+        }
+        else{
+            alert("Please Login first!");
         }
 
     }
@@ -124,7 +128,6 @@ export class ProductDetails extends Component {
 
     }
     render(e) {
-        console.log(this.props)
         function importAll(r) {
             let carouselImages = {};
             r.keys().forEach((item, index) => { carouselImages[item.replace('./', '')] = r(item); });
