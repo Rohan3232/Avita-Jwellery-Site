@@ -1,6 +1,5 @@
-import { ADD_TO_CART,UPDATE_CART,CHANGE_LOGIN_STATUS,ADD_SINGLEQUANTITY,REMOVE_ITEM,SUB_QUANTITY,ADD_QUANTITY,ADD_SHIPPING,ADD_PRODUCT, TRYATHOME_STATE, ADD_TO_TRYOUTCART, ADD_FEEDBACK} from './action-types/cart-actions'
+import { ADD_TO_CART,UPDATE_CART,CHANGE_LOGIN_STATUS,ADD_SINGLEQUANTITY,REMOVE_ITEM,SUB_QUANTITY,ADD_QUANTITY,ADD_SHIPPING,ADD_PRODUCT, TRYATHOME_STATE, ADD_TO_TRYOUTCART, ADD_FEEDBACK} from './action-types/cart-actions';
 
-//add cart action
 export const addToCart= (name)=>{
     return{
         type: ADD_TO_CART,
@@ -17,7 +16,6 @@ export const updateCart=(addedItems,total,totalQuantity,totalDiscount,tryoutcart
         tryoutcart
     }
 }
-//remove item action
 export const removeItem=(name,cartname)=>{
     return{
         type: REMOVE_ITEM,
@@ -25,7 +23,6 @@ export const removeItem=(name,cartname)=>{
         cartname
     }
 }
-//subtract qt action
 export const subtractQuantity=(name)=>{
     return{
         type: SUB_QUANTITY,
@@ -45,21 +42,18 @@ export const addSingleQuantity=(name)=>{
         name
     }
 }
-//add qt action
 export const addShipping=(id)=>{
     return{
         type: ADD_SHIPPING,
         id
     }
 }
-
 export const addProduct=(product)=>{
     return{
         type:ADD_PRODUCT,
         product
     }
 }
-
 export const changeLoginStatus=(userid,username,password)=>{
     return{
         type:CHANGE_LOGIN_STATUS,
@@ -82,7 +76,6 @@ export const addtotryoutcart=(name)=>{
         name
     }
 }
-
 export const addFeedback=(itemname,feedback,username,rating)=>{
     return{
         type:ADD_FEEDBACK,

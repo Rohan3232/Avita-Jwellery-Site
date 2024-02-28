@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 
-export class FAQ extends Component {
-    render() {
+export function FAQ(){
         return (
              <div>
                <h1 style={{textAlign:"center"}}>Frequently Asked Questions</h1>
@@ -192,7 +191,6 @@ export class FAQ extends Component {
         </div>
         </div>
         )
-    }
-}
+        }
 
 export default FAQ

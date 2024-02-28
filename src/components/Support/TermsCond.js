@@ -7,7 +7,7 @@ export default function TermsCond() {
                  <div className="row"> 
           
                 
-                <h1 className="page-title" itemprop="name">Terms &amp; Conditions</h1>
+                <h1 className="page-title" itemProp="name">Terms &amp; Conditions</h1>
                 <div className="col-xs-12">        
                 <span className="head">Use of the Website</span>
                 <p>By accessing the website, you warrant and represent to the website owner that 

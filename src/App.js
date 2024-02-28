@@ -28,14 +28,14 @@ function App() {
           <Routes>
             <Route exact path="/" element={<Home/>}/>
             <Route path="/ContactUs" element={<ContactUs/>}/>
-            <Route path="/Cart/shopping-cart" element={<Cart cart={'shopping-cart'}/>}/>
-            <Route path="/Cart/try-at-home" element={<Cart cart={'try-at-home'}/>}/>
+            <Route path="/Cart/shopping-cart" element={<Cart cart='shopping-cart'/>}/>
+            <Route path="/Cart/try-at-home" element={<Cart cart='try-at-home'/>}/>
             <Route path="/FAQ" element={<FAQ/>}/>
             <Route path="/TermsCond" element={<TermsCond/>}/>
             <Route path="/Privacy" element={<PrivacyPolicy/>}/>
             <Route path="/TryAtHome" element={<TryAtHome/>}/>
             <Route path="/Offers/:category" element={<Products/>}/>
-            <Route path="/Collection/:category"  element={<SearchPage/>}/>
+            <Route path="/Collection/:category" element={<SearchPage/>}/>
             <Route path="/products/:product" element={<Products/>}/>
             <Route path="/search" element={<SearchPage/>}/>
             <Route path="/products/:product/:type" element={<Products/>}/>

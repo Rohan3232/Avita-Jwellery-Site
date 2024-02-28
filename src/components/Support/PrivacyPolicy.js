@@ -5,7 +5,7 @@ export default function PrivacyPolicy() {
         <div>
             <div className="container static-page">
                  <div className="row"> 
-                            <h1 className="page-title" itemprop="name">Privacy Policy</h1>
+                            <h1 className="page-title" itemProp="name">Privacy Policy</h1>
             <div className="col-xs-12">
                  <p>We value the trust you place in us. That's why we insist
                  upon the highest standards for secure transactions and customer information privacy.</p>

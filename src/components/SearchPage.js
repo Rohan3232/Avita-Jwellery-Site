@@ -1,25 +1,17 @@
-import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { addToCart, addProduct } from './actions/cartActions';
 import { NavLink } from 'react-router-dom';
-class SearchPage extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      flg: false
-    }
-    this.Offerprice = this.Offerprice.bind(this);
-  }
-  Offerprice(discount, price) {
-    let discountedprice = price - (price * discount / 100)
-    return discountedprice;
-  }
-  render() {
-    function importAll(r) {
-      let carouselImages = {};
-      r.keys().forEach((item, index) => { carouselImages[item.replace('./', '')] = r(item); });
-      return carouselImages
-    }
+import { useState } from 'react';
+function Offerprice(discount, price) {
+  let discountedprice = price - (price * discount / 100)
+  return discountedprice;
+}
+function importAll(r) {
+  let carouselImages = {};
+  r.keys().forEach((item, index) => { carouselImages[item.replace('./', '')] = r(item); });
+  return carouselImages
+}
+export function SearchPage({allItems,searchkey}){
     const ProductImages = importAll(require.context('./Products/images/products/', false, /\.(PNG|jpe?g|svg|webp)$/))
 
     var currentUrl = window.location.pathname;
@@ -30,13 +22,13 @@ class SearchPage extends Component {
       if (itemspath[0] === "Collection")
         searchkey = itemspath[itemspath.length - 1].split(/(?:,| |-)+/);
       else
-        searchkey = this.props.searchkey.split(/(?:,| |-)+/);
+        searchkey = searchkey.split(/(?:,| |-)+/);
     }
     else {
       const searchParams = new URLSearchParams(document.location.search)
       searchkey = searchParams.get('searchfor').split(/(?:,| |-)+/);
     }
-    let currentproduct = this.props.allItems;
+    let currentproduct = allItems;
     let searchedproduct = [];
     searchkey.map((searchvalue) => {
       if (searchedproduct.length !== 0 && searchvalue !== 'collection') {
@@ -44,7 +36,7 @@ class SearchPage extends Component {
         searchedproduct = [];
       }
       else if (searchedproduct.length === 0)
-        currentproduct = this.props.allItems;
+        currentproduct =allItems;
       currentproduct.map((product, key) => {
         let flg = 0;
         for (let p in product) {
@@ -58,7 +50,7 @@ class SearchPage extends Component {
               <div className=' product-cards'>
                 {ProductImages[product.images] ? <div className='image-holder'><img loading="lazy" className='h-auto' src={ProductImages[product.images]} alt={product.description} /></div> : null}
                 <h6 className='product-name'>{product.name}</h6>
-                <h6 className='price'>₹{product.discount ? <span>{this.Offerprice(product.discount, product.price)} <span className='old-price'>{product.price}</span><span className='discount'>-{product.discount}%off</span></span> : <span>{product.price}</span>}</h6>
+                <h6 className='price'>₹{product.discount ? <span>{Offerprice(product.discount, product.price)} <span className='old-price'>{product.price}</span><span className='discount'>-{product.discount}%off</span></span> : <span>{product.price}</span>}</h6>
               </div>
             </NavLink>
           </div>);
@@ -71,7 +63,7 @@ class SearchPage extends Component {
       return (
         <div className='container-fluid products-holder'>
           <div className='row'>
-            <h1 className='title'>{this.props.searchkey ? "Here are some suggestions:" : "Our Collection"}</h1>
+            <h1 className='title'>{searchkey ? "Here are some suggestions:" : "Our Collection"}</h1>
             {searchedproduct}</div></div >
       )
     }
@@ -81,13 +73,8 @@ class SearchPage extends Component {
       </div>)
     }
   }
-
-}
-
 const mapStateToProps = (state) => {
   return {
-    items: state.items,
-    currentproduct: state.currentproduct,
     allItems: state.allItems
   }
 }
