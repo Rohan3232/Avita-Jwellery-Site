@@ -1,10 +1,10 @@
+import React, { Component, useState} from "react";
 import React, { Component, useEffect, useState} from "react";
 import { connect } from 'react-redux';
 import { NavLink } from 'react-router-dom';
 import SecondaryNav from "./SecondaryNav";
+export function PrimaryNav({items}){
 
-
-function PrimaryNav({items}){
   const [toggledropdown,setToggledropdown]=useState(false);
   function ToggleDropdown(e, types) {
     if (types !== undefined && window.screen.width < 992) {
