@@ -14,7 +14,7 @@ import PrivacyPolicy from './components/Support/PrivacyPolicy';
 import TryAtHome from './components/Support/TryAtHome';
 import SearchPage from './components/SearchPage.js';
 import axios from 'axios';
-axios.defaults.baseURL='http://localhost:8000'//http://localhost:8000;
+axios.defaults.baseURL='https://jwellerybackend.onrender.com'//http://localhost:8000;
 axios.defaults.withCredentials=true;
 function App() {
   return (
