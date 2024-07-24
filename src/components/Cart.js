@@ -94,7 +94,7 @@ function Cart({ email,address,DOB,addedItems, total, totalQuantity, totalDiscoun
                         <div className='col-md-9 col-12 product-details'>
                             <h6 className='product-name'>{item.name}</h6>
                             <p className='desc-text'>{item.description}</p>
-                            <button className='remove-button' onClick={(e) => removeItem(e, item.name, 'tryoutcart')}>Remove</button>
+                            <button className='remove-button' onClick={(e) => removeProduct(e, item.name, 'tryoutcart')}>Remove</button>
                         </div>
                     </div>
                 </div >

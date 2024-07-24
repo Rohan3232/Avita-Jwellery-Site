@@ -197,7 +197,12 @@ const BangleItems = (state = initState, action) => {
         }
         else{
             let addedItems = state.tryoutcart.filter(product => { return product.name !== action.name })
+            userid=state.userid;
             state.tryoutcart= addedItems;
+            cart = state.tryoutcart;
+            axios.post('/updatetryoutcart', {
+                userid,cart
+            })
         }
         
         return { ...state }

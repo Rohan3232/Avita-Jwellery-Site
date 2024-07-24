@@ -95,11 +95,11 @@ function TryAtHome({ uniemail, tryoutcart, items, userid, tryathomestate, addtot
               <div className="form-content">
                 <div className="form-group email-group">
                   <div className="col-xs-12 email-address-holder">
-                    <input type="text" placeholder="Email Address" className="form-control" name="email" value={email} onChange={()=>handleChange()} />
+                    <input type="text" placeholder="Email Address" className="form-control" name="email" value={email} onChange={(e)=>handleChange(e)} />
                     <span className="validity-alert-email">Please enter valid Email address</span>
                   </div>
                   <div>
-                    <input type="textarea" placeholder="Address" className="form-control" name="area" value={address} onChange={()=>handleAddressChange()} />
+                    <input type="textarea" placeholder="Address" className="form-control" name="area" value={address} onChange={(e)=>handleAddressChange(e)} />
                   </div>
                 </div>
 

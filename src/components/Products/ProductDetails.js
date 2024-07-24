@@ -49,8 +49,8 @@ function ProductDetails({ currentproduct, items, addedItems, userid, username, a
 
     const giveFeedback = () => {
         if (userid != '') {
-            fdbkform.hidden = false;
-            fdbkinput.focus()
+            fdbkform.current.hidden = false;
+            fdbkinput.current.focus()
         }
         else {
             alert("Please Login first!");
