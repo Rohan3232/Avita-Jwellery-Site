@@ -15,9 +15,11 @@
 
 **How to Run:**
     First run npm install to install all dependancies.
+    
     "start": "node server/server.js", To run backend server
+    
     "server": "nodemon server/server.js", To run Mongoose to connect with Mongodb Database
-    "client": "react-scripts --max-http-header-size=1024 start", 
+    
     "dev": "concurrently \"npm run server\" \"npm run client\"", To run frontend and backend
+    
     "build": "react-scripts build", To build project
-    "data:import": "node server/SeederScript.js"
