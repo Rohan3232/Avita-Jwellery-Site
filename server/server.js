@@ -1,9 +1,13 @@
 const express=require('express');
+const dotenv=require('dotenv');
+dotenv.config()
+const config={
+   origin:process.env['REACT_APP_ORIGIN_URL']
+}
 const cors=require('cors');
 const app=express();
 var mongo = require("mongoose");
 const path=require('path')
-
 const connectDB = async () =>{
    try{
       mongo.connect("mongodb+srv://user123:user123@atlascluster.5lvz3ep.mongodb.net/?retryWrites=true&w=majority", {useNewUrlParser:true,
@@ -17,7 +21,7 @@ const connectDB = async () =>{
 }
 app.use(cors({
         credentials:true,
-        origin:'https://jwellerysite.onrender.com'//http://localhost:3000
+        origin:config.origin
     }
 ));
 connectDB();
