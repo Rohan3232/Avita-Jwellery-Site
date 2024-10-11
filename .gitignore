@@ -4,7 +4,9 @@
 /node_modules
 /.pnp
 .pnp.js
-
+.log
+.txt
+.eslintcache
 # testing
 /coverage
 

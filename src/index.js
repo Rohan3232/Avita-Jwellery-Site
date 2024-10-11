@@ -10,5 +10,5 @@ const store = createStore(BangleItems);
 
 
 const container = document.getElementById('root');
-const root = createRoot(container); // createRoot(container!) if you use TypeScript
+const root = createRoot(container);
 root.render(<Provider store={store}><App /></Provider>);

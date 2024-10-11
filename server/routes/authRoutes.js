@@ -1,4 +1,9 @@
 const express = require('express');
+const dotenv=require('dotenv');
+dotenv.config()
+const config={
+   origin:process.env['REACT_APP_ORIGIN_URL']
+}
 const router = express.Router();
 const cors = require('cors');
 const User = require('../models/user')
@@ -7,7 +12,7 @@ const Items=require('../models/items');
 router.use(
     cors({
         credentials: true,
-        origin: 'https://jwellerysite.onrender.com'//http://localhost:3000
+        origin: config.origin
     }
     )
 )
